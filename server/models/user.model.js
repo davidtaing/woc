@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
     firstName: {
@@ -28,7 +29,6 @@ const UserSchema = new mongoose.Schema({
 });
 
 // ok should i set up mongoose hooks
-// or handle everything in the call
 
 const UserModel = mongoose.model('users', UserSchema);
 
