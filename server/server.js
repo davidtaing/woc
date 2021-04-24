@@ -4,6 +4,7 @@ const logging = require('./config/logging');
 const path = require('path');
 const config = require('./config/config');
 const mongoose = require('mongoose');
+const passport = require('passport');
 
 require('dotenv').config();
 
@@ -38,6 +39,11 @@ app.use((req, res, next) => {
     });
     next();
 });
+
+// init passport
+require('./config/passport')
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // serving static file ------------------------------------------------------------------------------------------
 app.use(express.static(path.resolve(__dirname, '../web', 'build')));

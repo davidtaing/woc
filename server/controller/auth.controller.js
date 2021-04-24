@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const jwtConf = require('../config/jwt');
 
 const User = require('../models/user.model');
 const logging = require('../config/logging');
@@ -19,12 +20,31 @@ const logging = require('../config/logging');
 const NAMESPACE = 'AuthController';
 
 // route definitions --------------------------------------------------------------------------------
-module.exports.login = (req, res) => {
-    // check existing email
+module.exports.login = (req, res, next) => {
+    passport.authenticate('login', async (err, user, info) => {
+        try {
+            if(err || !user) {
+                // should this return a bad response instead
+                return next(new Error('an error occured'));
+            }
+            
+            // login from passport
+            req.login(user, { session: false }, async (error) => {
+                if(error) return next(error);
 
-    // check password
+                const token = jwtConf.generateJWT({
+                    _id: user._id,
+                    email: user.email
+                });
 
-    return res.status(200).json({ message: 'Hallo' });
+                return res.status(200).json({ msg: 'login OK', token });
+            })
+
+        } catch (error) {
+            // should this return a bad response instead
+            return next(error);
+        }
+    })(req, res, next)
 };
 
 module.exports.signup = async (req, res) => {
@@ -34,6 +54,10 @@ module.exports.signup = async (req, res) => {
         logging.error(NAMESPACE, 'Login - duplicated email');
         return res.status(400).json({ msg: 'Email already exist' });
     }
+    
+
+    console.log(req.body)
+    console.log(process.env.SALT_ROUNDS)
 
     // hash password
     const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS));

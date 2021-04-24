@@ -30,6 +30,13 @@ const UserSchema = new mongoose.Schema({
 
 // ok should i set up mongoose hooks
 
+UserSchema.method.isValidPassword = async function(password) {
+    const user = this;
+    const valid = await bcrypt.compare(password, user.password);
+
+    return valid;
+}
+
 const UserModel = mongoose.model('users', UserSchema);
 
 module.exports = UserModel;

@@ -11,7 +11,7 @@ const UserModel = require('../models/user.model')
 const NAMESPACE = "PASSPORT"
 
 passport.use(
-    "/login",
+    "login",
     new localStrategy(
         {
             usernameField: 'email',
