@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema({
 
 // ok should i set up mongoose hooks
 
-UserSchema.method.isValidPassword = async function(password) {
+UserSchema.methods.isValidPassword = async function(password) {
     const user = this;
     const valid = await bcrypt.compare(password, user.password);
 
