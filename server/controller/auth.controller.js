@@ -21,33 +21,34 @@ const NAMESPACE = 'AuthController';
 
 // route definitions --------------------------------------------------------------------------------
 module.exports.user = (req, res) => {
-    return res.status(200).json({...req.user})
-}
+    if (!req.user)
+        return res.status(401).json({ message: 'not authenticated' });
+    return res.status(200).json({ ...req.user });
+};
 module.exports.login = (req, res, next) => {
     passport.authenticate('login', async (err, user, info) => {
         try {
-            if(err || !user) {
+            if (err || !user) {
                 // should this return a bad response instead
                 return next(new Error('an error occured'));
             }
-            
+
             // login from passport
             req.login(user, { session: false }, async (error) => {
-                if(error) return next(error);
+                if (error) return next(error);
 
                 const token = jwtConf.generateJWT({
                     _id: user._id,
-                    email: user.email
+                    email: user.email,
                 });
 
                 return res.status(200).json({ msg: 'login OK', token });
-            })
-
+            });
         } catch (error) {
             // should this return a bad response instead
             return next(error);
         }
-    })(req, res, next)
+    })(req, res, next);
 };
 
 module.exports.signup = async (req, res) => {
@@ -57,10 +58,9 @@ module.exports.signup = async (req, res) => {
         logging.error(NAMESPACE, 'Login - duplicated email');
         return res.status(400).json({ msg: 'Email already exist' });
     }
-    
 
-    console.log(req.body)
-    console.log(process.env.SALT_ROUNDS)
+    console.log(req.body);
+    console.log(process.env.SALT_ROUNDS);
 
     // hash password
     const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS));
