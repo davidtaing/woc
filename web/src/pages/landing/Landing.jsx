@@ -1,31 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Grid, Paper, Button } from "@material-ui/core/";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import cardData from "./cardData";
+import { Container, Grid, Button } from "@material-ui/core/";
 import landingSvg from "../../res/img/women.svg";
 import styles from "./Landing.style";
 
 /* 
     Landing page component
 */
-
-const Card = ({ item, index }) => {
-    const classes = styles();
-
-    return (
-        <Grid item lg={3} key={index}>
-            <Paper className={classes.paper}>
-                <FontAwesomeIcon icon={item.icons} size="2x" />
-                <header>
-                    <strong>{item.title}</strong>
-                </header>
-                <p>{item.desc}</p>
-            </Paper>
-        </Grid>
-    );
-};
 
 function Landing() {
     const classes = styles();
@@ -46,11 +27,6 @@ function Landing() {
                     <Grid item xs={6} md={6}>
                         <img className={classes.landingPic} src={landingSvg} alt="women of colour" />
                     </Grid>
-                </Grid>
-                <Grid container spacing={4} style={{ paddingTop: "4em" }}>
-                    {cardData.map((item, index) => (
-                        <Card item={item} index={index} />
-                    ))}
                 </Grid>
             </Container>
         </>
