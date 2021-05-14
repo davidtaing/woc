@@ -25,6 +25,7 @@ module.exports.user = (req, res) => {
         return res.status(401).json({ message: 'not authenticated' });
     return res.status(200).json({ ...req.user });
 };
+
 module.exports.login = (req, res, next) => {
     passport.authenticate('login', async (err, user, info) => {
         try {

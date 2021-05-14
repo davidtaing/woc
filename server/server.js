@@ -1,8 +1,7 @@
-const http = require('http');
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const passport = require('passport');
+// const passport = require('passport');
 
 const logging = require('./config/logging');
 const config = require('./config/config');
@@ -27,8 +26,8 @@ mongoose
     .then((res) => logging.info(NAMESPACE, 'Mongo connected'))
     .catch((err) => logging.error(NAMESPACE, err.message, err));
 
-// middleware ------------------------------------------------------------------------------------------
-app.use(serverUtils.logAllRequests);
+// middlewares ------------------------------------------------------------------------------------------
+app.use(express.static(path.resolve(__dirname, '../web', 'build')));
 
 // init passport
 require('./config/passport');
@@ -37,6 +36,7 @@ require('./config/passport');
 
 // serving static file ------------------------------------------------------------------------------------------
 app.use(express.static(path.resolve(__dirname, '../web', 'build')));
+// app.use(express.static('public'));
 
 // api routing ------------------------------------------------------------------------------------------
 app.use('/api', require('./routes/routes'));
