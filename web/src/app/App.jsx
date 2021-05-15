@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import "./App.css";
+import { useAuth } from "../contexts/authContext";
 
+import "./App.css";
 import UserRoute from "./authWrapper/UserRoute";
 import Layout from "../components/layout/Layout";
 import * as Pages from "../pages/Pages";
@@ -21,7 +22,8 @@ import * as Pages from "../pages/Pages";
 const App = () => {
     // might still need context for this
     // need to find a simple way for dev mode
-    let loggedIn = false;
+    const { loggedIn } = useAuth();
+
     const HomePage = () => {
         return loggedIn ? (
             <UserRoute exact path="/" component={Pages.UserDashBoard} />
@@ -37,6 +39,7 @@ const App = () => {
                 <Route path="/user" component={Pages.UserDashBoard} />
                 <Route path="/login" component={Pages.Login} />
                 <Route path="/signUp" component={Pages.SignUp} />
+                <UserRoute path="/profile" component={Pages.UserProfile} />
             </Layout>
         </BrowserRouter>
     );

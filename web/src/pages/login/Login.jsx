@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link as RouterLink, Redirect } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../../contexts/authContext";
 
 import {
     Avatar,
@@ -13,6 +14,7 @@ import {
     Box,
     Typography,
     Container,
+    CircularProgress, // change to FAB later
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Copyright from "../../components/copyright/Copyright";
@@ -50,24 +52,28 @@ const SignIn = (props) => {
     const classes = useStyles();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    // context
+    const { loggedIn, setToken } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const credentials = { email, password };
+        setLoading(true);
         axios
             .post("/api/auth/login", credentials)
             .then((res) => {
                 // ok set token
-                axios.defaults.headers.common["Authorizaton"] = res.data.token;
-                localStorage.setItem("tk", res.data.token.split(" ")[1]);
-                setLoggedIn(true);
-
-                // handle bad credentials
+                setToken(res.data.token);
+                setLoading(false);
             })
             .catch((e) => {
-                console.log(e.message);
+                // display bad credentials or unexpected errors
+                setError(e.response.status === 401 ? "Invalid email/ password" : e.message);
+                setLoading(false);
             });
     };
 
@@ -89,7 +95,7 @@ const SignIn = (props) => {
                 <Typography component="h1" variant="h5">
                     Sign In
                 </Typography>
-                <form className={classes.form} onSubmit={handleSubmit}>
+                <form className={classes.form}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -115,16 +121,25 @@ const SignIn = (props) => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        disabled={!validateForm()}
-                    >
-                        Sign In
-                    </Button>
+
+                    {error ? <Typography style={{ color: "red" }}>{error}</Typography> : <></>}
+
+                    {loading ? (
+                        <CircularProgress />
+                    ) : (
+                        <Button
+                            type="button"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                            onClick={handleSubmit}
+                            disabled={!validateForm()}
+                        >
+                            Sign In
+                        </Button>
+                    )}
+
                     <Grid container>
                         <Grid item xs>
                             <Link href="#" variant="body2">

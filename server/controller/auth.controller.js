@@ -23,15 +23,16 @@ const NAMESPACE = 'AuthController';
 module.exports.user = (req, res) => {
     if (!req.user)
         return res.status(401).json({ message: 'not authenticated' });
-    // edit the data returned from here to change the password
-    return res.status(200).json({ user: req.user });
+    return res.status(200);
 };
 
 module.exports.login = async (req, res) => {
     // check matching account
     const user = await User.findOne({ email: req.body.email });
     if (!user)
-        return res.json({ success: false, msg: 'Account does not exist' });
+        return res
+            .status(401)
+            .json({ success: false, msg: 'Account does not exist' });
 
     // check matching password
     // console.log(user.obj, req.body);
@@ -40,7 +41,9 @@ module.exports.login = async (req, res) => {
         user.passwordHash
     );
     if (!checkPassword)
-        return res.json({ success: false, msg: 'Invalid password' });
+        return res
+            .status(401)
+            .json({ success: false, msg: 'Invalid password' });
 
     // successful
     console.log(user);

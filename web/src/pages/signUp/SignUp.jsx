@@ -1,19 +1,29 @@
 import React, { useState } from "react";
-import { Link as RouterLink } from 'react-router-dom'
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Copyright from '../../components/copyright/Copyright'
+import { Link as RouterLink } from "react-router-dom";
+import { useAuth } from "../../contexts/authContext";
+import { Redirect } from "react-router-dom";
 
+import {
+    Avatar,
+    Button,
+    TextField,
+    FormControlLabel,
+    Checkbox,
+    Link,
+    Grid,
+    Box,
+    Typography,
+    Container,
+} from "@material-ui/core";
+
+import Copyright from "../../components/copyright/Copyright";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { makeStyles } from "@material-ui/core/styles";
+
+/* 
+    Register page
+    have this redirect to login when logging in in successful
+*/
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(2),
@@ -34,11 +44,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SignUp() {
+export default function SignUp(props) {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const { loggedIn } = useAuth();
 
     const handleSignUp = (event) => {
         event.preventDefault();
@@ -47,6 +59,10 @@ export default function SignUp() {
     };
 
     const classes = useStyles();
+
+    const referer = (props) => (props.location.state === undefined ? "/" : props.location.state.referer);
+
+    if (loggedIn) return <Redirect to={referer(props)} />;
 
     return (
         <Container component="main" maxWidth="xs">
@@ -128,7 +144,7 @@ export default function SignUp() {
                     </Grid>
 
                     <Button
-                        type="submit"
+                        type="button"
                         fullWidth
                         variant="contained"
                         color="primary"
@@ -140,7 +156,7 @@ export default function SignUp() {
 
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Link component={ RouterLink } to="/login" variant="body2">
+                            <Link component={RouterLink} to="/login" variant="body2">
                                 Already have an account? Sign in
                             </Link>
                         </Grid>

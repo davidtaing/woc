@@ -1,20 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import App from "./App";
+import axios from "axios";
 
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../contexts/authContext";
+
+const TOKEN_KEY = "tk";
+
+const getToken = () => localStorage.getItem(TOKEN_KEY);
 
 const AppWrapper = () => {
+    // const [loggedIn, setLoggedIn] = useState(getToken() !== null);
     const [loggedIn, setLoggedIn] = useState(getToken() !== null);
-    const TOKEN_KEY = "tk";
 
     // should this be here
     // or the authentication page
     // or the login page
     const setToken = (tk) => {
-        localStorage.setItem(TOKEN_KEY, tk);
-        setLoggedIn(tk !== null);
+        if (tk) {
+            axios.defaults.headers.common["Authorization"] = `Bearer ${tk}`;
+            localStorage.setItem(TOKEN_KEY, tk);
+        } else {
+            localStorage.removeItem(TOKEN_KEY);
+            delete axios.defaults.headers.common["Authorization"];
+        }
+        setLoggedIn(getToken() !== null);
     };
-    const getToken = () => localStorage.getItem(TOKEN_KEY);
+
+    if (getToken()) axios.defaults.headers["Authorization"] = `Bearer ${getToken()}`;
 
     return (
         <AuthContext.Provider

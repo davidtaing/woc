@@ -1,29 +1,37 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import { useAuth } from "../../contexts/authContext";
+import axios from "axios";
 
+/* 
+    wrapper for protected routes
+
+    TODO:
+    - 
+*/
+
+// this is re-rendering twice
+// same thing happening with strict mode removed
 const UserRoute = ({ component: Component, ...rest }) => {
-    const [loggedIn, setLoggedIn] = useState(false);
-
+    const { loggedIn, setToken } = useAuth();
     // call server to check token
-    const checkToken = () => {};
-    useEffect(() => {
+    if (loggedIn) {
         axios
             .get("/api/auth")
             .then((res) => {
-                console.log(res.data);
-                // setLoggedIn(true);
+                console.log("good token");
             })
             .catch((e) => {
-                console.log(e.message);
+                if (e.response.status === 401) setToken(null);
             });
-    }, []);
+    }
 
     // redirect to login if not authenticated
     const access = (props) => {
         return loggedIn ? (
             <Component {...props} />
         ) : (
+            // redirect to login if bad / no token
             <Redirect
                 to={{
                     pathname: "/login",

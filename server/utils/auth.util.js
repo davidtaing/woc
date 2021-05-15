@@ -18,7 +18,7 @@ const checkHash = async (password, hash) =>
     await bcrypt.compare(password, hash);
 
 const signToken = (dataObj) => {
-    const expires = '1s';
+    const expires = '1d';
     const SECRET = process.env.JWT_SECRET;
 
     const payload = {
@@ -28,7 +28,7 @@ const signToken = (dataObj) => {
 
     const token = jwt.sign(payload, SECRET, { expiresIn: expires });
     return {
-        token: `Bearer ${token}`,
+        token,
         expiresIn: expires,
     };
 };

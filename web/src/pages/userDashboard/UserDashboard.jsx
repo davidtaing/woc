@@ -5,7 +5,11 @@ import React from "react";
 */
 
 const UserDash = () => {
-    return <div>UserDashboard</div>;
+    return (
+        <>
+            <div>User DashBoard</div>
+        </>
+    );
 };
 
 export default UserDash;
