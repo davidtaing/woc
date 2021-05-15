@@ -1,18 +1,30 @@
 import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+import { Link as RouterLink, Redirect } from "react-router-dom";
+import axios from "axios";
+
+import {
+    Avatar,
+    Button,
+    TextField,
+    FormControlLabel,
+    Checkbox,
+    Link,
+    Grid,
+    Box,
+    Typography,
+    Container,
+} from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 import Copyright from "../../components/copyright/Copyright";
+import { makeStyles } from "@material-ui/core/styles";
+
+/* 
+    Login page component
+
+    TODO:
+    - remember me checkbox not handled
+    - bad login not handled
+*/
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -34,39 +46,39 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-async function loginUser(credentials) {
-    return fetch("http://localhost:8000/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentials),
-    }).then((response) => response.json());
-}
-
-export default function SignIn() {
+const SignIn = (props) => {
     const classes = useStyles();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [token, setToken] = useState("");
+    const [loggedIn, setLoggedIn] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const token = await loginUser({
-                email,
-                password,
+
+        const credentials = { email, password };
+        axios
+            .post("/api/auth/login", credentials)
+            .then((res) => {
+                // ok set token
+                axios.defaults.headers.common["Authorizaton"] = res.data.token;
+                localStorage.setItem("tk", res.data.token.split(" ")[1]);
+                setLoggedIn(true);
+
+                // handle bad credentials
+            })
+            .catch((e) => {
+                console.log(e.message);
             });
-            setToken(token);
-        } catch (e) {
-            alert(e.message);
-        }
-        console.log(token);
     };
 
-    function validateForm() {
+    const validateForm = () => {
         return email.length > 0 && password.length > 0;
-    }
+    };
+
+    /// set redirecting path
+    const referer = (props) => (props.location.state === undefined ? "/" : props.location.state.referer);
+
+    if (loggedIn) return <Redirect to={referer(props)} />;
 
     return (
         <Container component="main" maxWidth="xs">
@@ -77,7 +89,7 @@ export default function SignIn() {
                 <Typography component="h1" variant="h5">
                     Sign In
                 </Typography>
-                <form className={classes.form} onSubmit={handleSubmit} noValidate>
+                <form className={classes.form} onSubmit={handleSubmit}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -132,4 +144,6 @@ export default function SignIn() {
             </Box>
         </Container>
     );
-}
+};
+
+export default SignIn;
