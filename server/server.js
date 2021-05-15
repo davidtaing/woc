@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const logging = require('./config/logging');
 const config = require('./config/config');
-const serverUtils = require('./config/serverUtils');
+const serverUtils = require('./utils/server.util');
 
 require('dotenv').config();
 
@@ -27,7 +27,7 @@ mongoose
     .catch((err) => logging.error(NAMESPACE, err.message, err));
 
 // middlewares ------------------------------------------------------------------------------------------
-app.use(express.static(path.resolve(__dirname, '../web', 'build')));
+app.use(serverUtils.logAllRequests);
 
 // init passport
 require('./config/passport');

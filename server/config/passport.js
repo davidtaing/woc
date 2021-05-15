@@ -1,15 +1,35 @@
-const passport = require("passport")
-const localStrategy = require('passport-local').Strategy
+const passport = require('passport');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const localStrategy = require('passport-local').Strategy;
 
-const logging = require('./logging')
-const UserModel = require('../models/user.model')
-
+const logging = require('./logging');
+const User = require('../models/user.model');
 
 /* 
     setting up passport middleware
 */
-const NAMESPACE = "PASSPORT"
+const NAMESPACE = 'PASSPORT';
 
+const JWT_OPTIONS = {
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: process.env.JWT_SECRET,
+};
+
+passport.use(
+    'jwt',
+    new JwtStrategy(JWT_OPTIONS, (jwtPayload, done) => {
+        // valid jwt
+        User.findOne({ _id: jwtPayload.id }, (err, user) => {
+            logging.info(NAMESPACE, 'user', user);
+            if (err) return done(err, false);
+            if (user) return done(null, user);
+            else return done(null, false);
+        });
+    })
+);
+
+/*
 passport.use(
     "login",
     new localStrategy(
@@ -39,3 +59,4 @@ passport.use(
         }
     )
 )
+*/

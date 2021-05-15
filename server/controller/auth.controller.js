@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const jwtConf = require('../config/jwt');
+const authUtil = require('../utils/auth.util');
 
 const User = require('../models/user.model');
 const logging = require('../config/logging');
@@ -23,11 +23,39 @@ const NAMESPACE = 'AuthController';
 module.exports.user = (req, res) => {
     if (!req.user)
         return res.status(401).json({ message: 'not authenticated' });
-    return res.status(200).json({ ...req.user });
+    // edit the data returned from here to change the password
+    return res.status(200).json({ user: req.user });
 };
 
-module.exports.login = (req, res, next) => {
+module.exports.login = async (req, res) => {
+    // check matching account
+    const user = await User.findOne({ email: req.body.email });
+    if (!user)
+        return res.json({ success: false, msg: 'Account does not exist' });
+
+    // check matching password
+    // console.log(user.obj, req.body);
+    const checkPassword = await authUtil.checkHash(
+        req.body.password,
+        user.passwordHash
+    );
+    if (!checkPassword)
+        return res.json({ success: false, msg: 'Invalid password' });
+
+    // successful
+    console.log(user);
+    const tokenObj = await authUtil.signToken({ id: user._id });
+    return res.status(200).json({
+        success: true,
+        token: tokenObj.token,
+        expiresIn: tokenObj.expiresIn,
+    });
+
+    // sign jwt
+    // return token
+    /* old stuff
     passport.authenticate('login', async (err, user, info) => {
+        
         try {
             if (err || !user) {
                 // should this return a bad response instead
@@ -50,28 +78,27 @@ module.exports.login = (req, res, next) => {
             return next(error);
         }
     })(req, res, next);
+    */
 };
 
 module.exports.signup = async (req, res) => {
     // check existing email
+    User.findOne({ email: req.body.email });
     const exist = await User.findOne({ email: req.body.email });
     if (exist) {
-        logging.error(NAMESPACE, 'Login - duplicated email');
-        return res.status(400).json({ msg: 'Email already exist' });
+        return res.status(200).json({ msg: 'Email already exist' });
     }
 
-    console.log(req.body);
-    console.log(process.env.SALT_ROUNDS);
-
     // hash password
-    const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS));
-    const hash = await bcrypt.hash(req.body.password, salt);
+    // const hash = authUtil.generateHash(req.body.password);
 
     // new user object
     const newUser = new User({
         ...req.body,
-        password: hash,
+        passwordHash: await authUtil.generateHash(req.body.password),
     });
+
+    console.log(newUser);
 
     // save
     try {

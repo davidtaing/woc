@@ -1,4 +1,4 @@
-const logging = require('./logging');
+const logging = require('../config/logging');
 const path = require('path');
 
 /* 
