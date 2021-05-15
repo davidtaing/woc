@@ -36,9 +36,10 @@ const NavBar = () => {
                             <img className="logo-image" src={logo} alt="landing page art"></img>
                         </div>
                     </Link>
+                    <h2>Women of Colour Australia</h2>
                     <Typography variant="h6" className={classes.flex}></Typography>
                     <Link to="/login">
-                        <Button className={classes.navItem}>Login</Button>
+                        <Button className={classes.navItem}>Sign in</Button>
                     </Link>
                 </Toolbar>
             </AppBar>
