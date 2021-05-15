@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import "../../components/navbar/NavBar.css";
 
 const styles = makeStyles((theme) => ({
     root: {
@@ -7,15 +8,20 @@ const styles = makeStyles((theme) => ({
         justifyContent: "center",
     },
     paper: {
-        padding: theme.spacing(1),
+       // padding: theme.spacing(1),
         textAlign: "center",
         color: theme.palette.text.secondary,
     },
+    btnJoinLink: {
+        textDecoration: "none"
+    },
     btnJoin: {
+        fontFamily: `'Roboto Slab', serif`,
+        fontWeight: "600",
         fontSize: "1em",
         backgroundColor: theme.palette.secondary.main,
         color: "white",
-        marginTop: "2rem",
+        //marginTop: "2rem",
         borderRadius: "4rem",
         width: "35%",
         height: "4rem",
@@ -28,18 +34,32 @@ const styles = makeStyles((theme) => ({
         },
     },
     landingPic: {
-        width: "80%",
+        width: "100%",
         height: "auto",
     },
     description: {
+        fontFamily: `'Roboto Slab', serif`,
+        fontWeight: "300",
         letterSpacing: "0.02em",
-        fontSize: "2em",
+        fontSize: "1.65em",
     },
     caption: {
-        fontFamily: "Montserrat Classic",
+        fontFamily: `'Roboto Slab', serif`,
         fontWeight: "bold",
-        fontSize: "4.5em",
         lineHeight: "1",
+        marginBottom: "0",
+        fontSize: "60px",
+        textAlign: "-webkit-match-parent",
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '30px',
+            marginTop: '45px'
+          },
+          [theme.breakpoints.down('sm')]: {
+            fontSize: '40px',
+          },
+          [theme.breakpoints.down('md')]: {
+            paddingTop: 'inherit',
+          },
     },
 }));
 

@@ -8,8 +8,6 @@ import styles from "./Landing.style";
     Landing page component
 */
 
-
-
 function Landing() {
     const classes = styles();
 
@@ -20,7 +18,7 @@ function Landing() {
                     <Grid item xs={12} md={6} align="center" className={classes.root}>
                         <h1 className={classes.caption}>Fairer and more equitable Australia for all Women of Colour</h1>
                         <h5 className={classes.description}>We exist to champion Australia’s Women of Colour.</h5>
-                        <Link to="/signup">
+                        <Link to="/signup" className={classes.btnJoinLink}>
                             <Button variant="contained" /* color="secondary" */ className={classes.btnJoin}>
                                 Join us
                             </Button>
