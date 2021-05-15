@@ -40,9 +40,6 @@ const NavBar = () => {
                     <Link to="/login">
                         <Button className={classes.navItem}>Login</Button>
                     </Link>
-                    <Link to="/signup">
-                        <Button className={classes.navItem}>Sign up</Button>
-                    </Link>
                 </Toolbar>
             </AppBar>
             <div className={`${classes.offset}`} />
