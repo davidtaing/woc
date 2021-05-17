@@ -1,18 +1,23 @@
+import mentoringSvg from "./../../res/img/mentoring2.svg";
+import eventSvg from "../../res/img/events5.svg";
+import chatroomSvg from "../../res/img/chatrooms.svg";
+import onlinecourseSvg from "../../res/img/onlinecourses.svg";
+
 const cardData = [
     {
-        icons: ["fas", "chalkboard-teacher"],
+        icon: mentoringSvg,
         title: "Mentoring",
     },
     {
-        icons: ["fas", "desktop"],
+        icon: onlinecourseSvg,
         title: "Online courses",
     },
     {
-        icons: ["fas", "book-reader"],
-        title: "Book club",
+        icon: eventSvg,
+        title: "Events",
     },
     {
-        icons: ["fas", "comments"],
+        icon: chatroomSvg,
         title: "Chat rooms",
     },
 ];

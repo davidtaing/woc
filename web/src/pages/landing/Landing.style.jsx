@@ -7,6 +7,9 @@ const styles = makeStyles((theme) => ({
         flexDirection: "column",
         justifyContent: "center",
     },
+    second: {
+        backgroundColor: "#efe8eb"
+    },
     paper: {
        // padding: theme.spacing(1),
         textAlign: "center",
