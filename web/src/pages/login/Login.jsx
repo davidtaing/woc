@@ -46,43 +46,38 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        margin: theme.spacing(1, 0, 2),
     },
 }));
 
 const SignIn = (props) => {
     const classes = useStyles();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+
+    const [cred, setCred] = useState({ email: "", password: "" });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
-    // context
     const { loggedIn, setToken } = useAuth();
 
+    // on input change
+    const handleChange = (e) => setCred({ ...cred, [e.target.name]: e.target.value });
+    // on form submit
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        setLoading(true);
+        axios
+            .post("/api/auth/login", cred)
+            .then((res) => {
+                // ok set token
+                setToken(res.data.token);
+                setLoading(false);
+            })
+            .catch((e) => {
+                // display bad credentials or unexpected errors
+                setError(e.response.status === 401 ? "Invalid email/ password" : e.message);
+                setLoading(false);
+            });
 
-        const credentials = { email, password };
-        alert(JSON.stringify(credentials));
-        // setLoading(true);
-        // axios
-        //     .post("/api/auth/login", credentials)
-        //     .then((res) => {
-        //         // ok set token
-        //         setToken(res.data.token);
-        //         setLoading(false);
-        //     })
-        //     .catch((e) => {
-        //         // display bad credentials or unexpected errors
-        //         setError(e.response.status === 401 ? "Invalid email/ password" : e.message);
-        //         setLoading(false);
-        //     });
-    };
-
-    // preliminary validation
-    const validateForm = () => {
-        return email.length > 0 && password.length > 0;
+        e.preventDefault(); // things works if this is on the bottom, interesting
     };
 
     /// redirect if logged in
@@ -95,63 +90,64 @@ const SignIn = (props) => {
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
                 </Avatar>
+
                 <Typography component="h1" variant="h5">
                     Sign In
                 </Typography>
 
                 {/* form */}
-                <form className={classes.form} submit={handleSubmit}>
-                    {/* <Grid container> */}
-                    <TextField
-                        name="email"
-                        label="Email Address"
-                        autoComplete="email"
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        autoFocus
-                    />
-                    <TextField
-                        name="password"
-                        label="Password"
-                        autoComplete="current-password"
-                        onChange
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                    <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-
-                    {error ? <Typography style={{ color: "red" }}>{error}</Typography> : <></>}
-
-                    {loading ? (
-                        <CircularProgress />
-                    ) : (
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                            // onClick={handleSubmit}
-                            // disabled={!validateForm()}
-                        >
-                            Sign In
-                        </Button>
-                    )}
-
-                    {/* links after submit */}
+                <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <Link component={RouterLink} to="/signUp" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
+                        <TextField
+                            name="email"
+                            label="Email Address"
+                            autoComplete="email"
+                            onChange={handleChange}
+                            required
+                            autoFocus
+                        />
+                        <TextField
+                            name="password"
+                            label="Password"
+                            autoComplete="current-password"
+                            onChange
+                            onChange={handleChange}
+                            required
+                        />
+                        <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+
+                        {/* error message */}
+                        {error ? <Typography style={{ color: "red" }}>{error}</Typography> : <></>}
+
+                        {/* loading button (needs some styling) */}
+                        {loading ? (
+                            <CircularProgress />
+                        ) : (
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="secondary"
+                                className={classes.submit}
+                            >
+                                Sign In
+                            </Button>
+                        )}
+
+                        {/* links after submit */}
+                        <Grid container>
+                            <Grid item xs>
+                                <Link href="#" variant="body2">
+                                    Forgot password?
+                                </Link>
+                            </Grid>
+                            <Grid item>
+                                <Link component={RouterLink} to="/signUp" variant="body2">
+                                    {"Don't have an account? Sign Up"}
+                                </Link>
+                            </Grid>
                         </Grid>
                     </Grid>
-                    {/* </Grid> */}
                 </form>
             </div>
             <Box mt={8}>
