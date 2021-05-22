@@ -6,7 +6,7 @@ import { useAuth } from "../../contexts/authContext";
 import {
     Avatar,
     Button,
-    TextField,
+    // TextField,
     FormControlLabel,
     Checkbox,
     Link,
@@ -14,8 +14,10 @@ import {
     Box,
     Typography,
     Container,
-    CircularProgress, // change to FAB later
+    CircularProgress, // change to MUI-FAB later
 } from "@material-ui/core";
+
+import TextField from "../../components/textfield/TextField";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Copyright from "../../components/copyright/Copyright";
 import { makeStyles } from "@material-ui/core/styles";
@@ -62,28 +64,29 @@ const SignIn = (props) => {
         e.preventDefault();
 
         const credentials = { email, password };
-        setLoading(true);
-        axios
-            .post("/api/auth/login", credentials)
-            .then((res) => {
-                // ok set token
-                setToken(res.data.token);
-                setLoading(false);
-            })
-            .catch((e) => {
-                // display bad credentials or unexpected errors
-                setError(e.response.status === 401 ? "Invalid email/ password" : e.message);
-                setLoading(false);
-            });
+        alert(JSON.stringify(credentials));
+        // setLoading(true);
+        // axios
+        //     .post("/api/auth/login", credentials)
+        //     .then((res) => {
+        //         // ok set token
+        //         setToken(res.data.token);
+        //         setLoading(false);
+        //     })
+        //     .catch((e) => {
+        //         // display bad credentials or unexpected errors
+        //         setError(e.response.status === 401 ? "Invalid email/ password" : e.message);
+        //         setLoading(false);
+        //     });
     };
 
+    // preliminary validation
     const validateForm = () => {
         return email.length > 0 && password.length > 0;
     };
 
-    /// set redirecting path
+    /// redirect if logged in
     const referer = (props) => (props.location.state === undefined ? "/" : props.location.state.referer);
-
     if (loggedIn) return <Redirect to={referer(props)} />;
 
     return (
@@ -95,30 +98,25 @@ const SignIn = (props) => {
                 <Typography component="h1" variant="h5">
                     Sign In
                 </Typography>
-                <form className={classes.form}>
+
+                {/* form */}
+                <form className={classes.form} submit={handleSubmit}>
+                    {/* <Grid container> */}
                     <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
                         name="email"
+                        label="Email Address"
                         autoComplete="email"
                         onChange={(e) => setEmail(e.target.value)}
+                        required
                         autoFocus
                     />
                     <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
                         name="password"
                         label="Password"
-                        type="password"
-                        id="password"
                         autoComplete="current-password"
+                        onChange
                         onChange={(e) => setPassword(e.target.value)}
+                        required
                     />
                     <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
 
@@ -128,18 +126,19 @@ const SignIn = (props) => {
                         <CircularProgress />
                     ) : (
                         <Button
-                            type="button"
+                            type="submit"
                             fullWidth
                             variant="contained"
                             color="primary"
                             className={classes.submit}
-                            onClick={handleSubmit}
-                            disabled={!validateForm()}
+                            // onClick={handleSubmit}
+                            // disabled={!validateForm()}
                         >
                             Sign In
                         </Button>
                     )}
 
+                    {/* links after submit */}
                     <Grid container>
                         <Grid item xs>
                             <Link href="#" variant="body2">
@@ -152,10 +151,12 @@ const SignIn = (props) => {
                             </Link>
                         </Grid>
                     </Grid>
+                    {/* </Grid> */}
                 </form>
             </div>
             <Box mt={8}>
-                <Copyright />
+                {" "}
+                <Copyright />{" "}
             </Box>
         </Container>
     );
