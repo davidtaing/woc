@@ -21,20 +21,25 @@ const styles = makeStyles((theme) => ({
         fontSize: "1.5em",
         fontFamily: `'Roboto Slab', serif`,
         fontWeight: "300",
-      //  textDecoration: 'none'
+        //  textDecoration: 'none'
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "14px",
+        },
     },
     brandName: {
         fontFamily: `'Roboto Slab', serif`,
         margin: "0.5em",
-        fontWeight: "300",        
-        color: "white"
-
+        fontWeight: "300",
+        color: "white",
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "14px",
+        },
     },
     navLoginLink: {
-        textDecoration: "none"
+        textDecoration: "none",
     },
-    brandNameLink:{
-        textDecoration: "none"
+    brandNameLink: {
+        textDecoration: "none",
     },
     offset: theme.mixins.toolbar,
     offsetPad: { paddingBottom: theme.spacing(1) },
@@ -53,7 +58,7 @@ const NavBar = () => {
                         </div>
                     </Link>
                     <Link to="/" className={classes.brandNameLink}>
-                    <h2 className={classes.brandName}>Women of Colour Australia</h2>
+                        <h2 className={classes.brandName}>Women of Colour Australia</h2>
                     </Link>
                     <Typography variant="h6" className={classes.flex}></Typography>
                     <Link className={classes.navLoginLink} to="/login">
