@@ -93,8 +93,7 @@ module.exports.checkEmail = async (req, res) => {
 };
 
 module.exports.signup = async (req, res) => {
-    // check existing email
-    User.findOne({ email: req.body.email });
+    // already done in checkEmail but leaving this here for safety
     const exist = await User.findOne({ email: req.body.email });
     if (exist) {
         return res.status(200).json({ msg: 'Email already exist' });
