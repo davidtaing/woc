@@ -54,6 +54,7 @@ const SignIn = (props) => {
     const classes = useStyles();
 
     const [cred, setCred] = useState({ email: "", password: "" });
+    const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -102,6 +103,7 @@ const SignIn = (props) => {
                             name="email"
                             label="Email Address"
                             autoComplete="email"
+                            value={email}
                             onChange={handleChange}
                             required
                             autoFocus
