@@ -25,6 +25,9 @@ const styles = makeStyles((theme) => ({
         [theme.breakpoints.down("xs")]: {
             fontSize: "14px",
         },
+        "&:hover": {
+            backgroundColor: theme.palette.secondary.main,
+        },
     },
     brandName: {
         fontFamily: `'Roboto Slab', serif`,
@@ -52,6 +55,7 @@ const NavBar = () => {
         <>
             <AppBar className={classes.flex}>
                 <Toolbar>
+                    {/* LEFT: logo/ name */}
                     <Link to="/">
                         <div className={classes.flex}>
                             <img className="logo-image" src={logo} alt="landing page art"></img>
@@ -60,9 +64,14 @@ const NavBar = () => {
                     <Link to="/" className={classes.brandNameLink}>
                         <h2 className={classes.brandName}>Women of Colour Australia</h2>
                     </Link>
+                    {/* spacing */}
                     <Typography variant="h6" className={classes.flex}></Typography>
+                    {/* RIGHT links */}
                     <Link className={classes.navLoginLink} to="/login">
                         <Button className={classes.navItem}>Sign in</Button>
+                    </Link>
+                    <Link className={classes.navLoginLink} to="/login">
+                        <Button className={classes.navItem}>Join Us</Button>
                     </Link>
                 </Toolbar>
             </AppBar>
