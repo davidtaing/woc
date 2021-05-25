@@ -19,6 +19,30 @@ const styles = makeStyles((theme) => ({
     navItem: {
         color: "white",
         fontSize: "1.5em",
+        fontFamily: `'Roboto Slab', serif`,
+        fontWeight: "300",
+        //  textDecoration: 'none'
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "14px",
+        },
+        "&:hover": {
+            backgroundColor: theme.palette.secondary.main,
+        },
+    },
+    brandName: {
+        fontFamily: `'Roboto Slab', serif`,
+        margin: "0.5em",
+        fontWeight: "300",
+        color: "white",
+        [theme.breakpoints.down("xs")]: {
+            fontSize: "14px",
+        },
+    },
+    navLoginLink: {
+        textDecoration: "none",
+    },
+    brandNameLink: {
+        textDecoration: "none",
     },
     offset: theme.mixins.toolbar,
     offsetPad: { paddingBottom: theme.spacing(1) },
@@ -31,17 +55,23 @@ const NavBar = () => {
         <>
             <AppBar className={classes.flex}>
                 <Toolbar>
+                    {/* LEFT: logo/ name */}
                     <Link to="/">
                         <div className={classes.flex}>
                             <img className="logo-image" src={logo} alt="landing page art"></img>
                         </div>
                     </Link>
-                    <Typography variant="h6" className={classes.flex}></Typography>
-                    <Link to="/login">
-                        <Button className={classes.navItem}>Login</Button>
+                    <Link to="/" className={classes.brandNameLink}>
+                        <h2 className={classes.brandName}>Women of Colour Australia</h2>
                     </Link>
-                    <Link to="/signup">
-                        <Button className={classes.navItem}>Sign up</Button>
+                    {/* spacing */}
+                    <Typography variant="h6" className={classes.flex}></Typography>
+                    {/* RIGHT links */}
+                    <Link className={classes.navLoginLink} to="/login">
+                        <Button className={classes.navItem}>Sign in</Button>
+                    </Link>
+                    <Link className={classes.navLoginLink} to="/login">
+                        <Button className={classes.navItem}>Join Us</Button>
                     </Link>
                 </Toolbar>
             </AppBar>
