@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Grid, Paper, Button, AccessAlarm, ThreeDRotation, SvgIcon, Icon } from "@material-ui/core/";
+
+import { Container, Grid, Paper, Button } from "@material-ui/core/";
 import landingSvg from "../../res/img/women.svg";
 import styles from "./Landing.style";
 import cardData from "./cardData";
@@ -9,6 +10,7 @@ import cardData from "./cardData";
     Landing page component
 */
 
+// card for item box
 const Card = ({ item, index }) => {
     const classes = styles();
 
@@ -30,6 +32,7 @@ function Landing() {
     return (
         <>
             <Container>
+                {/* main logo and text */}
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={12} md={6} lg={6} align="center" className={classes.root}>
                         <h1 className={classes.caption}>Fairer and more equitable Australia for all Women of Colour</h1>
@@ -44,6 +47,7 @@ function Landing() {
                         <img className={classes.landingPic} src={landingSvg} alt="women of colour" />
                     </Grid>
                 </Grid>
+                {/* item boxes */}
                 <Grid container className="classes.second">
                     <Grid container spacing={4} style={{ paddingTop: "4em" }}>
                         {cardData.map((item, index) => (
