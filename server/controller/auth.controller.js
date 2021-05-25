@@ -84,6 +84,14 @@ module.exports.login = async (req, res) => {
     */
 };
 
+module.exports.checkEmail = async (req, res) => {
+    // check existing email
+    User.findOne({ email: req.body.email });
+    return exist
+        ? res.status(200).json({ exist: true, msg: 'Email already exist' })
+        : res.status(200).json({ exist: false, msg: 'OK to use' });
+};
+
 module.exports.signup = async (req, res) => {
     // check existing email
     User.findOne({ email: req.body.email });
@@ -113,7 +121,9 @@ module.exports.signup = async (req, res) => {
         });
     } catch (err) {
         logging.error(NAMESPACE, `Signup ${err.message}`, err);
-        return res.status(400).json({ err });
+        return res
+            .status(400)
+            .json({ msg: 'Signup error. Please try again or contact support' });
     }
 };
 

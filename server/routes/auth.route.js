@@ -11,6 +11,7 @@ router.get(
     passport.authenticate('jwt', { session: false }),
     controller.user
 );
+router.post('/checkemail', controller.checkEmail);
 router.post('/login', controller.login);
 router.post('/signup', controller.signup);
 
