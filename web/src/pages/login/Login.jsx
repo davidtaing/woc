@@ -54,9 +54,8 @@ const SignIn = (props) => {
     const classes = useStyles();
 
     const [cred, setCred] = useState({ email: "", password: "" });
-    const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+    const [error, setError] = useState(""); // POST error
 
     const { loggedIn, setToken } = useAuth();
 
@@ -103,25 +102,29 @@ const SignIn = (props) => {
                             name="email"
                             label="Email Address"
                             autoComplete="email"
-                            value={email}
+                            value={cred.email}
                             onChange={handleChange}
+                            // onChange={(e) => setEmail(e.target.value)}
                             required
                             autoFocus
                         />
                         <TextField
                             name="password"
                             label="Password"
+                            type="password"
                             autoComplete="current-password"
+                            value={cred.password}
                             onChange
                             onChange={handleChange}
+                            // onChange={(e) => setPass(e.target.value)}
                             required
                         />
                         <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
 
-                        {/* error message */}
+                        {/* API message */}
                         {error ? <Typography style={{ color: "red" }}>{error}</Typography> : <></>}
 
-                        {/* loading button (needs some styling) */}
+                        {/* loading button (needs some styling or use MUI loading button) */}
                         {loading ? (
                             <CircularProgress />
                         ) : (
@@ -153,7 +156,6 @@ const SignIn = (props) => {
                 </form>
             </div>
             <Box mt={8}>
-                {" "}
                 <Copyright />{" "}
             </Box>
         </Container>
