@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/";
 import { Link } from "react-router-dom";
 import logo from "../../res/img/2.png";
 import "./NavBar.css";
+import { useAuth } from "../../../src/contexts/authContext";
+import App from "./../../app/authWrapper/UserRoute";
 
 /* 
     Handing main navigation bar for site
@@ -51,6 +53,8 @@ const styles = makeStyles((theme) => ({
 const NavBar = () => {
     const classes = styles();
 
+    const loggedIn = useAuth();
+    //   console.log("llll: " + loggedIn);
     return (
         <>
             <AppBar className={classes.flex}>
@@ -68,7 +72,7 @@ const NavBar = () => {
                     <Typography variant="h6" className={classes.flex}></Typography>
                     {/* RIGHT links */}
                     <Link className={classes.navLoginLink} to="/login">
-                        <Button className={classes.navItem}>Sign in</Button>
+                        <Button className={classes.navItem}>{loggedIn.loggedIn ? "Sign out" : "Sign in"}</Button>
                     </Link>
                 </Toolbar>
             </AppBar>
