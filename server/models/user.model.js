@@ -20,12 +20,19 @@ const UserSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        default: 2,
+        required: false,
+        default: 2, // default user unless set
     },
     passwordHash: {
         type: String,
         required: true,
     },
+    gender: { type: String, require: true },
+    nationality: { type: String, require: true },
+    about: { type: String, require: false },
+    skills: { type: Array, require: false },
+    events: { type: Array, require: false },
+    // display image
 });
 
 // ok should i set up mongoose hooks
