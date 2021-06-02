@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { checkIsFormValid, validateInput } from "../../utils/formUtils";
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -15,12 +15,8 @@ import Container from "@material-ui/core/Container";
 import Copyright from '../../components/copyright/Copyright';
 import { FormHelperText } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
+import axios from "axios";
 
-
-/* 
-    Register page
-    have this redirect to login when logging in in successful
-*/
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(2),
@@ -77,7 +73,12 @@ function SignUp() {
   const [showError, setShowError] = useState(false)
 
   const classes = useStyles();
-
+  let history = useHistory();
+  const apiUrl = "/api/auth/signup";
+  const createNewUser = async newUser => {
+    const response = await axios.post(apiUrl, newUser)
+    return response;
+  }
   const handleChange = (event) => {
       const { name, value } = event.target
       const { hasError, error } = validateInput(name, value)
@@ -164,18 +165,31 @@ function SignUp() {
 
       if (!isFormValid ) {
           setShowError(true)
-
+          setTimeout(() => {setShowError(false)}, 5000)
       } else {
         // TODOS 
-        // 1. POST new user to the server
-        // 2. includes check duplicate user 
-        // 3. redirect to dashboard once sucessfully created new user
-          window.alert('sending login data to the server')
+        // includes check duplicate user 
+        const payload = {
+          email: formState.email.value,
+          firstName:formState.firstName.value,
+          lastName: formState.lastName.value,
+          password: formState.password.value
+        };
+        
+        try {
+          const response = createNewUser(payload);
+          // TODOS
+          // refactor the reponse
+          console.table(response)
+          history.push("/login")
+
+        } catch (error) {
+          console.log(error.response.data.error)
+        }
       }
 
-      console.log(`showError being ${showError}`)
 
-      setTimeout(() => {setShowError(false)}, 5000)
+
 
     }
 
