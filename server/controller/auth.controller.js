@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-const passport = require('passport');
 const authUtil = require('../utils/auth.util');
 
 const User = require('../models/user.model');
@@ -20,10 +19,11 @@ const logging = require('../config/logging');
 const NAMESPACE = 'AuthController';
 
 // route definitions --------------------------------------------------------------------------------
+// may not need this
 module.exports.user = (req, res) => {
     if (!req.user)
         return res.status(401).json({ message: 'not authenticated' });
-    return res.status(200);
+    return res.status(200).json({ message: 'something' });
 };
 
 module.exports.login = async (req, res) => {
@@ -35,7 +35,6 @@ module.exports.login = async (req, res) => {
             .json({ success: false, msg: 'Account does not exist' });
 
     // check matching password
-    // console.log(user.obj, req.body);
     const checkPassword = await authUtil.checkHash(
         req.body.password,
         user.passwordHash
@@ -46,8 +45,8 @@ module.exports.login = async (req, res) => {
             .json({ success: false, msg: 'Invalid password' });
 
     // successful
-    console.log(user);
     const tokenObj = await authUtil.signToken({ id: user._id });
+
     return res.status(200).json({
         success: true,
         token: tokenObj.token,
@@ -84,8 +83,10 @@ module.exports.login = async (req, res) => {
     */
 };
 
+/**
+ *  Check existing Email
+ */
 module.exports.checkEmail = async (req, res) => {
-    // check existing email
     User.findOne({ email: req.body.email });
     return exist
         ? res.status(200).json({ exist: true, msg: 'Email already exist' })
@@ -99,16 +100,11 @@ module.exports.signup = async (req, res) => {
         return res.status(200).json({ msg: 'Email already exist' });
     }
 
-    // hash password
-    // const hash = authUtil.generateHash(req.body.password);
-
     // new user object
     const newUser = new User({
         ...req.body,
         passwordHash: await authUtil.generateHash(req.body.password),
     });
-
-    console.log(newUser);
 
     // save
     try {
@@ -127,3 +123,5 @@ module.exports.signup = async (req, res) => {
 };
 
 // change password
+// - compare old password hash
+// - update new password

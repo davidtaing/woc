@@ -14,17 +14,20 @@ const NAMESPACE = 'PASSPORT';
 const JWT_OPTIONS = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.JWT_SECRET,
+    ignoreExpiration: false,
 };
 
 passport.use(
     'jwt',
     new JwtStrategy(JWT_OPTIONS, (jwtPayload, done) => {
+        console.log(jwtPayload);
         // valid jwt
         User.findOne({ _id: jwtPayload.id }, (err, user) => {
             logging.info(NAMESPACE, 'user', user);
-            if (err) return done(err, false);
-            if (user) return done(null, user);
-            else return done(null, false);
+            if (err) return done(err, false); // error
+
+            // bind to req in protected route
+            return user ? done(null, user) : done(null, false);
         });
     })
 );

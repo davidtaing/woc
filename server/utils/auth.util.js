@@ -18,12 +18,12 @@ const checkHash = async (password, hash) =>
     await bcrypt.compare(password, hash);
 
 const signToken = (dataObj) => {
-    const expires = '1d';
+    const expires = '1';
     const SECRET = process.env.JWT_SECRET;
 
     const payload = {
         ...dataObj,
-        iat: Date.now(),
+        iat: Math.floor(Date.now()),
     };
 
     const token = jwt.sign(payload, SECRET, { expiresIn: expires });
