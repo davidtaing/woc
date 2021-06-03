@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const controller = require('../controller/user.controller');
-const passport = require('passport');
+// const passport = require('passport');
 
 /* 
     crud operations for a user
@@ -8,7 +8,7 @@ const passport = require('passport');
 
 router.get(
     '/',
-    passport.authenticate('jwt', { session: false }),
+    // passport.authenticate('jwt', { session: false }),
     controller.getUser
 );
 

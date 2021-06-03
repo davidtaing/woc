@@ -8,6 +8,7 @@ const User = require('../models/user.model');
 
 /* 
     setting up passport middleware
+    NOT USED - Pending to be removed
 */
 const NAMESPACE = 'PASSPORT';
 

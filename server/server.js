@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-// const passport = require('passport');
 
 const logging = require('./config/logging');
 const config = require('./config/config');
@@ -30,9 +29,7 @@ mongoose
 app.use(serverUtils.logAllRequests);
 
 // init passport
-require('./config/passport');
-// app.use(passport.initialize());
-// app.use(passport.session());
+// require('./config/passport');
 
 // serving static file ------------------------------------------------------------------------------------------
 app.use(express.static(path.resolve(__dirname, '../web', 'build')));
