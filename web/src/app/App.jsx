@@ -23,7 +23,7 @@ const App = () => {
     // might still need context for this
     // need to find a simple way for dev mode
     const { loggedIn } = useAuth();
-    console.log(loggedIn);
+
     const HomePage = () => {
         return loggedIn ? (
             <UserRoute exact path="/" component={Pages.UserDashBoard} />
