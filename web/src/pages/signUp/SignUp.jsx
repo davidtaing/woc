@@ -1,29 +1,22 @@
 import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { useAuth } from "../../contexts/authContext";
-import { Redirect } from "react-router-dom";
-
-import {
-    Avatar,
-    Button,
-    TextField,
-    FormControlLabel,
-    Checkbox,
-    Link,
-    Grid,
-    Box,
-    Typography,
-    Container,
-} from "@material-ui/core";
-
-import Copyright from "../../components/copyright/Copyright";
+import { checkIsFormValid, validateInput } from "../../utils/formUtils";
+import { Link as RouterLink, useHistory } from 'react-router-dom';
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Copyright from '../../components/copyright/Copyright';
+import { FormHelperText } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
+import axios from "axios";
 
-/* 
-    Register page
-    have this redirect to login when logging in in successful
-*/
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(2),
@@ -44,28 +37,164 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SignUp(props) {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+const initialState = {
+    firstName: {
+        value: '',
+        touched: false,
+        hasError: true,
+        error: '',
+    },
+    lastName: {
+        value: '',
+        touched: false,
+        hasError: true,
+        error: '',
+    },
+    email: {
+        value: '',
+        touched: false,
+        hasError: true,
+        error: '',
+    },
+    password: {
+      value: '',
+      touched: false,
+      hasError: true,
+      error: '',
+    },
+    newsletter: {
+      value: true, touched: false, hasErrors: false, error: '',
+    },
+    isFormValid: false,
+}
 
-    const { loggedIn } = useAuth();
+function SignUp() {
+  const [formState, setFormState] = useState(initialState)
+  const [showError, setShowError] = useState(false)
 
-    const handleSignUp = (event) => {
-        event.preventDefault();
-        console.log("signup btn is clicked");
-        console.log(`now we have a new user, and userName is ${firstName} ${lastName} email address is ${email}`);
-    };
+  const classes = useStyles();
+  let history = useHistory();
+  const apiUrl = "/api/auth/signup";
+  const createNewUser = async newUser => {
+    const response = await axios.post(apiUrl, newUser)
+    return response;
+  }
+  const handleChange = (event) => {
+      const { name, value } = event.target
+      const { hasError, error } = validateInput(name, value)
+      const isFormValid = checkIsFormValid(name, value, hasError, error, formState)
+      setFormState(prevState => ({
+              ...prevState,
+              [name]: {
+                ...prevState[name],
+                value,
+                hasError,
+                error,
+                touched: false,
+              },
+              isFormValid
+      }))
+  }
 
-    const classes = useStyles();
+    const handleCheckBox = (event) => {
+        const { name, checked } = event.target
+        const { hasError, error } = validateInput(name, checked)
+        const isFormValid = checkIsFormValid(name, checked, hasError, error, formState)
+        setFormState(prevState => ({
+            ...prevState,
+            [name]: {
+                ...prevState[name],
+                value: checked,
+                hasError,
+                error,
+                touched: true,
+            },
+            isFormValid
+        }))
+    }
 
-    const referer = (props) => (props.location.state === undefined ? "/" : props.location.state.referer);
+  const handleOnBlur = (event) => {
+      const { name, value } = event.target
+      const { hasError, error } = validateInput( name, value )
+      const isFormValid =  checkIsFormValid(name, value, hasError, error, formState)
+      setFormState(prevState => ({
+              ...prevState,
+              [name]: {
+                  ...prevState[name],
+                  value,
+                  hasError,
+                  error,
+                  touched: true,
+              },
+              isFormValid
+          }
+      ))
+  }
 
-    if (loggedIn) return <Redirect to={referer(props)} />;
 
-    return (
-        <Container component="main" maxWidth="xs">
+  const handleSignUp = (event) => {
+    event.preventDefault()
+    console.log(`submit btn is clicked ...`)
+      let tempFormState = {}
+      console.table(tempFormState)
+
+    let isFormValid = true
+
+    for ( const name in formState) {
+      const { value } = formState[name]
+      const { hasError, error } = validateInput(name, value)
+
+      if (hasError) {
+        isFormValid = false
+      }
+
+        if (name) {
+            tempFormState[name] = {
+                value,
+                hasError,
+                error,
+                touched: true
+            }
+        }
+    }
+
+      setFormState({
+          ...tempFormState,
+          isFormValid
+      })
+
+      if (!isFormValid ) {
+          setShowError(true)
+          setTimeout(() => {setShowError(false)}, 5000)
+      } else {
+        // TODOS 
+        // includes check duplicate user 
+        const payload = {
+          email: formState.email.value,
+          firstName:formState.firstName.value,
+          lastName: formState.lastName.value,
+          password: formState.password.value
+        };
+        
+        try {
+          const response = createNewUser(payload);
+          // TODOS
+          // refactor the reponse
+          console.table(response)
+          history.push("/login")
+
+        } catch (error) {
+          console.log(error.response.data.error)
+        }
+      }
+
+
+
+
+    }
+
+   return (
+      <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
@@ -73,71 +202,84 @@ export default function SignUp(props) {
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
-                <form className={classes.form} noValidate>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                autoComplete="fname"
-                                name="firstName"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="firstName"
-                                label="First Name"
-                                value={firstName}
-                                onChange={({ target }) => setFirstName(target.value)}
-                                autoFocus
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="lastName"
-                                label="Last Name"
-                                name="lastName"
-                                autoComplete="lname"
-                                value={lastName}
-                                onChange={({ target }) => {
-                                    setLastName(target.value);
-                                }}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-                                value={email}
-                                onChange={({ target }) => {
-                                    setEmail(target.value);
-                                }}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                                value={password}
-                                onChange={({ target }) => {
-                                    setPassword(target.value);
-                                }}
-                            />
-                        </Grid>
+                { showError && (<FormHelperText>please enter the info correctly</FormHelperText>) }
+
+                <form className={classes.form} >
+                  <Grid container spacing={2} >
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          variant="outlined"
+                          required
+                          fullWidth
+                          name="firstName"
+                          id="firstName"
+                          label="First Name"
+                          value={formState.firstName.value}
+                          onChange={handleChange}
+                          onBlur={handleOnBlur}
+                          error={formState.firstName.touched && formState.firstName.hasError}
+                          helperText={formState.firstName.error}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          variant="outlined"
+                          required
+                          fullWidth
+                          name="lastName"
+                          id="lastName"
+                          label="Last Name"
+                          value={formState.lastName.value}
+                          onChange={handleChange}
+                          onBlur={handleOnBlur}
+                          error={formState.lastName.touched && formState.lastName.hasError}
+                          helperText={formState.lastName.error}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          variant="outlined"
+                          required
+                          fullWidth
+                          name="email"
+                          id="email"
+                          label="Email Address"
+                          type='email'
+                          value={formState.email.value}
+                          onChange={handleChange}
+                          onBlur={handleOnBlur}
+                          error={formState.email.touched && formState.email.hasError }
+                          helperText={formState.email.error}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          variant="outlined"
+                          required
+                          fullWidth
+                          name="password"
+                          id="password"
+                          label="Password"
+                          type="password"
+                          autoComplete="current-password"
+                          value={formState.password.value}
+                          onChange={handleChange}
+                          onBlur={handleOnBlur}
+                          error={formState.password.touched && formState.password.hasError }
+                          helperText={formState.password.error}
+                        />
+                      </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
-                                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                                control={
+                                  <Checkbox
+                                    name="newsletter"
+                                    checked={formState.newsletter.value}
+                                    value="allowExtraEmails"
+                                    color="primary"
+                                    onChange={handleCheckBox}
+                                />
+                                }
                                 label="I want to receive inspiration, marketing promotions and updates via email."
                             />
                         </Grid>
@@ -167,5 +309,8 @@ export default function SignUp(props) {
                 <Copyright />
             </Box>
         </Container>
-    );
+    )
 }
+
+export default SignUp
+
