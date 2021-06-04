@@ -114,7 +114,6 @@ const SignIn = (props) => {
                             type="password"
                             autoComplete="current-password"
                             value={cred.password}
-                            onChange
                             onChange={handleChange}
                             // onChange={(e) => setPass(e.target.value)}
                             required
