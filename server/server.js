@@ -33,7 +33,6 @@ app.use(serverUtils.logAllRequests);
 
 // serving static file ------------------------------------------------------------------------------------------
 app.use(express.static(path.resolve(__dirname, '../web', 'build')));
-// app.use(express.static('public'));
 
 // api routing ------------------------------------------------------------------------------------------
 app.use('/api', require('./routes/routes'));

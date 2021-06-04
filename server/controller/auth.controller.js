@@ -21,9 +21,9 @@ const NAMESPACE = 'AuthController';
 // route definitions --------------------------------------------------------------------------------
 // may not need this
 module.exports.user = (req, res) => {
-    if (!req.user)
+    if (!req.token)
         return res.status(401).json({ message: 'not authenticated' });
-    return res.status(200).json({ message: 'something' });
+    return res.status(200).json({ message: 'something', user: req.token });
 };
 
 module.exports.login = async (req, res) => {

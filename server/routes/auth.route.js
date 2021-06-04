@@ -3,6 +3,7 @@ const controller = require('../controller/auth.controller');
 const authValidator = require('../validator/auth.validate');
 const { runValidation } = require('../validator/runValidator');
 // const passport = require('passport');
+const jwt = require('express-jwt');
 
 /* 
     authentication routes
@@ -11,6 +12,16 @@ const { runValidation } = require('../validator/runValidator');
 router.get(
     '/',
     // passport.authenticate('jwt', { session: false }),
+    // slap this into config
+    jwt({
+        secret: process.env.JWT_SECRET,
+        algorithms: ['HS256'],
+        requestProperty: 'token', // bind to prop of req
+    }),
+    (err, req, res, next) => {
+        if (err.name === 'UnauthorizedError') console.log('somehting');
+        next();
+    },
     controller.user
 );
 
