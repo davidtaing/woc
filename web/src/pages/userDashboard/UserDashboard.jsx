@@ -1,4 +1,5 @@
 import React from "react";
+import { LayoutUserDashboard } from "../../components/layout/Layout";
 
 /* 
     User Dashboard component
@@ -6,9 +7,9 @@ import React from "react";
 
 const UserDash = () => {
     return (
-        <>
-            <div>User DashBoard</div>
-        </>
+        <LayoutUserDashboard>
+            <h1>User DashBoard</h1>
+        </LayoutUserDashboard>
     );
 };
 
