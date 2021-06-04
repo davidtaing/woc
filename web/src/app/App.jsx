@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/authContext";
 
 import "./App.css";
 import UserRoute from "./authWrapper/UserRoute";
-import Layout from "../components/layout/Layout";
+import { Layout } from "../components/layout/Layout";
 import * as Pages from "../pages/Pages";
 
 /* 
@@ -39,7 +39,6 @@ const App = () => {
                 <Route path="/user" component={Pages.UserDashBoard} />
                 <Route path="/login" component={Pages.Login} />
                 <Route path="/signUp" component={Pages.SignUp} />
-                <UserRoute path="/profile" component={Pages.UserProfile} />
             </Layout>
         </BrowserRouter>
     );
