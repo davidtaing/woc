@@ -1,9 +1,7 @@
 import React from "react";
 import NavBar from "../navbar/NavBar";
-import UserProfile from "../../pages/userProfile/UserProfile";
-import UserEvents from "../userevents/UserEvents";
-import UserCourses from "../usercourses/UserCourses";
-import {Container} from "@material-ui/core";
+
+import { Container } from "@material-ui/core";
 /* 
     Layout component handling common layout for all pages
 
@@ -11,7 +9,8 @@ import {Container} from "@material-ui/core";
 
 */
 
-const Layout = ({ status, children }) => {
+// main layout with nav and footer
+export const Layout = ({ status, children }) => {
     return (
         <>
             <NavBar />
@@ -20,17 +19,11 @@ const Layout = ({ status, children }) => {
     );
 };
 
-export const LayoutUserDashboard = () => {
-  return (
-    <>
-      <Container maxWidth="sm" >
-        <UserProfile />
-        <UserEvents />
-        <UserCourses />
-      </Container>
-
-    </>
-  );
-}
-
-export default Layout;
+// layout for user dashboard
+export const LayoutUserDashboard = ({ children }) => {
+    return (
+        <>
+            <Container maxWidth="sm">{children}</Container>
+        </>
+    );
+};
