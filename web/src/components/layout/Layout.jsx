@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "../navbar/NavBar";
 import UserProfile from "../../pages/userProfile/UserProfile";
 import UserEvents from "../userevents/UserEvents";
-import UserCourses from "../usercourse/UserCourses";
+import UserCourses from "../usercourses/UserCourses";
 import {Container} from "@material-ui/core";
 /* 
     Layout component handling common layout for all pages
