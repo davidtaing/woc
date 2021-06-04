@@ -1,15 +1,11 @@
 const router = require('express').Router();
 const controller = require('../controller/user.controller');
-// const passport = require('passport');
+const { validateToken } = require('../utils/verifyToken');
 
 /* 
     crud operations for a user
 */
 
-router.get(
-    '/',
-    // passport.authenticate('jwt', { session: false }),
-    controller.getUser
-);
+router.get('/', validateToken, controller.getUser);
 
 module.exports = router;

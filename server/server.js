@@ -19,25 +19,22 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// database connection ------------------------------------------------------------------------------------------
+// database connection ---------------------------------------------------------------------------------------
 mongoose
     .connect(config.db.uri, config.db.config)
     .then((res) => logging.info(NAMESPACE, 'Mongo connected'))
     .catch((err) => logging.error(NAMESPACE, err.message, err));
 
-// middlewares ------------------------------------------------------------------------------------------
+// middlewares -----------------------------------------------------------------------------------------------
 app.use(serverUtils.logAllRequests);
 
-// init passport
-// require('./config/passport');
-
-// serving static file ------------------------------------------------------------------------------------------
+// serving static file ---------------------------------------------------------------------------------------
 app.use(express.static(path.resolve(__dirname, '../web', 'build')));
 
-// api routing ------------------------------------------------------------------------------------------
+// api routing -----------------------------------------------------------------------------------------------
 app.use('/api', require('./routes/routes'));
 
-// error handling ------------------------------------------------------------------------------------------
+// error handling --------------------------------------------------------------------------------------------
 app.use(serverUtils.errHandling);
 app.get('*', serverUtils.redirectToIndex);
 

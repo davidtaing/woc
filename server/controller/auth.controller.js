@@ -22,8 +22,10 @@ const NAMESPACE = 'AuthController';
 // may not need this
 module.exports.user = (req, res) => {
     if (!req.token)
-        return res.status(401).json({ message: 'not authenticated' });
-    return res.status(200).json({ message: 'something', user: req.token });
+        return res
+            .status(401)
+            .json({ message: 'controller not authenticated' });
+    return res.status(200).json({ message: 'authenticated', user: req.token });
 };
 
 module.exports.login = async (req, res) => {
@@ -50,37 +52,8 @@ module.exports.login = async (req, res) => {
     return res.status(200).json({
         success: true,
         token: tokenObj.token,
-        expiresIn: tokenObj.expiresIn,
+        expiresIn: tokenObj.expiresIn, // just for response
     });
-
-    // sign jwt
-    // return token
-    /* old stuff
-    passport.authenticate('login', async (err, user, info) => {
-        
-        try {
-            if (err || !user) {
-                // should this return a bad response instead
-                return next(new Error('an error occured'));
-            }
-
-            // login from passport
-            req.login(user, { session: false }, async (error) => {
-                if (error) return next(error);
-
-                const token = jwtConf.generateJWT({
-                    _id: user._id,
-                    email: user.email,
-                });
-
-                return res.status(200).json({ msg: 'login OK', token });
-            });
-        } catch (error) {
-            // should this return a bad response instead
-            return next(error);
-        }
-    })(req, res, next);
-    */
 };
 
 /**
