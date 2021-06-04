@@ -2,7 +2,8 @@ import React from "react";
 import NavBar from "../navbar/NavBar";
 import UserProfile from "../../pages/userProfile/UserProfile";
 import UserEvents from "../userevents/UserEvents";
-import EventsList from "../eventslist/EventsList";
+import UserCourses from "../usercourse/UserCourses";
+import {Container} from "@material-ui/core";
 /* 
     Layout component handling common layout for all pages
 
@@ -22,9 +23,12 @@ const Layout = ({ status, children }) => {
 export const LayoutUserDashboard = () => {
   return (
     <>
-      <UserProfile />
-      <UserEvents />
-      <EventsList />
+      <Container maxWidth="sm" >
+        <UserProfile />
+        <UserEvents />
+        <UserCourses />
+      </Container>
+
     </>
   );
 }
