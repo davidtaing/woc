@@ -104,7 +104,6 @@ const SignIn = (props) => {
                             autoComplete="email"
                             value={cred.email}
                             onChange={handleChange}
-                            // onChange={(e) => setEmail(e.target.value)}
                             required
                             autoFocus
                         />
@@ -115,7 +114,6 @@ const SignIn = (props) => {
                             autoComplete="current-password"
                             value={cred.password}
                             onChange={handleChange}
-                            // onChange={(e) => setPass(e.target.value)}
                             required
                         />
                         <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
