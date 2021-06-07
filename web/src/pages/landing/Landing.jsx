@@ -51,7 +51,7 @@ function Landing() {
                 <Grid container className="classes.second">
                     <Grid container spacing={4} style={{ paddingTop: "4em" }}>
                         {cardData.map((item, index) => (
-                            <Card item={item} index={index} key={index} />
+                            <Card item={item} index={index} key={item.id} />
                         ))}
                     </Grid>
                 </Grid>

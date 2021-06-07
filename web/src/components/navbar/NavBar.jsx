@@ -3,7 +3,8 @@ import { AppBar, Toolbar, Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/";
 import { Link } from "react-router-dom";
 import logo from "../../res/img/2.png";
-import "./NavBar.css";
+// import "./NavBar.css";
+import { useAuth } from "../../contexts/authContext";
 
 /* 
     Handing main navigation bar for site
@@ -51,6 +52,8 @@ const styles = makeStyles((theme) => ({
 const NavBar = () => {
     const classes = styles();
 
+    const appWrapperObj = useAuth();
+
     return (
         <>
             <AppBar className={classes.flex}>
@@ -67,18 +70,35 @@ const NavBar = () => {
                     {/* spacing */}
                     <Typography variant="h6" className={classes.flex}></Typography>
                     {/* RIGHT links */}
-                    <Link className={classes.navLoginLink} to="/login">
-                        <Button className={classes.navItem}>Sign in</Button>
-                    </Link>
-                    <Link className={classes.navLoginLink} to="/login">
-                        <Button className={classes.navItem}>Join Us</Button>
-                    </Link>
+                    {showButton()}
                 </Toolbar>
             </AppBar>
             <div className={`${classes.offset}`} />
             <div className={`${classes.offsetPad}`} />
         </>
     );
+
+    // render links on the right hand side of navigation
+    function showButton() {
+        const loggedInUrl = appWrapperObj.loggedIn ? "/" : "/login";
+        const loggedInButton = appWrapperObj.loggedIn ? "Sign out" : "Sign in";
+
+        return (
+            <Link className={classes.navLoginLink} to={loggedInUrl}>
+                <Button onClick={buttonClick} className={classes.navItem}>
+                    {loggedInButton}
+                </Button>
+            </Link>
+        );
+    }
+
+    function buttonClick() {
+        if (appWrapperObj.loggedIn) {
+            // make this a function
+            appWrapperObj.setLoggedIn(false);
+            localStorage.removeItem("tk");
+        }
+    }
 };
 
 export default NavBar;
