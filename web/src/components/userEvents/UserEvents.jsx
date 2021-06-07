@@ -6,16 +6,16 @@ import img1 from "../../res/img/woc.jpg"
 
 const UserEvents = () => {
 
+    /* We upload all the images with titles and date from the user details*/
 const slideImages = [
-    img1,
-    img1,
-    img1,
-    img1
+    [img1, "Title 1", "05-05-20201"],
+    [img1, "Title 2", "05-04-20201"],
+    [img1, "Title 3", "05-03-20201"],
+    [img1, "Title 4", "05-02-20201"]
 ];
 
 const responsive = {
   superLargeDesktop: {
-    // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
     items: 5
   },
@@ -34,22 +34,27 @@ const responsive = {
 };
 
 return (
+    <div className="slide-container">
+        <span className="title">Events</span>
     <Carousel responsive={responsive}>
             {
                 slideImages.map((url,index) => {
                     return(
                         <div key={index}>
                             <div class="each-slide">
-                                <img className="gallery-thumbnail" src={url} alt={'Image number' + (index + 1)} />
-                                <span>Placeholder Field image number {index + 1}</span>
+                                <img className="each-image" src={url[0]} alt={'Image number' + (index + 1)} />
+                                <br/>
+                                <span>{url[1]}</span>
+                                <br/>
+                                <span>Date {url[2]}</span>
                             </div>
                         </div>                        
                     )
                 })
             }    
     </Carousel>
+    </div>
 )
-
 };
 
 export default UserEvents;
