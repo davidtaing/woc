@@ -60,7 +60,7 @@ module.exports.login = async (req, res) => {
  *  Check existing Email
  */
 module.exports.checkEmail = async (req, res) => {
-    User.findOne({ email: req.body.email });
+    const exist = await User.findOne({ email: req.body.email });
     return exist
         ? res.status(200).json({ exist: true, msg: 'Email already exist' })
         : res.status(200).json({ exist: false, msg: 'OK to use' });

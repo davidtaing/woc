@@ -18,8 +18,7 @@ const NAMESPACE = 'AUTH ROUTE';
 // test this
 router.post(
     '/checkemail',
-    authValidator.emailValidator,
-    runValidation,
+    runValidation(authValidator.emailValidator),
     controller.checkEmail
 );
 
