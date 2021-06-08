@@ -1,4 +1,4 @@
-const getUser = (req, res) => {
+const getUser = async (req, res) => {
     console.log(req.user);
     const data = {
         firstName: req.user.firstName,

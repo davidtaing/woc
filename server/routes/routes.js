@@ -1,4 +1,5 @@
 const app = require('express')();
+const { verifyToken } = require('../utils/verifyToken');
 const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
 
@@ -7,6 +8,8 @@ const userRoute = require('./user.route');
 */
 
 app.use('/auth', authRoute);
+
+app.use(verifyToken);
 app.use('/user', userRoute);
 
 module.exports = app;
