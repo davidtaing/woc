@@ -37,9 +37,9 @@ const signToken = (dataObj) => {
     };
 };
 
-const authErrMsg = (NAMESPACE) => ({
+const authErrMsg = (NAMESPACE, msg) => ({
     namespace: NAMESPACE,
-    msg: 'failed authentication',
+    msg: msg || 'failed authentication',
 });
 
 module.exports = {

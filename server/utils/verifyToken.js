@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const { authErrMsg } = require('../utils/auth.util');
 const User = require('../models/user.model');
 
+const NAMESPACE = 'VERIFYTOKEN';
 /**
  *  Validate token then bind user data to req.user
  *  return 401 if token is bad
@@ -23,6 +24,15 @@ module.exports.verifyToken = async (req, res, next) => {
     } catch (e) {
         if (e.name === 'JsonWebTokenError')
             return res.status(401).json({ err });
-        return res.status(401).json(authErrMsg); //  misc error
+        return res.status(401).json(authErrMsg(NAMESPACE)); //  misc error
     }
+};
+
+// verify admin status
+module.exports.verifyAdmin = (req, res, next) => {
+    // is not admin
+    if (req.user.role !== 1)
+        return res.status(401).json(authErrMsg(NAMESPACE, 'not admin'));
+    // is admin
+    else next();
 };
