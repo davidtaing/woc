@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Container, Grid, Paper, Button } from "@material-ui/core/";
+import { Container, Grid, Paper, Button } from "@material-ui/core";
 import landingSvg from "../../res/img/women.svg";
 import styles from "./Landing.style";
 import cardData from "./cardData";
@@ -51,7 +51,7 @@ function Landing() {
                 <Grid container className="classes.second">
                     <Grid container spacing={4} style={{ paddingTop: "4em" }}>
                         {cardData.map((item, index) => (
-                            <Card item={item} index={index} key={index} />
+                            <Card item={item} index={index} key={item.id} />
                         ))}
                     </Grid>
                 </Grid>
