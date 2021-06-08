@@ -7,13 +7,14 @@ const userRoute = require('./user.route');
     grouping REST routing path
 */
 
+// open =================================================================
 app.use('/auth', authRoute);
 
-// user only routes
+// user only ============================================================
 app.use(verifyToken);
 app.use('/user', userRoute);
 
-// admin only routes;
+// admin only ===========================================================
 app.use(verifyAdmin);
 app.get('/admin', (req, res) => {
     return res.status(200).json({ msg: 'ok' });
