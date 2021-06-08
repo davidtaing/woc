@@ -2,9 +2,6 @@ import React from "react";
 import Course from "../course/Course";
 import { Grid } from "@material-ui/core";
 
-// TODO
-// 1. when to call the API for all the course the user joined
-// 2. Date type in mongoDB
 const course = [
     {
         id: "001",
