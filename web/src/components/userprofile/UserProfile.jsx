@@ -1,35 +1,61 @@
 import React from "react";
-import { Container, Grid, Paper } from "@material-ui/core";
+import { Container, FormControl, Grid } from "@material-ui/core";
+import styles from "./UserProfile.style";
+import picture from "./../../res/img/profilepic.jpg";
+import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 
 const UserProfile = ({ profile }) => {
+    const classes = styles();
+
     return (
         <>
             <Container>
                 {/* main logo and text */}
-                <Grid container spacing={3}>
-                    <Grid item>
-                        {profile.firstName} {profile.lastName}
+                <Grid container className={classes.root} align="center" spacing={3} sm={12}>
+                    <Grid item className={classes.backgroundStyle}>
+                        <img src={picture} className={classes.profilePic} alt="Profile" />
+                        <div>
+                            <h3 className={classes.userName}>
+                                {profile.firstName} {profile.lastName}
+                            </h3>
+                            <h5 className={classes.userOccupation}>
+                                {" "}
+                                <LocationOnOutlinedIcon /> Sydney, Australia
+                            </h5>
+                        </div>
+                        <br></br>
                     </Grid>
-                    <Grid item>
-                        <img src={profile.picture} alt="Profile" />
-                    </Grid>
-                </Grid>
 
-                <Grid container>
-                    <Grid item>
-                        <h1>Occupation: {profile.occupation}</h1>
-                    </Grid>
-                    <Grid item>
-                        <h1>Nationality: {profile.nationality}</h1>
-                    </Grid>
-                    <Grid item>
-                        <h1>Language: {profile.language}</h1>
-                    </Grid>
-                    <Grid item>
-                        <h1>Skills: {profile.skills}</h1>
-                    </Grid>
-                    <Grid item>
-                        <h1>Interests: {profile.interests}</h1>
+                    <Grid className={classes.userInfo} item sm={12} md={6} lg={6}>
+                        <div className={classes.profileInnerDiv}>
+                            <h1>
+                                Occupation <span style={{ marginLeft: "49px", color: "	#A8A8A8" }}>UI Designer</span>
+                            </h1>
+                            <hr />
+                            <h1>
+                                Nationality <span style={{ marginLeft: "48px", color: "	#A8A8A8" }}>Australian</span>
+                            </h1>
+                            <hr />
+
+                            <h1>
+                                Language
+                                <span style={{ marginLeft: "66px", color: "	#A8A8A8" }}>English | Spanish</span>
+                            </h1>
+                            <hr />
+                            <h1>
+                                Skills{" "}
+                                <span style={{ marginLeft: "95px", color: "	#A8A8A8" }}>Design | Coding | UI | UX</span>
+                            </h1>
+                            <hr />
+                            <h1>
+                                Interests
+                                <span style={{ marginLeft: "68px", color: "	#A8A8A8" }}>
+                                    {" "}
+                                    Painting | Reading | Web Design
+                                </span>
+                            </h1>
+                            <hr />
+                        </div>
                     </Grid>
                 </Grid>
             </Container>
