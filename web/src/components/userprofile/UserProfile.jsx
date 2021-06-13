@@ -57,6 +57,9 @@ const UserProfile = ({ profile }) => {
                     </Grid>
 
                     <Grid className={classes.userInfo} item sm={12} md={6} lg={6}>
+                        <IconButton onClick={openDialog} style={{ marginLeft: "500px" }}>
+                            <EditIcon />
+                        </IconButton>
                         <div className={classes.profileInnerDiv}>
                             <h1>
                                 Occupation <span style={{ marginLeft: "49px", color: "	#A8A8A" }}>{occupation}</span>
@@ -81,9 +84,6 @@ const UserProfile = ({ profile }) => {
                                 <span style={{ marginLeft: "68px", color: "	#A8A8A" }}> {interests}</span>
                             </h1>
                             <hr />
-                            <IconButton onClick={openDialog}>
-                                <EditIcon />
-                            </IconButton>
                         </div>
                     </Grid>
                 </Grid>

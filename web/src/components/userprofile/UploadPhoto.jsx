@@ -28,7 +28,7 @@ const UploadPhoto = (props) => {
     return (
         <>
             <Button size="small" onClick={handleClick}>
-                Upload a file
+                Upload a photo
             </Button>
             <input type="file" ref={hiddenFileInput} onChange={handleChange} style={{ display: "none" }} />
         </>
