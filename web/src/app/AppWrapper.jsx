@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import App from "./App";
 import axios from "axios";
 
+import { getToken, setToken } from "../utils/auth";
+
 /* 
     Top level component
     Used to handling auth and context only
@@ -13,23 +15,14 @@ import axios from "axios";
         - login status
         - login (set key)
         - logout (clear key)
+    
+    TODO:
+        - not yet handled admin permissions
+        - maybe lets just check key payload then apply it
 
 */
 
 import { AuthContext } from "../contexts/authContext";
-
-const TOKEN_KEY = "tk";
-
-const getToken = () => localStorage.getItem(TOKEN_KEY);
-const setToken = (tk) => {
-    if (tk) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${tk}`;
-        localStorage.setItem(TOKEN_KEY, tk);
-    } else {
-        localStorage.removeItem(TOKEN_KEY);
-        delete axios.defaults.headers.common["Authorization"];
-    }
-};
 
 const AppWrapper = () => {
     const [loggedIn, setLoggedIn] = useState(getToken() !== null);
@@ -53,10 +46,8 @@ const AppWrapper = () => {
             // fix what is passed in here
             value={{
                 loggedIn,
-                setLoggedIn,
                 logIn,
                 logOut,
-                setToken,
             }}
         >
             <App />

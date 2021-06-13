@@ -5,9 +5,6 @@ import axios from "axios";
 
 /* 
     wrapper for protected routes
-
-    TODO:
-    - 
 */
 
 // this is re-rendering twice
