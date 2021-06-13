@@ -1,11 +1,39 @@
-import React from "react";
-import { Container, FormControl, Grid } from "@material-ui/core";
+import React, { useState } from "react";
+import EditIcon from "@material-ui/icons/Edit";
+import { Container, IconButton, Grid } from "@material-ui/core";
 import styles from "./UserProfile.style";
 import picture from "./../../res/img/profilepic.jpg";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
+import UploadPhoto from "./UploadPhoto";
+import EditProfile from "./EditProfile";
 
 const UserProfile = ({ profile }) => {
     const classes = styles();
+    setFakeProfileData();
+
+    const [open, setOpen] = React.useState(false);
+    const [name, setName] = useState(profile.firstName);
+    const [lastName, setLastName] = useState(profile.lastName);
+    const [location, setLocation] = useState(profile.location);
+    const [occupation, setOccupation] = useState(profile.occupation);
+    const [skills, setSkills] = useState(profile.skills);
+    const [nationality, setNationality] = useState(profile.nationality);
+    const [languages, setLanguages] = useState(profile.languages);
+    const [interests, setInterests] = useState(profile.interests);
+
+    //TODO:: get this data from database
+    function setFakeProfileData() {
+        profile.location = "Sydney, Australia";
+        profile.occupation = "Software developer";
+        profile.skills = "Web | CSS | .NET";
+        profile.nationality = "Australian";
+        profile.languages = "English | Spanish";
+        profile.interests = "Painting | Reading | Web Design";
+    }
+
+    const openDialog = () => {
+        setOpen(true);
+    };
 
     return (
         <>
@@ -15,12 +43,14 @@ const UserProfile = ({ profile }) => {
                     <Grid item className={classes.backgroundStyle}>
                         <img src={picture} className={classes.profilePic} alt="Profile" />
                         <div>
+                            <UploadPhoto />
                             <h3 className={classes.userName}>
-                                {profile.firstName} {profile.lastName}
+                                {name} {lastName}
                             </h3>
+
                             <h5 className={classes.userOccupation}>
                                 {" "}
-                                <LocationOnOutlinedIcon /> Sydney, Australia
+                                <LocationOnOutlinedIcon /> {location}
                             </h5>
                         </div>
                         <br></br>
@@ -29,42 +59,55 @@ const UserProfile = ({ profile }) => {
                     <Grid className={classes.userInfo} item sm={12} md={6} lg={6}>
                         <div className={classes.profileInnerDiv}>
                             <h1>
-                                Occupation <span style={{ marginLeft: "49px", color: "	#A8A8A8" }}>UI Designer</span>
+                                Occupation <span style={{ marginLeft: "49px", color: "	#A8A8A" }}>{occupation}</span>
                             </h1>
                             <hr />
                             <h1>
-                                Nationality <span style={{ marginLeft: "48px", color: "	#A8A8A8" }}>Australian</span>
+                                Nationality <span style={{ marginLeft: "48px", color: "	#A8A8A" }}>{nationality}</span>
                             </h1>
                             <hr />
 
                             <h1>
                                 Language
-                                <span style={{ marginLeft: "66px", color: "	#A8A8A8" }}>English | Spanish</span>
+                                <span style={{ marginLeft: "66px", color: "	#A8A8A" }}>{languages}</span>
                             </h1>
                             <hr />
                             <h1>
-                                Skills{" "}
-                                <span style={{ marginLeft: "95px", color: "	#A8A8A8" }}>Design | Coding | UI | UX</span>
+                                Skills <span style={{ marginLeft: "95px", color: "	#A8A8A" }}>{skills}</span>
                             </h1>
                             <hr />
                             <h1>
                                 Interests
-                                <span style={{ marginLeft: "68px", color: "	#A8A8A8" }}>
-                                    {" "}
-                                    Painting | Reading | Web Design
-                                </span>
+                                <span style={{ marginLeft: "68px", color: "	#A8A8A" }}> {interests}</span>
                             </h1>
                             <hr />
+                            <IconButton onClick={openDialog}>
+                                <EditIcon />
+                            </IconButton>
                         </div>
                     </Grid>
                 </Grid>
+                <EditProfile
+                    open={open}
+                    onOpen={setOpen}
+                    name={name}
+                    onNameChange={setName}
+                    lastName={lastName}
+                    onLastNameChange={setLastName}
+                    location={location}
+                    onLocationChange={setLocation}
+                    occupation={occupation}
+                    onOccupationChange={setOccupation}
+                    nationality={nationality}
+                    onNationalityChange={setNationality}
+                    languages={languages}
+                    onLanguagesChange={setLanguages}
+                    skills={skills}
+                    onSkillsChange={setSkills}
+                    interests={interests}
+                    onInterestsChange={setInterests}
+                />
             </Container>
-            {/* <div>User Profile</div>
-            <div>
-                <p>First Name: {profile.firstName}</p>
-                <p>Last Name: {profile.lastName}</p>
-                <p>Email: {profile.email}</p>
-            </div> */}
         </>
     );
 };

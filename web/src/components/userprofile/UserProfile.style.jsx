@@ -17,6 +17,9 @@ const styles = makeStyles((theme) => ({
 
         color: theme.palette.text.secondary,
     },
+    modalBox: {
+        //  width: "40%",
+    },
     backgroundStyle: {
         paddingTop: "26px",
         marginRight: "16px",
