@@ -30,6 +30,7 @@ const AppWrapper = () => {
 
     return (
         <AuthContext.Provider
+            // fix what is passed in here
             value={{
                 loggedIn,
                 setLoggedIn,
