@@ -9,6 +9,8 @@ import axios from "axios";
 
 // this is re-rendering twice
 // same thing happening with strict mode removed
+// TODO: remove token check here
+// TODO: global axios handler for bad token
 const UserRoute = ({ component: Component, ...rest }) => {
     const { loggedIn, logOut } = useAuth();
     // call server to check token
