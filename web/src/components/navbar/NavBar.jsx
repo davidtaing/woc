@@ -3,7 +3,6 @@ import { AppBar, Toolbar, Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/";
 import { Link } from "react-router-dom";
 import logo from "../../res/img/2.png";
-// import "./NavBar.css";
 import { useAuth } from "../../contexts/authContext";
 
 /* 
@@ -47,6 +46,15 @@ const styles = makeStyles((theme) => ({
     },
     offset: theme.mixins.toolbar,
     offsetPad: { paddingBottom: theme.spacing(1) },
+    logoImage: {
+        justifyContent: "left",
+        width: "54px",
+        height: "54px",
+        borderRadius: "50%",
+        overflow: "hidden",
+        cursor: "pointer",
+        marginLeft: "20px",
+    },
 }));
 
 const NavBar = () => {
@@ -61,7 +69,7 @@ const NavBar = () => {
                     {/* LEFT: logo/ name */}
                     <Link to="/">
                         <div className={classes.flex}>
-                            <img className="logo-image" src={logo} alt="landing page art"></img>
+                            <img className={classes.logoImage} src={logo} alt="landing page art"></img>
                         </div>
                     </Link>
                     <Link to="/" className={classes.brandNameLink}>

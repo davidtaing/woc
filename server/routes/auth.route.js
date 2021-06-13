@@ -9,13 +9,6 @@ const NAMESPACE = 'AUTH ROUTE';
     would only contains open routes (no token needed)
 */
 
-/* 
-    TODO: 
-    - add login, sign up validation
-    - test validation
-*/
-
-// test this
 router.post(
     '/checkemail',
     validate(validAuth.emailCheck),

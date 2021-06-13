@@ -12,8 +12,6 @@ const logging = require('../config/logging');
  *
  * TODO:
  * - SignUp:
- *  - email verification??
- * - LogIn (JWT)
  * - changePassword
  */
 const NAMESPACE = 'AuthController';
