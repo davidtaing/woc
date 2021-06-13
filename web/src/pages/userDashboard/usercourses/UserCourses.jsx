@@ -24,18 +24,17 @@ const course = [
 ];
 
 function UserCourses() {
-    const courses = course.map((course) => {
-        return (
-            <Grid item={true}>
-                <Course key={course.id} course={course} />
-            </Grid>
-        );
-    });
+    const renderCourses = course.map((course) => (
+        <Grid item>
+            <Course key={course.id} course={course} />
+        </Grid>
+    ));
+
     return (
         <>
-            <h2> Courses</h2>
+            <h2>Enrolled Courses</h2>
             <Grid container spacing={3} wrap={"nowrap"}>
-                {courses}
+                {renderCourses}
             </Grid>
         </>
     );
