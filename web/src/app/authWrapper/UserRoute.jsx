@@ -17,7 +17,7 @@ const UserRoute = ({ component: Component, ...rest }) => {
     // call server to check token
     if (loggedIn) {
         axios
-            .get("/api/auth")
+            .get("/api/user")
             .then((res) => {
                 console.log("good token");
             })
