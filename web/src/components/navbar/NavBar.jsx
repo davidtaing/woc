@@ -57,10 +57,36 @@ const styles = makeStyles((theme) => ({
     },
 }));
 
+const NavButtons = ({ data }) => {
+    const classes = styles();
+    return (
+        <Link className={classes.navLoginLink} to={data.path}>
+            <Button className={classes.navItem} onClick={data.click}>
+                {data.text}
+            </Button>
+        </Link>
+    );
+};
+
 const NavBar = () => {
     const classes = styles();
-
     const { loggedIn, logOut } = useAuth();
+
+    const btLogIn = { text: "Sign In", path: "/login" };
+    const btLogOut = { text: "Sign out", click: () => logOut() };
+    const btAdmin = { text: "Admin", path: "/admin" };
+
+    // render buttons
+    const NotAuthenticated = () => <NavButtons data={btLogIn} />;
+
+    const Authenticated = () => (
+        <>
+            <NavButtons data={btAdmin} />
+            <NavButtons data={btLogOut} />
+        </>
+    );
+
+    const renderButtons = () => (loggedIn ? <Authenticated /> : <NotAuthenticated />);
 
     return (
         <>
@@ -78,31 +104,13 @@ const NavBar = () => {
                     {/* spacing */}
                     <Typography variant="h6" className={classes.flex}></Typography>
                     {/* RIGHT links */}
-                    {showButton()}
+                    {renderButtons()}
                 </Toolbar>
             </AppBar>
             <div className={`${classes.offset}`} />
             <div className={`${classes.offsetPad}`} />
         </>
     );
-
-    // render links on the right hand side of navigation
-    function showButton() {
-        const loggedInUrl = loggedIn ? "/" : "/login";
-        const loggedInButton = loggedIn ? "Sign out" : "Sign in";
-
-        return (
-            <Link className={classes.navLoginLink} to={loggedInUrl}>
-                <Button onClick={buttonClick} className={classes.navItem}>
-                    {loggedInButton}
-                </Button>
-            </Link>
-        );
-    }
-
-    function buttonClick() {
-        if (loggedIn) logOut();
-    }
 };
 
 export default NavBar;
