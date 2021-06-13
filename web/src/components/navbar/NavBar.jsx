@@ -52,7 +52,7 @@ const styles = makeStyles((theme) => ({
 const NavBar = () => {
     const classes = styles();
 
-    const appWrapperObj = useAuth();
+    const { loggedIn, logOut } = useAuth();
 
     return (
         <>
@@ -80,8 +80,8 @@ const NavBar = () => {
 
     // render links on the right hand side of navigation
     function showButton() {
-        const loggedInUrl = appWrapperObj.loggedIn ? "/" : "/login";
-        const loggedInButton = appWrapperObj.loggedIn ? "Sign out" : "Sign in";
+        const loggedInUrl = loggedIn ? "/" : "/login";
+        const loggedInButton = loggedIn ? "Sign out" : "Sign in";
 
         return (
             <Link className={classes.navLoginLink} to={loggedInUrl}>
@@ -93,11 +93,7 @@ const NavBar = () => {
     }
 
     function buttonClick() {
-        if (appWrapperObj.loggedIn) {
-            // make this a function
-            appWrapperObj.setLoggedIn(false);
-            localStorage.removeItem("tk");
-        }
+        if (loggedIn) logOut();
     }
 };
 

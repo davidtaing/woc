@@ -6,7 +6,7 @@ const { validationResult } = require('express-validator');
 /**
  *  middleware validating the body content
  */
-module.exports.runValidation = (rules) => [
+module.exports.validate = (rules) => [
     ...rules,
     (req, res, next) => {
         const err = validationResult(req);

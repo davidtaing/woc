@@ -13,7 +13,7 @@ import axios from "axios";
 // this is re-rendering twice
 // same thing happening with strict mode removed
 const UserRoute = ({ component: Component, ...rest }) => {
-    const { loggedIn, setToken } = useAuth();
+    const { loggedIn, logOut } = useAuth();
     // call server to check token
     if (loggedIn) {
         axios
@@ -22,7 +22,8 @@ const UserRoute = ({ component: Component, ...rest }) => {
                 console.log("good token");
             })
             .catch((e) => {
-                if (e.response.status === 401) setToken(null);
+                // bad token => clear token and logout
+                if (e.response.status === 401) logOut();
             });
     }
 

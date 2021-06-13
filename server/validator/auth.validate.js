@@ -8,7 +8,7 @@ const { check } = require('express-validator');
     - sign i
 */
 
-const emailValidator = [
+const emailCheck = [
     check('email')
         .not()
         .isEmpty()
@@ -17,7 +17,7 @@ const emailValidator = [
         .withMessage('Must be Valid email address'),
 ];
 
-const loginValidator = [
+const login = [
     check('email')
         .not()
         .isEmpty()
@@ -28,10 +28,10 @@ const loginValidator = [
 ];
 
 // double check the form/ data structure to see whats required and what is not
-const signupValidator = [];
+const signup = [];
 
 module.exports = {
-    emailValidator,
-    loginValidator,
-    signupValidator,
+    emailCheck,
+    login,
+    signup,
 };
