@@ -32,7 +32,7 @@ function UserCourses() {
 
     return (
         <>
-            <h2> Courses</h2>
+            <h2>Enrolled Courses</h2>
             <Grid container spacing={3} wrap={"nowrap"}>
                 {renderCourses}
             </Grid>
