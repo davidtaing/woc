@@ -26,7 +26,7 @@ import { AuthContext } from "../contexts/authContext";
 
 const AppWrapper = () => {
     const [loggedIn, setLoggedIn] = useState(getToken() !== null);
-    const [isAdmin, setIsAdmin] = useState(false);
+    // const [isAdmin, setIsAdmin] = useState(false);
 
     const logIn = (tk) => {
         setToken(tk);

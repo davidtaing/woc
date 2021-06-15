@@ -26,16 +26,6 @@ import AdminLayout from "./AdminLayout";
     - delete users
 */
 
-const userList = [
-    {
-        id: 0,
-        firstName: "Steve",
-        lastName: "Seven",
-        email: "steve@seven.com",
-        role: "User",
-    },
-];
-
 const AdminDash = () => {
     const [users, SetUsers] = useState([]);
 
