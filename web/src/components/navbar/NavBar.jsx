@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Toolbar, Button, Typography } from "@material-ui/core";
+import { AppBar, Toolbar, Button, Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/";
 import { Link } from "react-router-dom";
 import logo from "../../res/img/2.png";
@@ -45,7 +45,6 @@ const styles = makeStyles((theme) => ({
         textDecoration: "none",
     },
     offset: theme.mixins.toolbar,
-    offsetPad: { paddingBottom: theme.spacing(1) },
     logoImage: {
         justifyContent: "left",
         width: "54px",
@@ -90,25 +89,22 @@ const NavBar = () => {
 
     return (
         <>
-            <AppBar className={classes.flex}>
+            <AppBar elevation={0}>
                 <Toolbar>
                     {/* LEFT: logo/ name */}
                     <Link to="/">
-                        <div className={classes.flex}>
-                            <img className={classes.logoImage} src={logo} alt="landing page art"></img>
-                        </div>
+                        <img className={classes.logoImage} src={logo} alt="landing page art"></img>
                     </Link>
                     <Link to="/" className={classes.brandNameLink}>
                         <h2 className={classes.brandName}>Women of Colour Australia</h2>
                     </Link>
                     {/* spacing */}
-                    <Typography variant="h6" className={classes.flex}></Typography>
+                    <Box className={classes.flex} />
                     {/* RIGHT links */}
                     {renderButtons()}
                 </Toolbar>
             </AppBar>
-            <div className={`${classes.offset}`} />
-            <div className={`${classes.offsetPad}`} />
+            <div className={classes.offset} />
         </>
     );
 };
