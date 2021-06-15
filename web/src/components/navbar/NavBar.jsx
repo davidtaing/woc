@@ -3,8 +3,8 @@ import { AppBar, Toolbar, Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/";
 import { Link } from "react-router-dom";
 import logo from "../../res/img/2.png";
-import "./NavBar.css";
-import { useAuth } from "../../../src/contexts/authContext";
+// import "./NavBar.css";
+import { useAuth } from "../../contexts/authContext";
 
 /* 
     Handing main navigation bar for site
@@ -78,12 +78,15 @@ const NavBar = () => {
         </>
     );
 
+    // render links on the right hand side of navigation
     function showButton() {
-        var loggedInUrl = appWrapperObj.loggedIn ? "/" : "/login";
+        const loggedInUrl = appWrapperObj.loggedIn ? "/" : "/login";
+        const loggedInButton = appWrapperObj.loggedIn ? "Sign out" : "Sign in";
+
         return (
             <Link className={classes.navLoginLink} to={loggedInUrl}>
                 <Button onClick={buttonClick} className={classes.navItem}>
-                    {appWrapperObj.loggedIn ? "Sign out" : "Sign in"}
+                    {loggedInButton}
                 </Button>
             </Link>
         );
@@ -91,7 +94,9 @@ const NavBar = () => {
 
     function buttonClick() {
         if (appWrapperObj.loggedIn) {
+            // make this a function
             appWrapperObj.setLoggedIn(false);
+            localStorage.removeItem("tk");
         }
     }
 };

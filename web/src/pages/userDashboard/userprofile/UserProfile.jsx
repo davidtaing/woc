@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import { Container, IconButton, Grid } from "@material-ui/core";
 import styles from "./UserProfile.style";
-import picture from "./../../res/img/profilepic.jpg";
+import picture from "./profilepic.jpg";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import UploadPhoto from "./UploadPhoto";
 import EditProfile from "./EditProfile";

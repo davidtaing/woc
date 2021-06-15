@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { LayoutUserDashboard } from "../../components/layout/Layout";
 
-import UserProfile from "../../components/userprofile/UserProfile";
-import UserEvents from "../../components/userevents/UserEvents";
-import UserCourses from "../../components/usercourses/UserCourses";
+import UserProfile from "./userprofile/UserProfile";
+import UserEvents from "./userevents/UserEvents";
+import UserCourses from "./usercourses/UserCourses";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 

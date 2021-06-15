@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import "../../components/navbar/NavBar.css";
+// import "../../components/navbar/NavBar.css";
 
 const styles = makeStyles((theme) => ({
     root: {
