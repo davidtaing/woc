@@ -57,7 +57,7 @@ const SignIn = (props) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(""); // POST error
 
-    const { loggedIn, setToken } = useAuth();
+    const { loggedIn, logIn } = useAuth();
 
     // on input change
     const handleChange = (e) => setCred({ ...cred, [e.target.name]: e.target.value });
@@ -68,7 +68,7 @@ const SignIn = (props) => {
             .post("/api/auth/login", cred)
             .then((res) => {
                 // ok set token
-                setToken(res.data.token);
+                logIn(res.data.token);
                 setLoading(false);
             })
             .catch((e) => {

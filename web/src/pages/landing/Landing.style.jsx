@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+// TODO: change this to font in Index
 import "../../components/navbar/NavBar.css";
 
 const styles = makeStyles((theme) => ({
@@ -6,9 +7,6 @@ const styles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-    },
-    second: {
-        backgroundColor: "#efe8eb",
     },
     paper: {
         // padding: theme.spacing(1),
