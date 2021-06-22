@@ -1,9 +1,8 @@
 import React from "react";
-import { AppBar, Toolbar, Button, Typography } from "@material-ui/core";
+import { AppBar, Toolbar, Button, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/";
 import { Link } from "react-router-dom";
 import logo from "../../res/img/2.png";
-// import "./NavBar.css";
 import { useAuth } from "../../contexts/authContext";
 
 /* 
@@ -46,59 +45,68 @@ const styles = makeStyles((theme) => ({
         textDecoration: "none",
     },
     offset: theme.mixins.toolbar,
-    offsetPad: { paddingBottom: theme.spacing(1) },
+    logoImage: {
+        justifyContent: "left",
+        width: "54px",
+        height: "54px",
+        borderRadius: "50%",
+        overflow: "hidden",
+        cursor: "pointer",
+        marginLeft: "20px",
+    },
 }));
+
+const NavButtons = ({ data }) => {
+    const classes = styles();
+    return (
+        <Link className={classes.navLoginLink} to={data.path}>
+            <Button className={classes.navItem} onClick={data.click}>
+                {data.text}
+            </Button>
+        </Link>
+    );
+};
 
 const NavBar = () => {
     const classes = styles();
+    const { loggedIn, logOut } = useAuth();
 
-    const appWrapperObj = useAuth();
+    const btLogIn = { text: "Sign In", path: "/login" };
+    const btLogOut = { text: "Sign out", click: () => logOut() };
+    const btAdmin = { text: "Admin", path: "/admin" };
+
+    // render buttons
+    const NotAuthenticated = () => <NavButtons data={btLogIn} />;
+
+    const Authenticated = () => (
+        <>
+            <NavButtons data={btAdmin} />
+            <NavButtons data={btLogOut} />
+        </>
+    );
+
+    const renderButtons = () => (loggedIn ? <Authenticated /> : <NotAuthenticated />);
 
     return (
         <>
-            <AppBar className={classes.flex}>
+            <AppBar elevation={0}>
                 <Toolbar>
                     {/* LEFT: logo/ name */}
                     <Link to="/">
-                        <div className={classes.flex}>
-                            <img className="logo-image" src={logo} alt="landing page art"></img>
-                        </div>
+                        <img className={classes.logoImage} src={logo} alt="landing page art"></img>
                     </Link>
                     <Link to="/" className={classes.brandNameLink}>
                         <h2 className={classes.brandName}>Women of Colour Australia</h2>
                     </Link>
                     {/* spacing */}
-                    <Typography variant="h6" className={classes.flex}></Typography>
+                    <Box className={classes.flex} />
                     {/* RIGHT links */}
-                    {showButton()}
+                    {renderButtons()}
                 </Toolbar>
             </AppBar>
-            <div className={`${classes.offset}`} />
-            <div className={`${classes.offsetPad}`} />
+            <div className={classes.offset} />
         </>
     );
-
-    // render links on the right hand side of navigation
-    function showButton() {
-        const loggedInUrl = appWrapperObj.loggedIn ? "/" : "/login";
-        const loggedInButton = appWrapperObj.loggedIn ? "Sign out" : "Sign in";
-
-        return (
-            <Link className={classes.navLoginLink} to={loggedInUrl}>
-                <Button onClick={buttonClick} className={classes.navItem}>
-                    {loggedInButton}
-                </Button>
-            </Link>
-        );
-    }
-
-    function buttonClick() {
-        if (appWrapperObj.loggedIn) {
-            // make this a function
-            appWrapperObj.setLoggedIn(false);
-            localStorage.removeItem("tk");
-        }
-    }
 };
 
 export default NavBar;

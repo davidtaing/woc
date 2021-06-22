@@ -36,9 +36,11 @@ const App = () => {
         <BrowserRouter>
             <Layout>
                 <HomePage />
-                <Route path="/user" component={Pages.UserDashBoard} />
-                <Route path="/login" component={Pages.Login} />
-                <Route path="/signUp" component={Pages.SignUp} />
+                <Route exact path="/login" component={Pages.Login} />
+                <Route exact path="/signUp" component={Pages.SignUp} />
+                <UserRoute exact path="/user" component={Pages.UserDashBoard} />
+                {/* TODO: change to admin route */}
+                <UserRoute exact path="/admin" component={Pages.Admin} />
             </Layout>
         </BrowserRouter>
     );

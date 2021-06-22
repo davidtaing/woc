@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-// const passport = require('passport');
 
 const logging = require('./config/logging');
 const config = require('./config/config');
@@ -20,28 +19,22 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// database connection ------------------------------------------------------------------------------------------
+// database connection ---------------------------------------------------------------------------------------
 mongoose
     .connect(config.db.uri, config.db.config)
     .then((res) => logging.info(NAMESPACE, 'Mongo connected'))
     .catch((err) => logging.error(NAMESPACE, err.message, err));
 
-// middlewares ------------------------------------------------------------------------------------------
+// middlewares -----------------------------------------------------------------------------------------------
 app.use(serverUtils.logAllRequests);
 
-// init passport
-require('./config/passport');
-// app.use(passport.initialize());
-// app.use(passport.session());
-
-// serving static file ------------------------------------------------------------------------------------------
+// serving static file ---------------------------------------------------------------------------------------
 app.use(express.static(path.resolve(__dirname, '../web', 'build')));
-// app.use(express.static('public'));
 
-// api routing ------------------------------------------------------------------------------------------
+// api routing -----------------------------------------------------------------------------------------------
 app.use('/api', require('./routes/routes'));
 
-// error handling ------------------------------------------------------------------------------------------
+// error handling --------------------------------------------------------------------------------------------
 app.use(serverUtils.errHandling);
 app.get('*', serverUtils.redirectToIndex);
 
