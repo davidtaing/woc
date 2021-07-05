@@ -35,7 +35,7 @@ const styles = makeStyles(() => ({
     },
     definitionContainer: {
         backgroundColor: "black",
-        color: "white",
+        color: "grey",
         letterSpacing: 0,
         fontFamily: `'Roboto Slab', serif`,
         fontWeight: 400,
@@ -54,7 +54,8 @@ const styles = makeStyles(() => ({
     },
     title:{
         fontWeight: 400,
-        fontSize:20
+        fontSize:20,
+        color: "white"
     },
     wocimage: {
         width: 150,
