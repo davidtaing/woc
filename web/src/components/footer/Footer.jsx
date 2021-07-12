@@ -158,10 +158,10 @@ const Footer = () => {
                         </p>
                     </div>
                     <div div className={classes.socialMediaIcons}>
-                        <a href="https://www.facebook.com/WomenofColourAU" target="_blank"><Facebook className={classes.socialMediaIcon}/></a>
-                        <a href="https://www.linkedin.com/company/womenofcolourltd" target="_blank"><LinkedIn className={classes.socialMediaIcon}/></a>
-                        <a href="https://twitter.com/WomenofColourAU" target="_blank"><Twitter className={classes.socialMediaIcon}/></a>
-                        <a href="https://www.instagram.com/womenofcolourau/" target="_blank"><Instagram className={classes.socialMediaIcon}/></a>
+                        <a href="https://www.facebook.com/WomenofColourAU" target="_blank" rel="noreferrer"><Facebook className={classes.socialMediaIcon}/></a>
+                        <a href="https://www.linkedin.com/company/womenofcolourltd" target="_blank" rel="noreferrer"><LinkedIn className={classes.socialMediaIcon}/></a>
+                        <a href="https://twitter.com/WomenofColourAU" target="_blank" rel="noreferrer"><Twitter className={classes.socialMediaIcon}/></a>
+                        <a href="https://www.instagram.com/womenofcolourau/" target="_blank" rel="noreferrer"><Instagram className={classes.socialMediaIcon}/></a>
                     </div>
                 </div>
             </div>
@@ -169,7 +169,7 @@ const Footer = () => {
                 <div className={classes.definitionDiv}>
                     <div className={classes.block}>
                         <p>
-                            <img className={classes.wocimage} src={wocimage} alt="women of colour image"></img>
+                            <img className={classes.wocimage} src={wocimage} alt="women of colour"></img>
                             <br />
                             We exist to champion Australia’s Women of Colour.
                         </p>
@@ -179,9 +179,9 @@ const Footer = () => {
                         <div>
                         "Women of Color is not a biological designation. It is a solidarity definition. 
                         A commitment to work in collaboration with other oppressed women of color who have 
-                        been minoritized. It is a term that has a lot of power." <a href="https://www.lorettaross.com/" target="_blank" className={classes.link}>Loretta Ross</a>
+                        been minoritized. It is a term that has a lot of power." <a href="https://www.lorettaross.com/" target="_blank" rel="noreferrer" className={classes.link}>Loretta Ross</a>
                         <br />
-                        <a href="https://womenofcolour.org.au/the-origin-of-the-phrase-women-of-color/" target="_blank" className={classes.link}>Learn more here</a>
+                        <a href="https://womenofcolour.org.au/the-origin-of-the-phrase-women-of-color/" target="_blank" rel="noreferrer" className={classes.link}>Learn more here</a>
                         </div>
                     </div>
                     <div className={classes.block}>
@@ -191,7 +191,7 @@ const Footer = () => {
                             including non-binary and gender non-conforming people and all those who identify as women. Self-definition 
                             is at the discretion of the individual.
                             <br />
-                            <a href="https://www.wire.org.au/tgd-policy/" target="_blank" className={classes.link}>Definition credit: wire.org.au</a>
+                            <a href="https://www.wire.org.au/tgd-policy/" target="_blank" rel="noreferrer" className={classes.link}>Definition credit: wire.org.au</a>
                         </div>
                     </div>
                     <div className={classes.block}>
@@ -205,9 +205,9 @@ const Footer = () => {
                             <br />
                             Y - yield the floor
                             <br />
-                            *Mnemonic credit: Kayla Reed Executive Director <a href="https://actionstl.org/" target="_blank" className={classes.link}>ACTION St. Louis</a>
+                            *Mnemonic credit: Kayla Reed Executive Director <a href="https://actionstl.org/" target="_blank" rel="noreferrer" className={classes.link}>ACTION St. Louis</a>
                             <br />
-                            Follow Kayla Reed on Twitter <a href="https://twitter.com/iKaylaReed/" target="_blank" className={classes.link}>@iKaylaReed</a>
+                            Follow Kayla Reed on Twitter <a href="https://twitter.com/iKaylaReed/" target="_blank" rel="noreferrer" className={classes.link}>@iKaylaReed</a>
                         </div>
                     </div>
                 </div>
