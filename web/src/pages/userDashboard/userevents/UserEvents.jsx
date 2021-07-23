@@ -13,21 +13,19 @@ function redirect(url) {
     window.open(url, "_blank");
 }
 
-const EventCard = (item, index) => {
+const EventCard = (event, index) => {
     const classes = styles();
 
-    console.log(item);
+    console.log(event);
     return (
         <Grid item>
             <Paper className={classes.paper}>
                 <header>
-                    <strong style={{ fontFamily: `'Roboto Slab', serif`, fontSize: "20px" }}>
-                        {item.event.name.text}
-                    </strong>
+                    <strong style={{ fontFamily: `'Roboto Slab', serif`, fontSize: "20px" }}>{event.event.name}</strong>
                 </header>
-                <p>{item.event.description.text}</p>
-                <h5>{item.event.start.local}</h5>
-                <Link onClick={() => redirect(item.event.url)} className="btn btn-primary">
+                <p>{event.event.description}</p>
+
+                <Link onClick={() => redirect(event.event.url)} className="btn btn-primary">
                     Register here
                 </Link>
             </Paper>
@@ -35,27 +33,27 @@ const EventCard = (item, index) => {
     );
 };
 
-function UserEvents() {
-    console.log(1);
-    const [response, setResponse] = useState([]);
-    const [loading, setLoading] = useState(false);
+//API call to backend
 
-    // here is how you call this function
+function UserEvents() {
+    const [response, setResponse] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchEvents = async (args) => {
+        console.log("-------------");
+        const fetchEvents = async () => {
             const apiResult = await fetch(`/api/events`, {
                 method: "GET",
             });
             const body = await apiResult.json();
-            const finalresult = JSON.parse(body);
-            console.log(finalresult);
-            // setResponse(body);
-            return body;
+            const res = JSON.parse(body);
+            setLoading(false);
+            setResponse(res.events);
+            console.log(res.events);
         };
 
         fetchEvents();
-    }, [response]);
+    }, []);
 
     return (
         <>
@@ -67,6 +65,7 @@ function UserEvents() {
                             <CircularProgress />
                         ) : (
                             response.map((item) => {
+                                console.log(item + "he");
                                 return <Grid item={true}>{<EventCard key={item.id} event={item} />}</Grid>;
                             })
                         )}
