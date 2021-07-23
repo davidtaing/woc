@@ -5,7 +5,6 @@ import "react-multi-carousel/lib/styles.css";
 import { Grid, Paper, Container } from "@material-ui/core";
 // import EventCard from "./EventCard";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import styles from "./../../landing/Landing.style";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -41,18 +40,21 @@ function UserEvents() {
     const [response, setResponse] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        async function getData() {
-            setLoading(true);
-            console.log("inside");
-            fetch("api/events")
-                .then((response) => response.json())
-                .then((json) => console.log(json));
-            setResponse(response);
+    // here is how you call this function
 
-            setLoading(false);
-        }
-        getData();
+    useEffect(() => {
+        const fetchEvents = async (args) => {
+            const apiResult = await fetch(`/api/events`, {
+                method: "GET",
+            });
+            const body = await apiResult.json();
+            const finalresult = JSON.parse(body);
+            console.log(finalresult);
+            // setResponse(body);
+            return body;
+        };
+
+        fetchEvents();
     }, [response]);
 
     return (
