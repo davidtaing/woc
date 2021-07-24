@@ -2,7 +2,17 @@ import React, { useState, useEffect } from "react";
 
 import "react-multi-carousel/lib/styles.css";
 
-import { Grid, Paper, Container } from "@material-ui/core";
+import {
+    Grid,
+    Paper,
+    Container,
+    Card,
+    CardActionArea,
+    CardMedia,
+    CardContent,
+    Typography,
+    makeStyles,
+} from "@material-ui/core";
 // import EventCard from "./EventCard";
 import { Link } from "react-router-dom";
 import styles from "./../../landing/Landing.style";
@@ -10,7 +20,7 @@ import styles from "./../../landing/Landing.style";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 function redirect(url) {
-    window.open(url, "_blank");
+    window.open("https://events.humanitix.com/" + url, "_blank");
 }
 
 const EventCard = (event, index) => {
@@ -23,9 +33,8 @@ const EventCard = (event, index) => {
                 <header>
                     <strong style={{ fontFamily: `'Roboto Slab', serif`, fontSize: "20px" }}>{event.event.name}</strong>
                 </header>
-                <p>{event.event.description}</p>
-
-                <Link onClick={() => redirect(event.event.url)} className="btn btn-primary">
+                <h5> {event.event.description} </h5>
+                <Link onClick={() => redirect(event.event.slug)} className="btn btn-primary">
                     Register here
                 </Link>
             </Paper>
