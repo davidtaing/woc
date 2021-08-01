@@ -1,44 +1,59 @@
 import React, { useState, useEffect } from "react";
-
-import "react-multi-carousel/lib/styles.css";
+import random from "../../../../src/res/img/events5.svg";
 
 import {
     Grid,
-    Paper,
     Container,
     Card,
+    Button,
     CardActionArea,
     CardMedia,
     CardContent,
     Typography,
     makeStyles,
+    CardActions,
 } from "@material-ui/core";
-// import EventCard from "./EventCard";
-import { Link } from "react-router-dom";
-import styles from "./../../landing/Landing.style";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
+
+const useStyles = makeStyles({
+    root: {
+        maxWidth: 345,
+        minWidth: 345,
+    },
+});
 
 function redirect(url) {
     window.open("https://events.humanitix.com/" + url, "_blank");
 }
 
 const EventCard = (event, index) => {
-    const classes = styles();
+    const classes = useStyles();
+    let img = event.event.bannerImage ? event.event.bannerImage.url : random;
+    let date = new Date(event.event.startDate);
 
-    console.log(event);
     return (
-        <Grid item>
-            <Paper className={classes.paper}>
-                <header>
-                    <strong style={{ fontFamily: `'Roboto Slab', serif`, fontSize: "20px" }}>{event.event.name}</strong>
-                </header>
-                <h5> {event.event.description} </h5>
-                <Link onClick={() => redirect(event.event.slug)} className="btn btn-primary">
+        <Card className={classes.root}>
+            <CardActionArea>
+                <CardMedia component="img" alt="event banner" height="140" image={img} />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {event.event.name}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        {date.toDateString()}
+                        <br></br>
+
+                        {event.event.ticketTypes[0].price === 0 ? "Free" : event.event.ticketTypes[0].price}
+                    </Typography>
+                </CardContent>
+            </CardActionArea>
+            <CardActions>
+                <Button onClick={() => redirect(event.event.slug)} size="small" color="primary">
                     Register here
-                </Link>
-            </Paper>
-        </Grid>
+                </Button>
+            </CardActions>
+        </Card>
     );
 };
 
@@ -49,7 +64,6 @@ function UserEvents() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        console.log("-------------");
         const fetchEvents = async () => {
             const apiResult = await fetch(`/api/events`, {
                 method: "GET",
@@ -58,7 +72,6 @@ function UserEvents() {
             const res = JSON.parse(body);
             setLoading(false);
             setResponse(res.events);
-            console.log(res.events);
         };
 
         fetchEvents();
@@ -74,8 +87,8 @@ function UserEvents() {
                             <CircularProgress />
                         ) : (
                             response.map((item) => {
-                                console.log(item + "he");
-                                return <Grid item={true}>{<EventCard key={item.id} event={item} />}</Grid>;
+                                console.log(item);
+                                return <Grid item={true}>{<EventCard key={item._id} event={item} />}</Grid>;
                             })
                         )}
                     </Grid>
