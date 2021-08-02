@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const styles = makeStyles((theme) => ({
     root: {
         display: "flex",
-        justifyContent: "left",
+        justifyContent: "center",
         marginBottom: "35px",
     },
     second: {
