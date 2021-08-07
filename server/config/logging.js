@@ -12,16 +12,19 @@ const getTimeStamp = () => {
 const log = (type) => {
     return (namespace, msg, object) => {
         if (object) {
-            console.log(`[${getTimeStamp()}] [${type}] [${namespace}] ${msg}`, object);
+            console.log(
+                `[${getTimeStamp()}] [${type}] [${namespace}] ${msg}`,
+                object
+            );
         } else {
             console.log(`[${getTimeStamp()}] [${type}] [${namespace}] ${msg}`);
         }
     };
 };
 
-const info = log("INFO");
-const error = log("ERROR");
-const warn = log("WARN");
-const debug = log("DEBUG");
+const info = log('INFO');
+const error = log('ERROR');
+const warn = log('WARN');
+const debug = log('DEBUG');
 
 module.exports = { info, error, warn, debug };
