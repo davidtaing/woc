@@ -3,10 +3,6 @@ const https = require('https')
 require('dotenv').config();
 
 const token = process.env.API_KEY; 
-console.log(token);
-        
-        // TODO hide this somehow
-
 const options = {
     hostname: 'api.humanitix.com',
     path: '/v1/events?page=1&pageSize=100&since=2021-02-01T23%3A26%3A13.485Z',
@@ -19,6 +15,7 @@ const options = {
 const getEvents = (req,res) => {
    
     https.get(options, (response) => {
+        
         var result = '';
         response.on('data', function (chunk) {
             result += chunk;
@@ -32,7 +29,6 @@ const getEvents = (req,res) => {
         });
 
     });
-    
 
 };
 

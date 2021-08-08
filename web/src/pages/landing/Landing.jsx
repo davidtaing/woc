@@ -48,7 +48,7 @@ function Landing() {
                     </Grid>
                 </Grid>
                 {/* item boxes */}
-                <Grid container className="classes.second">
+                <Grid container>
                     <Grid container spacing={4} style={{ paddingTop: "4em" }}>
                         {cardData.map((item, index) => (
                             <Card item={item} index={index} key={item.id} />
