@@ -35,6 +35,8 @@ const UserProfile = ({ profile }) => {
         setOpen(true);
     };
 
+    const longName = (name.length + lastName.length + 1) < 13;
+    
     return (
         <>
             <Container>
@@ -44,10 +46,18 @@ const UserProfile = ({ profile }) => {
                         <img src={picture} className={classes.profilePic} alt="Profile" />
                         <div>
                             <UploadPhoto />
-                            <h3 className={classes.userName}>
-                                {name} {lastName}
-                            </h3>
-
+                            {longName ? (
+                                <h3 className={classes.userName}>
+                                    {name} {lastName}
+                                </h3>
+                             ) : (
+                                <h3 className={classes.userName}>
+                                    {name}
+                                    <br/>
+                                    {lastName}
+                                </h3>
+                            )}
+                            
                             <h5 className={classes.userOccupation}>
                                 {" "}
                                 <LocationOnOutlinedIcon /> {location}
