@@ -19,7 +19,7 @@ and further supports the Organizations operations.
 
 - [Bao](https://github.com/deBubz)
 - [Max](https://github.com/kimchirice)
-- [Kjsenja](https://github.com/xenia11)
+- [Ksenija](https://github.com/xenia11)
 - [Pablo](https://github.com/pgayoso)
 
 ----
