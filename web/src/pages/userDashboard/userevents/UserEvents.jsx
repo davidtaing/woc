@@ -87,7 +87,6 @@ function UserEvents() {
                             <CircularProgress />
                         ) : (
                             response.map((item) => {
-                                console.log(item);
                                 return <Grid item={true}>{<EventCard key={item._id} event={item} />}</Grid>;
                             })
                         )}
