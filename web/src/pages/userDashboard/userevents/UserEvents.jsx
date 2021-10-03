@@ -58,7 +58,6 @@ const EventCard = (event, index) => {
 };
 
 //API call to backend
-
 function UserEvents() {
     const [response, setResponse] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -72,6 +71,7 @@ function UserEvents() {
             const res = JSON.parse(body);
             setLoading(false);
             setResponse(res.events);
+            console.log(res.events);
         };
 
         fetchEvents();
@@ -86,9 +86,18 @@ function UserEvents() {
                         {loading ? (
                             <CircularProgress />
                         ) : (
-                            response.map((item) => {
-                                return <Grid item={true}>{<EventCard key={item._id} event={item} />}</Grid>;
-                            })
+                            response
+                                .filter(function (item) {
+                                    let today = new Date();
+                                    let eventDate = new Date(item.startDate);
+                                    if (today > eventDate) {
+                                        return false;
+                                    }
+                                    return true;
+                                })
+                                .map(function (item) {
+                                    return <Grid item={true}>{<EventCard key={item._id} event={item} />}</Grid>;
+                                })
                         )}
                     </Grid>
                 </Grid>
