@@ -1,6 +1,6 @@
+
 import React, { useState, useEffect } from "react";
 import random from "../../../res/img/events5.svg";
-
 import {
     Grid,
     Container,
@@ -12,9 +12,8 @@ import {
     Typography,
     makeStyles,
     CardActions,
+    CircularProgress,
 } from "@material-ui/core";
-
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles({
     root: {
