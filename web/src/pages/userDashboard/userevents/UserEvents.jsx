@@ -74,6 +74,10 @@ function UserEvents() {
             setResponse(res.events);
             console.log(res.events);
             */
+
+            // temp to solve ci/cd strict mode
+            await setResponse([]);
+            setLoading(false);
         };
 
         fetchEvents();
