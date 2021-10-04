@@ -1,78 +1,106 @@
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import img1 from "../../../res/img/woc.jpg";
-import { Container, Grid } from "@material-ui/core";
-import EventCard from "./EventCard";
-import styles from "./UserEvent.style";
 
-/* We upload all the images with titles and date from the user details*/
-const slideImages = [
-    {
-        id: "001",
-        url: img1,
-        title: "Placeholder Event 1",
-        date: "05-05-20201",
-    },
-    {
-        id: "002",
-        url: img1,
-        title: "Placeholder Event 2",
-        date: "05-04-20201",
-    },
-    {
-        id: "003",
-        url: img1,
-        title: "Placeholder Event 3",
-        date: "05-03-20201",
-    },
-    {
-        id: "004",
-        url: img1,
-        title: "Placeholder Event 4",
-        date: "05-02-20201",
-    },
-];
+import React, { useState, useEffect } from "react";
+import random from "../../../res/img/events5.svg";
+import {
+    Grid,
+    Container,
+    Card,
+    Button,
+    CardActionArea,
+    CardMedia,
+    CardContent,
+    Typography,
+    makeStyles,
+    CardActions,
+    CircularProgress,
+} from "@material-ui/core";
 
-const responsiveCarousel = {
-    superLargeDesktop: {
-        breakpoint: { max: 4000, min: 3000 },
-        items: 4,
+const useStyles = makeStyles({
+    root: {
+        maxWidth: 345,
+        minWidth: 345,
     },
-    desktop: {
-        breakpoint: { max: 3000, min: 1024 },
-        items: 3,
-    },
-    tablet: {
-        breakpoint: { max: 1024, min: 464 },
-        items: 2,
-    },
-    mobile: {
-        breakpoint: { max: 464, min: 0 },
-        items: 1,
-    },
+});
+
+function redirect(url) {
+    window.open("https://events.humanitix.com/" + url, "_blank");
+}
+
+const EventCard = (event, index) => {
+    const classes = useStyles();
+    let img = event.event.bannerImage ? event.event.bannerImage.url : random;
+    let date = new Date(event.event.startDate);
+
+    return (
+        <Card className={classes.root}>
+            <CardActionArea>
+                <CardMedia component="img" alt="event banner" height="140" image={img} />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {event.event.name}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        {date.toDateString()}
+                        <br></br>
+
+                        {event.event.ticketTypes[0].price === 0 ? "Free" : event.event.ticketTypes[0].price}
+                    </Typography>
+                </CardContent>
+            </CardActionArea>
+            <CardActions>
+                <Button onClick={() => redirect(event.event.slug)} size="small" color="primary">
+                    Register here
+                </Button>
+            </CardActions>
+        </Card>
+    );
 };
 
+// Carousel presenting the list of available events
+function UserEvents() {
+    const [response, setResponse] = useState([]);
+    const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        const fetchEvents = async () => {
+            // use axios
+            /*
+            const apiResult = await fetch(`/api/events`, {
+                method: "GET",
+            });
+            const body = await apiResult.json();
+            const res = JSON.parse(body);
+            setLoading(false);
+            setResponse(res.events);
+            console.log(res.events);
+            */
+        };
 
-/* NOTE: the carousel is fine but for now needs a lot of refining */
-const UserEvents = () => {
-    const classes = styles();
+        fetchEvents();
+    }, []);
 
     return (
         <>
+            <h2>Events</h2>
             <Container>
-                <h2>Upcoming Events</h2>
-                <Grid container clasName={classes.root} justify={"center"}>
-                    <Grid item className={classes.backgroundStyle} md={11}>
-                        <Carousel responsive={responsiveCarousel} itemClass={"spacing=2"}>
-                            {slideImages.map((item) => {
-                                return (
-                                    <Grid item={true}>
-                                        <EventCard key={item.id} event={item}/>
-                                    </Grid>
-                                );
-                            })}
-                        </Carousel>
+                <Grid container className="classes.second">
+                    <Grid container spacing={4} style={{ paddingTop: "4em" }}>
+                        {loading ? (
+                            <CircularProgress />
+                        ) : (
+                            response
+                                .filter(function (item) {
+                                    let today = new Date();
+                                    let eventDate = new Date(item.startDate);
+                                    if (today > eventDate) {
+                                        return false;
+                                    }
+                                    return true;
+                                })
+                                .map(function (item) {
+                                    return <Grid item={true}>{<EventCard key={item._id} event={item} />}</Grid>;
+                                })
+                        )}
                     </Grid>
                 </Grid>
             </Container>
