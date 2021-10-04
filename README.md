@@ -35,6 +35,6 @@ and further supports the Organizations operations.
 - [Requirements Specification](https://drive.google.com/drive/folders/176PyHwzWjwQdGCKEdQrak2mF5u-Bbf-k?usp=sharing)
 - [Figma Prototype](https://www.figma.com/file/wTiHBPgutC9bQf3ykJVyuh/Women-of-Colour-Membership-Portal?node-id=0%3A1)
 - [Design Document](#todo)
-- [Dev Docs](./docs/dev_docs.md)
+- [Dev Docs](./docs/README.md)
 
 
