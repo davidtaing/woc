@@ -1,5 +1,6 @@
 import React from "react";
 import NavBar from "../navbar/NavBar";
+import Footer from "../footer/Footer";
 
 import { Container } from "@material-ui/core";
 /* 
@@ -15,6 +16,7 @@ export const Layout = ({ status, children }) => {
         <>
             <NavBar />
             <>{children}</>
+            <Footer />
         </>
     );
 };

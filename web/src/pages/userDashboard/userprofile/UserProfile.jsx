@@ -12,8 +12,8 @@ const UserProfile = ({ profile }) => {
     setFakeProfileData();
 
     const [open, setOpen] = React.useState(false);
-    const [name, setName] = useState(profile.firstName);
-    const [lastName, setLastName] = useState(profile.lastName);
+    const [firstName, setFirstName] = useState(profile.firstName || "");
+    const [lastName, setLastName] = useState(profile.lastName || "");
     const [location, setLocation] = useState(profile.location);
     const [occupation, setOccupation] = useState(profile.occupation);
     const [skills, setSkills] = useState(profile.skills);
@@ -35,18 +35,22 @@ const UserProfile = ({ profile }) => {
         setOpen(true);
     };
 
+    const longName = firstName.length + lastName.length + 1 < 13;
+    const displayName = () => longName 
+        ? <h3 className={classes.userName}>{firstName} {lastName}</h3>
+        : <h3 className={classes.userName}>{firstName} <br/> {lastName}</h3>
+
+
     return (
         <>
             <Container>
                 {/* main logo and text */}
-                <Grid container className={classes.root} align="center" spacing={3} sm={12}>
+                <Grid container className={classes.root} align="center" sm={12}>
                     <Grid item className={classes.backgroundStyle}>
                         <img src={picture} className={classes.profilePic} alt="Profile" />
                         <div>
                             <UploadPhoto />
-                            <h3 className={classes.userName}>
-                                {name} {lastName}
-                            </h3>
+                            {displayName()}
 
                             <h5 className={classes.userOccupation}>
                                 {" "}
@@ -56,10 +60,11 @@ const UserProfile = ({ profile }) => {
                         <br></br>
                     </Grid>
 
-                    <Grid className={classes.userInfo} item sm={12} md={6} lg={6}>
-                        <IconButton onClick={openDialog} style={{ marginLeft: "500px" }}>
+                    <Grid className={classes.userInfo} item sm={12} md={8} lg={8}>
+                        <IconButton onClick={openDialog} style={{ marginLeft: "470px" }}>
                             <EditIcon />
                         </IconButton>
+                        {/* dont really like inline styling */}
                         <div className={classes.profileInnerDiv}>
                             <h1>
                                 Occupation <span style={{ marginLeft: "49px", color: "	#A8A8A" }}>{occupation}</span>
@@ -87,11 +92,11 @@ const UserProfile = ({ profile }) => {
                         </div>
                     </Grid>
                 </Grid>
-                <EditProfile
+                <EditProfile        // Note: passing object over maybe cleaner
                     open={open}
                     onOpen={setOpen}
-                    name={name}
-                    onNameChange={setName}
+                    name={firstName}
+                    onNameChange={setFirstName}
                     lastName={lastName}
                     onLastNameChange={setLastName}
                     location={location}
