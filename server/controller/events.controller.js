@@ -2,18 +2,22 @@ const https = require('https')
 
 require('dotenv').config();
 
+let currentDate = new Date();
+currentDate.setMonth(currentDate.getMonth() - 2);
+
+console.log(currentDate);
+
 const token = process.env.API_KEY; 
 const options = {
     hostname: 'api.humanitix.com',
-    path: '/v1/events?page=1&pageSize=100&since=2021-02-01T23%3A26%3A13.485Z',
+    path: '/v1/events?page=1&pageSize=100&since=' + currentDate.toISOString(),
     method: 'GET',
         headers: {
             'X-Api-Key': token
         }
 }
-
+console.log(options.path);
 const getEvents = (req,res) => {
-   
     https.get(options, (response) => {
         
         var result = '';
