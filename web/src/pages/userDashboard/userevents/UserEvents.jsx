@@ -1,6 +1,7 @@
-
 import React, { useState, useEffect } from "react";
-import random from "../../../res/img/events5.svg";
+import random from "../../../../src/res/img/events5.svg";
+import axios from "axios";
+
 import {
     Grid,
     Container,
@@ -55,28 +56,28 @@ const EventCard = (event, index) => {
         </Card>
     );
 };
-
-// Carousel presenting the list of available events
 function UserEvents() {
     const [response, setResponse] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchEvents = async () => {
-            // use axios
-            /*
-            const apiResult = await fetch(`/api/events`, {
-                method: "GET",
-            });
-            const body = await apiResult.json();
-            const res = JSON.parse(body);
-            setLoading(false);
-            setResponse(res.events);
-            console.log(res.events);
-            */
-        };
+        let isMounted = true;
 
-        fetchEvents();
+        axios
+            .get("/api/events")
+            .then((res) => {
+                let eventList = JSON.parse(res.data).events;
+
+                if (isMounted) {
+                    setLoading(false);
+                    setResponse(eventList);
+                }
+            })
+            .catch((err) => console.log(err));
+        return () => {
+            isMounted = false;
+            setLoading(true);
+        };
     }, []);
 
     return (
