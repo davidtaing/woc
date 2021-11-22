@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import random from "../../../../src/res/img/events5.svg";
 
+import React, { useState, useEffect } from "react";
+import random from "../../../res/img/events5.svg";
 import {
     Grid,
     Container,
@@ -12,9 +12,8 @@ import {
     Typography,
     makeStyles,
     CardActions,
+    CircularProgress,
 } from "@material-ui/core";
-
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles({
     root: {
@@ -57,13 +56,15 @@ const EventCard = (event, index) => {
     );
 };
 
-//API call to backend
+// Carousel presenting the list of available events
 function UserEvents() {
     const [response, setResponse] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchEvents = async () => {
+            // use axios
+            /*
             const apiResult = await fetch(`/api/events`, {
                 method: "GET",
             });
@@ -72,6 +73,7 @@ function UserEvents() {
             setLoading(false);
             setResponse(res.events);
             console.log(res.events);
+            */
         };
 
         fetchEvents();
