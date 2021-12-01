@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
     - first, last, email, password
 */
 const UserSchema = new mongoose.Schema({
+    schemaVersion: { type: Number, default: 1 },
     firstName: {
         type: String,
         required: true,

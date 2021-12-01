@@ -6,14 +6,19 @@ const eventsRoute = require('./events.route');
 
 /* 
     grouping REST routing path
+
+    nov - 22 
+    may have to redo this to 
 */
 
 // open =================================================================
 app.use('/auth', authRoute);
 app.use('/events', eventsRoute);
 
+app.use('/ding', (req, res) => res.status(200).json('ding'));
+
 // user only ============================================================
-app.use(verifyToken);
+// app.use(verifyToken); // Change auth to be called on locked paths
 app.use('/user', userRoute);
 
 // admin only ===========================================================
@@ -23,4 +28,3 @@ app.get('/admin', (req, res) => {
 });
 
 module.exports = app;
-
