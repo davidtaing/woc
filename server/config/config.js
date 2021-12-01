@@ -1,4 +1,5 @@
-require("dotenv").config(); //.env file in main folder
+if (process.env.NODE_ENV === 'dev') require('dotenv').config(); //.env file in main folder
+
 // NOTE: feels bad? react having access to .env
 
 /* 
@@ -6,7 +7,7 @@ require("dotenv").config(); //.env file in main folder
 */
 
 const SERVER_PORT = process.env.PORT || 8080;
-const SERVER_HOSTNAME = process.SERVER_HOSTNAME || "localhost";
+const SERVER_HOSTNAME = process.SERVER_HOSTNAME || 'localhost';
 
 const MONGO_CONF = {
     useNewUrlParser: true,
