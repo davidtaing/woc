@@ -6,8 +6,6 @@ const logging = require('./config/logging');
 const config = require('./config/config');
 const serverUtils = require('./utils/server.util');
 
-require('dotenv').config();
-
 /**
  * TODO:
  * - set up cors to secure access
