@@ -1,5 +1,17 @@
 const User = require('../models/user.model');
 
+// helper functions
+
+const setRole = (r) => (r === 0 ? 'admin' : r === '1' ? 'mentor' : 'user');
+const mapUsersList = (users) =>
+    users.map((e) => {
+        // need update every schema version change
+        // TODO:
+        // - remove hash
+        const { skills, events, passwordHash, ...user } = e.toObject();
+        return { ...user, role: setRole(user.role) };
+    });
+
 const getUser = async (req, res) => {
     console.log(req.user);
     const data = {
@@ -12,20 +24,27 @@ const getUser = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
     const users = await User.find();
-    const setRole = (r) => (r === 0 ? 'admin' : r === '1' ? 'mentor' : 'user');
 
     // users.toObject();
-    const list = users.map((e) => {
-        const u = e.toObject();
-        const { skills, events, passwordHash, ...user } = u;
+    const list = mapUsersList(users);
+    res.status(200).json([...list]);
+};
 
-        return { ...user, role: setRole(user.role) };
-    });
+/*
+    GET USER BY ROLE
+    0, 1, 2
+*/
+const getUserByRole = (roleNumber) => async (req, res) => {
+    const users = await User.find({ role: roleNumber.toString() });
 
+    const list = mapUsersList(users);
     res.status(200).json([...list]);
 };
 
 module.exports = {
     getUser,
     getAllUsers,
+    getAllAdmins: getUserByRole(0),
+    getAllMentors: getUserByRole(1),
+    getAllMentees: getUserByRole(2),
 };
