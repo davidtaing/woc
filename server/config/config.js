@@ -17,7 +17,7 @@ const MONGO_URI = process.env.MONGO_URI;
 
 const SWAGGER_CONF = {
     definition: {
-        openapi: '3.0.0',
+        // openapi: '3.0.0',
         info: {
             title: 'LogRocket Express API with Swagger',
             version: '0.1.0',
