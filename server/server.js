@@ -2,6 +2,10 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 
+const swaggerUI = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc');
+// const swaggerDoc = require('./swagger.json');
+
 const logging = require('./config/logging');
 const config = require('./config/config');
 const serverUtils = require('./utils/server.util');
@@ -28,6 +32,10 @@ app.use(serverUtils.logAllRequests);
 
 // serving static file ---------------------------------------------------------------------------------------
 app.use(express.static(path.resolve(__dirname, '../web', 'build')));
+
+// Swagger UI setup ------------------------------------------------------------------------------------------
+const specs = swaggerJSDoc(config.swagger);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
 
 // api routing -----------------------------------------------------------------------------------------------
 app.use('/api', require('./routes/routes'));
