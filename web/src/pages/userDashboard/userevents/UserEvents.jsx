@@ -67,6 +67,7 @@ function UserEvents() {
             .get("/api/events")
             .then((res) => {
                 let eventList = JSON.parse(res.data).events;
+                console.log(eventList);
 
                 if (isMounted) {
                     setLoading(false);
@@ -89,18 +90,9 @@ function UserEvents() {
                         {loading ? (
                             <CircularProgress />
                         ) : (
-                            response
-                                .filter(function (item) {
-                                    let today = new Date();
-                                    let eventDate = new Date(item.startDate);
-                                    if (today > eventDate) {
-                                        return false;
-                                    }
-                                    return true;
-                                })
-                                .map(function (item) {
-                                    return <Grid item={true}>{<EventCard key={item._id} event={item} />}</Grid>;
-                                })
+                            response.map(function (item) {
+                                return <Grid item={true}>{<EventCard key={item._id} event={item} />}</Grid>;
+                            })
                         )}
                     </Grid>
                 </Grid>

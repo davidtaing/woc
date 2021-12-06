@@ -1,7 +1,5 @@
 const https = require('https')
 
-require('dotenv').config();
-
 let currentDate = new Date();
 currentDate.setMonth(currentDate.getMonth() - 2);
 
@@ -29,7 +27,6 @@ const getEvents = (req,res) => {
             var finalResponse=JSON.parse(result);
             
         res.status(200).json(result);
-        console.log(result);
         });
 
     });
