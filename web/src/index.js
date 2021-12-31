@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 
-import "./index.css";
-import FortAwesomeIcons from "./components/FortAwesome/FortAwesomeIcons";
+import "index.css";
+import FortAwesomeIcons from "components/FortAwesome/FortAwesomeIcons";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import AppWrapper from "./app/AppWrapper";
+import AppWrapper from "app/AppWrapper";
 import { ThemeProvider } from "@material-ui/core";
-import Theme from "./Theme";
+import Theme from "Theme";
 
 ReactDOM.render(
     // <React.StrictMode>

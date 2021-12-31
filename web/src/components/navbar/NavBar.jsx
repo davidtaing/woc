@@ -2,8 +2,8 @@ import React from "react";
 import { AppBar, Toolbar, Button, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/";
 import { Link } from "react-router-dom";
-import logo from "../../res/img/2.png";
-import { useAuth } from "../../contexts/authContext";
+import logo from "res/img/2.png";
+import { useAuth } from "contexts/authContext";
 
 /* 
     Handing main navigation bar for site

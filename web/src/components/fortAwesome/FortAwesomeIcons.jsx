@@ -12,6 +12,8 @@ import {
 
 /* 
     handling fort awesome icon imports
+
+    NOTE: is this being used?
 */
 
 // free-solid-svg-icons

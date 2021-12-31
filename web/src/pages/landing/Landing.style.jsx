@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 // TODO: change this to font in Index
-import "../../components/navbar/NavBar.css";
+import "components/navbar/NavBar.css";
 
 const styles = makeStyles((theme) => ({
     root: {
