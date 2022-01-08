@@ -8,6 +8,7 @@ const { check } = require('express-validator');
     - sign i
 */
 
+// check valid email
 const emailCheck = [
     check('email')
         .not()

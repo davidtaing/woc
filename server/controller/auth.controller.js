@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const authUtil = require('../utils/auth.util');
 
 const User = require('../models/user.model');
-const logging = require('../config/logging');
+const logging = require('../utils/logging.util');
 
 /**
  * Authentication controller

@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const logging = require('../config/logging');
+const logging = require('./logging.util');
 
 /* 
     functions handling jwt
@@ -10,7 +10,7 @@ const logging = require('../config/logging');
 const NAMESPACE = 'JWT';
 
 const generateHash = async (password) => {
-    const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS));
+    const salt = await bcrypt.genSalt(parseInt(process.env.PASS_SALT_ROUNDS));
     return await bcrypt.hash(password, salt);
 };
 

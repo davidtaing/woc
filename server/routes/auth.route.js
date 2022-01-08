@@ -7,8 +7,11 @@ const NAMESPACE = 'AUTH ROUTE';
 /* 
     authentication routes
     would only contains open routes (no token needed)
+
+    /api/auth/
 */
 
+// check email
 router.post(
     '/checkemail',
     validate(validAuth.emailCheck),

@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 
-const logging = require('./config/logging');
+const logging = require('./utils/logging.util');
 const config = require('./config/config');
 const serverUtils = require('./utils/server.util');
 

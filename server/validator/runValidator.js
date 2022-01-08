@@ -4,7 +4,8 @@ const { validationResult } = require('express-validator');
 */
 
 /**
- *  middleware validating the body content
+ *  middleware to validate 
+ * body send through API call
  */
 module.exports.validate = (rules) => [
     ...rules,

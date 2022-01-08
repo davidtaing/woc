@@ -4,9 +4,10 @@ const { verifyToken: validateToken } = require('../utils/verifyToken');
 
 /* 
     crud operations for a user
+
+    /api/user/
 */
 
-// /api/user
 
 router.get('/', controller.getUser);
 router.get('/all', controller.getAllUsers);

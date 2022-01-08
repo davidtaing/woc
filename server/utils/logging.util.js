@@ -19,6 +19,12 @@ const log = (type) => {
     };
 };
 
+/**
+ * Info logging
+ * @param NAMESPACE 
+ * @param msg - 
+ * @param object - any object to print out to the log
+ */
 const info = log("INFO");
 const error = log("ERROR");
 const warn = log("WARN");
