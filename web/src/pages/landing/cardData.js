@@ -1,7 +1,7 @@
-import mentoringSvg from "./../../res/img/mentoring2.svg";
-import eventSvg from "../../res/img/events5.svg";
-import chatroomSvg from "../../res/img/chatrooms.svg";
-import onlinecourseSvg from "../../res/img/onlinecourses.svg";
+import mentoringSvg from "res/img/mentoring2.svg";
+import eventSvg from "res/img/events5.svg";
+import chatroomSvg from "res/img/chatrooms.svg";
+import onlinecourseSvg from "res/img/onlinecourses.svg";
 
 const cardData = [
     {   id: "1",

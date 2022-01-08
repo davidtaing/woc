@@ -12,6 +12,8 @@ import {
 
 /* 
     handling fort awesome icon imports
+
+    Note: is this being used? there are 2 coppies
 */
 
 // free-solid-svg-icons
