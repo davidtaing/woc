@@ -2,7 +2,6 @@ import React from "react";
 import { AppBar, Toolbar, Button, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/";
 import { Link } from "react-router-dom";
-import logo from "res/img/2.png";
 import { useAuth } from "contexts/authContext";
 
 /* 
@@ -17,10 +16,10 @@ const styles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     navItem: {
-        color: "white",
+        color: "black",
         fontSize: "1.5em",
         fontFamily: `'Roboto Slab', serif`,
-        fontWeight: "300",
+        fontWeight: "400",
         //  textDecoration: 'none'
         [theme.breakpoints.down("xs")]: {
             fontSize: "14px",
@@ -33,7 +32,7 @@ const styles = makeStyles((theme) => ({
         fontFamily: `'Roboto Slab', serif`,
         margin: "0.5em",
         fontWeight: "300",
-        color: "white",
+        color: "black",
         [theme.breakpoints.down("xs")]: {
             fontSize: "14px",
         },
@@ -45,15 +44,6 @@ const styles = makeStyles((theme) => ({
         textDecoration: "none",
     },
     offset: theme.mixins.toolbar,
-    logoImage: {
-        justifyContent: "left",
-        width: "54px",
-        height: "54px",
-        borderRadius: "50%",
-        overflow: "hidden",
-        cursor: "pointer",
-        marginLeft: "20px",
-    },
 }));
 
 const NavButtons = ({ data }) => {
