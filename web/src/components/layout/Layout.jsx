@@ -16,7 +16,6 @@ export const Layout = ({ status, children }) => {
         <>
             <NavBar />
             <>{children}</>
-            <Footer />
         </>
     );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { Container, Grid, Paper, Button } from "@material-ui/core";
-import landingSvg from "res/img/women.svg";
+import landingSvg from "./../../res/img/WoCA logo.png";
 import styles from "./Landing.style";
 
 /* 
