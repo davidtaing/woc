@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Container, Grid, Paper, Button } from "@material-ui/core";
 import landingSvg from "res/img/women.svg";
 import styles from "./Landing.style";
-import cardData from "./cardData";
 
 /* 
     Landing page component
@@ -35,11 +34,13 @@ function Landing() {
                 {/* main logo and text */}
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={12} md={6} lg={6} align="center" className={classes.root}>
-                        <h1 className={classes.caption}>Fairer and more equitable Australia for all Women of Colour</h1>
-                        <h5 className={classes.description}>We exist to champion Australia’s Women of Colour.</h5>
+                        <h1 className={classes.caption}>Women of Colour Australia</h1>
+                        <h5 className={classes.description}>
+                            A mentorship program designed by, with and for Women of Colour
+                        </h5>
                         <Link to="/signup" className={classes.btnJoinLink}>
-                            <Button variant="contained" /* color="secondary" */ className={classes.btnJoin}>
-                                Join us
+                            <Button variant="contained" className={classes.btnJoin}>
+                                register now
                             </Button>
                         </Link>
                     </Grid>
@@ -48,13 +49,6 @@ function Landing() {
                     </Grid>
                 </Grid>
                 {/* item boxes */}
-                <Grid container>
-                    <Grid container spacing={4} style={{ paddingTop: "4em" }}>
-                        {cardData.map((item, index) => (
-                            <Card item={item} index={index} key={item.id} />
-                        ))}
-                    </Grid>
-                </Grid>
             </Container>
         </>
     );
