@@ -92,11 +92,8 @@ const NavBar = () => {
             <AppBar elevation={0}>
                 <Toolbar>
                     {/* LEFT: logo/ name */}
-                    <Link to="/">
-                        <img className={classes.logoImage} src={logo} alt="landing page art"></img>
-                    </Link>
                     <Link to="/" className={classes.brandNameLink}>
-                        <h2 className={classes.brandName}>Women of Colour Australia</h2>
+                        <h2 className={classes.brandName}>WoCMentorWoc</h2>
                     </Link>
                     {/* spacing */}
                     <Box className={classes.flex} />

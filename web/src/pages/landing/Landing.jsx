@@ -33,7 +33,7 @@ function Landing() {
             <Container>
                 {/* main logo and text */}
                 <Grid container spacing={3}>
-                    <Grid item xs={12} sm={12} md={6} lg={6} align="center" className={classes.root}>
+                    <Grid item xs={12} sm={12} md={6} lg={6} align="start" className={classes.root}>
                         <h1 className={classes.caption}>Women of Colour Australia</h1>
                         <h5 className={classes.description}>
                             A mentorship program designed by, with and for Women of Colour
