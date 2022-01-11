@@ -48,6 +48,13 @@ function Landing() {
                         <img className={classes.landingPic} src={landingSvg} alt="women of colour" />
                     </Grid>
                 </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                    <p>
+                        WocMentorWoc Program is owned and operated by Women of Colour Australia (WoCA), Australia's
+                        leading not-for-profit organisation advocating for a fairer and more equitable Australia for all
+                        women of colour.{" "}
+                    </p>
+                </Grid>
                 {/* item boxes */}
             </Container>
         </>
