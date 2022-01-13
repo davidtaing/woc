@@ -10,20 +10,6 @@ import styles from "./Landing.style";
 */
 
 // card for item box
-const Card = ({ item, index }) => {
-    const classes = styles();
-
-    return (
-        <Grid item xs={12} sm={6} md={3} lg={3} key={index}>
-            <Paper className={classes.paper}>
-                <img src={item.icon} alt="Icon" style={{ height: "125px", padding: "10px" }} />
-                <header>
-                    <strong style={{ fontFamily: `'Roboto Slab', serif`, fontSize: "20px" }}>{item.title}</strong>
-                </header>
-            </Paper>
-        </Grid>
-    );
-};
 
 function Landing() {
     const classes = styles();
