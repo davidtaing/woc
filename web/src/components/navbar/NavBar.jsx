@@ -17,9 +17,13 @@ const styles = makeStyles((theme) => ({
     },
     navItem: {
         color: "black",
-        fontSize: "1.5em",
-        fontFamily: `'Roboto Slab', serif`,
-        fontWeight: "400",
+        fontSize: "27px",
+        fontFamily: `Montserrat, 'sans-serif'`,
+        fontWeight: "600",
+        border: "1px solid black",
+        paddingLeft: "10px",
+        paddingRight: "10px",
+        marginRight: "20px",
         //  textDecoration: 'none'
         [theme.breakpoints.down("xs")]: {
             fontSize: "14px",
@@ -29,10 +33,11 @@ const styles = makeStyles((theme) => ({
         },
     },
     brandName: {
-        fontFamily: `'Roboto Slab', serif`,
-        margin: "0.5em",
-        fontWeight: "300",
+        fontFamily: `Montserrat, 'sans-serif'`,
+        fontWeight: "700",
+        fontSize: "60px",
         color: "black",
+        margin: "10px 10px",
         [theme.breakpoints.down("xs")]: {
             fontSize: "14px",
         },
@@ -42,6 +47,17 @@ const styles = makeStyles((theme) => ({
     },
     brandNameLink: {
         textDecoration: "none",
+    },
+    navbarDiv: {
+        backgroundColor: "#fafafa",
+        margin: "0.5rem 0px",
+        borderBottom: "1px solid #F0F0F0",
+        minHeight: "77px",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+        padding: 0,
+        position: "relative",
     },
     offset: theme.mixins.toolbar,
 }));
@@ -79,9 +95,9 @@ const NavBar = () => {
 
     return (
         <>
-            <AppBar elevation={0}>
+            <AppBar className={classes.navbarDiv} elevation={0}>
                 <Toolbar>
-                    {/* LEFT: logo/ name */}
+                    {/* LEFT: name */}
                     <Link to="/" className={classes.brandNameLink}>
                         <h2 className={classes.brandName}>WoCMentorWoc</h2>
                     </Link>
