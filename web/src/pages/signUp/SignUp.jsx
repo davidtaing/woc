@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(2, 0, 2),
+        backgroundColor: theme.palette.secondary.main,
     },
 }));
 

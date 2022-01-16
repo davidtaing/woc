@@ -7,24 +7,21 @@ const styles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-    },
-    paper: {
-        // padding: theme.spacing(1),
-        textAlign: "center",
-        color: theme.palette.text.secondary,
+        paddingLeft: 0,
+        paddingRight: 0,
     },
     btnJoinLink: {
         textDecoration: "none",
     },
     btnJoin: {
-        fontFamily: `'Roboto Slab', serif`,
+        fontFamily: `Montserrat, 'sans-serif'`,
         fontWeight: "600",
-        fontSize: "1em",
+        fontSize: "25px",
         backgroundColor: theme.palette.secondary.main,
         color: "white",
         //marginTop: "2rem",
-        borderRadius: "4rem",
-        width: "35%",
+        borderRadius: "1rem",
+        width: "45%",
         height: "4rem",
         textAlign: "center",
         "&:hover": {
@@ -33,10 +30,13 @@ const styles = makeStyles((theme) => ({
         "&:active": {
             transform: "translateY(10px)",
         },
+        [theme.breakpoints.between("xs", "sm")]: {
+            fontSize: "13px",
+        },
     },
     imageDiv: {
         [theme.breakpoints.between("xs", "sm")]: {
-            width: "90% !important",
+            display: "none",
         },
         [theme.breakpoints.between("sm", "md")]: {
             textAlign: "center",
@@ -46,8 +46,9 @@ const styles = makeStyles((theme) => ({
         },
     },
     landingPic: {
-        width: "100%",
+        width: "86%",
         height: "auto",
+        marginLeft: "172px",
         [theme.breakpoints.between("xs", "sm")]: {
             width: "90% !important",
         },
@@ -55,25 +56,30 @@ const styles = makeStyles((theme) => ({
             width: "65% !important",
         },
         [theme.breakpoints.between("md", "lg")]: {
-            width: "100% !important",
+            width: "86% !important",
         },
     },
     description: {
-        fontFamily: `'Roboto Slab', serif`,
+        fontFamily: `Montserrat, 'sans-serif'`,
         fontWeight: "300",
         letterSpacing: "0.02em",
-        fontSize: "1.65em",
+        fontSize: "25px",
         [theme.breakpoints.between("xs", "sm")]: {
             paddingLeft: "inherit !important",
             paddingRight: "inherit !important",
+            fontSize: "18px",
         },
     },
+    description2: {
+        fontSize: "15px",
+        paddingTop: "30px",
+    },
     caption: {
-        fontFamily: `'Roboto Slab', serif`,
-        fontWeight: "bold",
+        fontFamily: `Montserrat, 'sans-serif'`,
+        fontWeight: "700",
         lineHeight: "1",
         marginBottom: "0",
-        fontSize: "60px",
+        fontSize: "69px",
         textAlign: "-webkit-match-parent",
         [theme.breakpoints.between("xs", "sm")]: {
             fontSize: "32px !important",

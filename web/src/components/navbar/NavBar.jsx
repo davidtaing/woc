@@ -39,7 +39,7 @@ const styles = makeStyles((theme) => ({
         color: "black",
         margin: "10px 10px",
         [theme.breakpoints.down("xs")]: {
-            fontSize: "14px",
+            fontSize: "20px",
         },
     },
     navLoginLink: {
