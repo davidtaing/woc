@@ -19,7 +19,6 @@ const styles = makeStyles((theme) => ({
         fontSize: "25px",
         backgroundColor: theme.palette.secondary.main,
         color: "white",
-        //marginTop: "2rem",
         borderRadius: "1rem",
         width: "45%",
         height: "4rem",
@@ -33,22 +32,25 @@ const styles = makeStyles((theme) => ({
         [theme.breakpoints.between("xs", "sm")]: {
             fontSize: "13px",
         },
+        [theme.breakpoints.between("md", "lg")]: {
+            fontSize: "19px",
+        },
     },
     imageDiv: {
         [theme.breakpoints.between("xs", "sm")]: {
             display: "none",
         },
         [theme.breakpoints.between("sm", "md")]: {
-            textAlign: "center",
+            display: "none",
         },
         [theme.breakpoints.between("md", "lg")]: {
             textAlign: "center",
         },
     },
     landingPic: {
-        width: "86%",
+        width: "83%",
         height: "auto",
-        marginLeft: "172px",
+        marginLeft: "145px",
         [theme.breakpoints.between("xs", "sm")]: {
             width: "90% !important",
         },
@@ -56,7 +58,8 @@ const styles = makeStyles((theme) => ({
             width: "65% !important",
         },
         [theme.breakpoints.between("md", "lg")]: {
-            width: "86% !important",
+            width: "72%",
+            marginLeft: "0px",
         },
     },
     description: {
@@ -68,6 +71,9 @@ const styles = makeStyles((theme) => ({
             paddingLeft: "inherit !important",
             paddingRight: "inherit !important",
             fontSize: "18px",
+        },
+        [theme.breakpoints.between("md", "lg")]: {
+            fontSize: "22px",
         },
     },
     description2: {
@@ -87,11 +93,11 @@ const styles = makeStyles((theme) => ({
         },
         [theme.breakpoints.between("sm", "md")]: {
             fontSize: "40px !important",
-            marginLeft: "16% !important",
             marginRight: "16% !important",
             paddingTop: "inherit !important",
         },
         [theme.breakpoints.between("md", "lg")]: {
+            fontSize: "50px",
             paddingTop: "inherit !important",
             marginLeft: "0 !important",
             marginRight: "0 !important",

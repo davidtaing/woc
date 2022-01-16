@@ -25,8 +25,14 @@ const styles = makeStyles((theme) => ({
         paddingRight: "10px",
         marginRight: "20px",
         //  textDecoration: 'none'
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.between("xs", "sm")]: {
             fontSize: "14px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            fontSize: "20px",
+        },
+        [theme.breakpoints.between("md", "lg")]: {
+            fontSize: "24px",
         },
         "&:hover": {
             backgroundColor: theme.palette.secondary.main,
@@ -38,8 +44,14 @@ const styles = makeStyles((theme) => ({
         fontSize: "60px",
         color: "black",
         margin: "10px 10px",
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.between("xs", "sm")]: {
             fontSize: "20px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            fontSize: "30px",
+        },
+        [theme.breakpoints.between("md", "lg")]: {
+            fontSize: "40px",
         },
     },
     navLoginLink: {
