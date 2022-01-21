@@ -2,7 +2,9 @@ const router = require('express').Router();
 const controller = require('../controller/events.controller');
 
 /* 
-    authentication routes
+    events routes
+    
+    /api/events
 */
 
 router.get('/', controller.getEvents);
