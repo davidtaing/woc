@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Container, Grid, Paper, Button } from "@material-ui/core";
-import landingSvg from "./../../res/img/WoCA logo.png";
+import { Container, Grid, Button } from "@material-ui/core";
+import landingSvg from "res/img/WoCA logo.png";
 import styles from "./Landing.style";
 
 /* 

@@ -5,7 +5,7 @@ import { LayoutUserDashboard } from "components/layout/Layout";
 import UserProfile from "./userprofile/UserProfile";
 import UserEvents from "./userevents/UserEvents";
 import UserCourses from "./usercourses/UserCourses";
-import Footer from "./../../components/footer/Footer";
+import Footer from "components/footer/Footer";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 

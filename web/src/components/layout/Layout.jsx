@@ -1,7 +1,5 @@
 import React from "react";
 import NavBar from "components/navbar/NavBar";
-import Footer from "components/footer/Footer";
-
 import { Container } from "@material-ui/core";
 /* 
     Layout component handling common layout for all pages
