@@ -2,8 +2,7 @@ import React from "react";
 import { AppBar, Toolbar, Button, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/";
 import { Link } from "react-router-dom";
-import logo from "../../res/img/2.png";
-import { useAuth } from "../../contexts/authContext";
+import { useAuth } from "contexts/authContext";
 
 /* 
     Handing main navigation bar for site
@@ -17,25 +16,42 @@ const styles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     navItem: {
-        color: "white",
-        fontSize: "1.5em",
-        fontFamily: `'Roboto Slab', serif`,
-        fontWeight: "300",
+        color: "black",
+        fontSize: "27px",
+        fontFamily: `Montserrat, 'sans-serif'`,
+        fontWeight: "600",
+        border: "1px solid black",
+        paddingLeft: "10px",
+        paddingRight: "10px",
+        marginRight: "20px",
         //  textDecoration: 'none'
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.between("xs", "sm")]: {
             fontSize: "14px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            fontSize: "20px",
+        },
+        [theme.breakpoints.between("md", "lg")]: {
+            fontSize: "24px",
         },
         "&:hover": {
             backgroundColor: theme.palette.secondary.main,
         },
     },
     brandName: {
-        fontFamily: `'Roboto Slab', serif`,
-        margin: "0.5em",
-        fontWeight: "300",
-        color: "white",
-        [theme.breakpoints.down("xs")]: {
-            fontSize: "14px",
+        fontFamily: `Montserrat, 'sans-serif'`,
+        fontWeight: "700",
+        fontSize: "60px",
+        color: "black",
+        margin: "10px 10px",
+        [theme.breakpoints.between("xs", "sm")]: {
+            fontSize: "20px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            fontSize: "30px",
+        },
+        [theme.breakpoints.between("md", "lg")]: {
+            fontSize: "40px",
         },
     },
     navLoginLink: {
@@ -44,16 +60,18 @@ const styles = makeStyles((theme) => ({
     brandNameLink: {
         textDecoration: "none",
     },
-    offset: theme.mixins.toolbar,
-    logoImage: {
-        justifyContent: "left",
-        width: "54px",
-        height: "54px",
-        borderRadius: "50%",
-        overflow: "hidden",
-        cursor: "pointer",
-        marginLeft: "20px",
+    navbarDiv: {
+        backgroundColor: "#fafafa",
+        margin: "0.5rem 0px",
+        borderBottom: "1px solid #F0F0F0",
+        minHeight: "77px",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+        padding: 0,
+        position: "relative",
     },
+    offset: theme.mixins.toolbar,
 }));
 
 const NavButtons = ({ data }) => {
@@ -89,14 +107,11 @@ const NavBar = () => {
 
     return (
         <>
-            <AppBar elevation={0}>
+            <AppBar className={classes.navbarDiv} elevation={0}>
                 <Toolbar>
-                    {/* LEFT: logo/ name */}
-                    <Link to="/">
-                        <img className={classes.logoImage} src={logo} alt="landing page art"></img>
-                    </Link>
+                    {/* LEFT: name */}
                     <Link to="/" className={classes.brandNameLink}>
-                        <h2 className={classes.brandName}>Women of Colour Australia</h2>
+                        <h2 className={classes.brandName}>WoCMentorWoc</h2>
                     </Link>
                     {/* spacing */}
                     <Box className={classes.flex} />

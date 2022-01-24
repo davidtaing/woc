@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import random from "../../../../src/res/img/events5.svg";
+import random from "res/img/events5.svg";
 import axios from "axios";
 
 import {

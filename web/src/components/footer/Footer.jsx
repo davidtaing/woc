@@ -1,6 +1,6 @@
 import styles from "./Footer.style";
 import { Twitter, Facebook, Instagram, LinkedIn } from "@material-ui/icons";
-import wocimage from "../../res/img/woclogo.jpg";
+import wocimage from "res/img/woclogo.jpg";
 
 const Footer = () => {
     const classes = styles();

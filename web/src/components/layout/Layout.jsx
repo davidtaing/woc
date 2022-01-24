@@ -1,7 +1,5 @@
 import React from "react";
-import NavBar from "../navbar/NavBar";
-import Footer from "../footer/Footer";
-
+import NavBar from "components/navbar/NavBar";
 import { Container } from "@material-ui/core";
 /* 
     Layout component handling common layout for all pages
@@ -16,7 +14,6 @@ export const Layout = ({ status, children }) => {
         <>
             <NavBar />
             <>{children}</>
-            <Footer />
         </>
     );
 };

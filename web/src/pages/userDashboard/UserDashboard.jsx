@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { LayoutUserDashboard } from "../../components/layout/Layout";
+import { LayoutUserDashboard } from "components/layout/Layout";
 
 import UserProfile from "./userprofile/UserProfile";
 import UserEvents from "./userevents/UserEvents";
