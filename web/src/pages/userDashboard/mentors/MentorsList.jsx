@@ -3,11 +3,11 @@ import MentorCard from "./MentorCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Grid } from "@material-ui/core";
-import mentorImg1 from "./../../../res/img/mentor1.jpg";
-import mentorImg2 from "./../../../res/img/mentor2.jpg";
-import mentorImg3 from "./../../../res/img/mentor3.jpg";
-import mentorImg4 from "./../../../res/img/mentor4.jpg";
-import mentorImg5 from "./../../../res/img/mentor5.jpg";
+import mentorImg1 from "res/img/mentor1.jpg";
+import mentorImg2 from "res/img/mentor2.jpg";
+import mentorImg3 from "res/img/mentor3.jpg";
+import mentorImg4 from "res/img/mentor4.jpg";
+import mentorImg5 from "res/img/mentor5.jpg";
 
 const mentor = [
     { id: 1, name: "Alexandra Robinson", photo: mentorImg1 },
