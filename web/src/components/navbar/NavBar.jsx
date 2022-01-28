@@ -1,8 +1,9 @@
 import React from "react";
 import { AppBar, Toolbar, Button, Box } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/";
+import { makeStyles, Avatar } from "@material-ui/core/";
 import { Link } from "react-router-dom";
 import { useAuth } from "contexts/authContext";
+import { MousePointer } from "react-feather";
 
 /* 
     Handing main navigation bar for site
@@ -71,6 +72,23 @@ const styles = makeStyles((theme) => ({
         padding: 0,
         position: "relative",
     },
+    avatar: {
+        border: "1px solid black",
+        height:"47px",
+        width: "47px",
+        [theme.breakpoints.between("xs", "sm")]: {
+            fontSize: "14px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            fontSize: "20px",
+        },
+        [theme.breakpoints.between("md", "lg")]: {
+            fontSize: "24px",
+        },
+        "&:hover": {
+            cursor: MousePointer,
+        },
+    },
     offset: theme.mixins.toolbar,
 }));
 
@@ -100,6 +118,7 @@ const NavBar = () => {
         <>
             <NavButtons data={btAdmin} />
             <NavButtons data={btLogOut} />
+            <Avatar src= "/logo192.png" className={classes.avatar} path="/profile"/>
         </>
     );
 
