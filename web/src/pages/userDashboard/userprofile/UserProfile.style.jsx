@@ -30,7 +30,7 @@ const styles = makeStyles((theme) => ({
         display: "inline - block",
         width: "180px",
         height: "180px",
-        borderRadius: "50%",
+        borderRadius: "5%",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
         backgroundSize: "cover",
@@ -38,26 +38,20 @@ const styles = makeStyles((theme) => ({
     userName: {
         fontWeight: "bold",
         fontSize: "2em",
-        fontFamily: `'Roboto Slab', serif`,
-    },
-    userOccupation: {
-        fontSize: "16px",
-        fontFamily: `'Roboto Slab', serif`,
-        marginBottom: "0px",
-        color: "grey",
+        fontFamily: `Montserrat, 'sans-serif'`,
     },
     userInfo: {
-        textAlign: "left",
-        fontFamily: `'Roboto Slab', serif`,
-        fontSize: "9px",
-        //paddingTop: "40px !important",
-        marginLeft: "10px",
-        border: "2px solid lightgrey",
-        padding: "10px",
-        borderRadius: "25px",
-        backgroundColor: "#f2f2f2",
-        paddingLeft: "37px",
+        fontFamily: `Montserrat, 'sans-serif'`,
+        fontSize: "20px",
         color: "grey",
+    },
+    userInfoLabel: {
+        marginRight: "15px",
+        lineHeight: "2.43",
+    },
+    textField: {
+        fontFamily: `Montserrat, 'sans-serif'`,
+        fontSize: "20px",
     },
 }));
 

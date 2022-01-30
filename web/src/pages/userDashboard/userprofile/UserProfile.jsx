@@ -6,6 +6,7 @@ import picture from "./profilepic.jpg";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import UploadPhoto from "./UploadPhoto";
 import EditProfile from "./EditProfile";
+import TextField from "@mui/material/TextField";
 
 const UserProfile = ({ profile }) => {
     const classes = styles();
@@ -23,76 +24,122 @@ const UserProfile = ({ profile }) => {
 
     //TODO:: get this data from database
     function setFakeProfileData() {
-        profile.location = "Sydney, Australia";
-        profile.occupation = "Software developer";
-        profile.skills = "Web | CSS | .NET";
-        profile.nationality = "Australian";
-        profile.languages = "English | Spanish";
-        profile.interests = "Painting | Reading | Web Design";
+        profile.skills = "Web";
+        profile.phone = "04345214562";
+        profile.linkedinUrl = "";
+        profile.mentor = "Roberta Lee";
     }
 
-    const openDialog = () => {
-        setOpen(true);
-    };
+    // const openDialog = () => {
+    //     setOpen(true);
+    // };
 
     const longName = firstName.length + lastName.length + 1 < 13;
-    const displayName = () => longName 
-        ? <h3 className={classes.userName}>{firstName} {lastName}</h3>
-        : <h3 className={classes.userName}>{firstName} <br/> {lastName}</h3>
-
+    const displayName = () =>
+        longName ? (
+            <h3 className={classes.userName}>
+                {firstName} {lastName}
+            </h3>
+        ) : (
+            <h3 className={classes.userName}>
+                {firstName} <br /> {lastName}
+            </h3>
+        );
 
     return (
         <>
             <Container>
                 {/* main logo and text */}
                 <Grid container className={classes.root} align="center" sm={12}>
-                    <Grid item className={classes.backgroundStyle}>
+                    <Grid item>
                         <img src={picture} className={classes.profilePic} alt="Profile" />
                         <div>
-                            <UploadPhoto />
+                            {/* <UploadPhoto /> */}
                             {displayName()}
-
-                            <h5 className={classes.userOccupation}>
-                                {" "}
-                                <LocationOnOutlinedIcon /> {location}
-                            </h5>
                         </div>
-                        <br></br>
                     </Grid>
 
-                    <Grid className={classes.userInfo} item sm={12} md={8} lg={8}>
-                        <IconButton onClick={openDialog} style={{ marginLeft: "470px" }}>
+                    <Grid item sm={12} md={8} lg={8} className={classes.userInfo} spacing={2}>
+                        {/* <IconButton onClick={openDialog} style={{ marginLeft: "470px" }}>
                             <EditIcon />
-                        </IconButton>
+                        </IconButton> */}
                         {/* dont really like inline styling */}
-                        <div className={classes.profileInnerDiv}>
-                            <h1>
-                                Occupation <span style={{ marginLeft: "49px", color: "	#A8A8A" }}>{occupation}</span>
-                            </h1>
-                            <hr />
-                            <h1>
-                                Nationality <span style={{ marginLeft: "48px", color: "	#A8A8A" }}>{nationality}</span>
-                            </h1>
-                            <hr />
+                        <Grid item style={{ margin: "10px" }}>
+                            <label className={classes.userInfoLabel} htmlFor="username">
+                                Name
+                            </label>
+                            <TextField
+                                className={classes.textField}
+                                disabled
+                                id="username"
+                                type="text"
+                                value={firstName + " " + lastName}
+                            />
+                        </Grid>
 
-                            <h1>
-                                Language
-                                <span style={{ marginLeft: "66px", color: "	#A8A8A" }}>{languages}</span>
-                            </h1>
-                            <hr />
-                            <h1>
-                                Skills <span style={{ marginLeft: "95px", color: "	#A8A8A" }}>{skills}</span>
-                            </h1>
-                            <hr />
-                            <h1>
-                                Interests
-                                <span style={{ marginLeft: "68px", color: "	#A8A8A" }}> {interests}</span>
-                            </h1>
-                            <hr />
-                        </div>
+                        <Grid item style={{ margin: "10px" }}>
+                            <label className={classes.userInfoLabel} htmlFor="useremail">
+                                Email
+                            </label>
+                            <TextField
+                                className={classes.textField}
+                                disabled
+                                id="useremail"
+                                type="email"
+                                value={profile.email}
+                            />
+                        </Grid>
+                        <Grid item style={{ margin: "10px" }}>
+                            <label className={classes.userInfoLabel} htmlFor="userphone">
+                                Phone
+                            </label>
+                            <TextField
+                                className={classes.textField}
+                                disabled
+                                id="phone"
+                                type="text"
+                                value={profile.phone}
+                            />
+                        </Grid>
+                        <Grid item style={{ margin: "10px" }}>
+                            <label className={classes.userInfoLabel} htmlFor="userlinkedinUrl">
+                                Linkedin
+                            </label>
+                            <TextField
+                                className={classes.textField}
+                                disabled
+                                id="userlinkedinUrl"
+                                type="text"
+                                value={profile.linkedinUrl}
+                            />
+                        </Grid>
+                        <Grid item style={{ marginBottom: "10px" }}>
+                            <label className={classes.userInfoLabel} htmlFor="userskills">
+                                Skills
+                            </label>
+                            <TextField
+                                className={classes.textField}
+                                disabled
+                                id="userskills"
+                                type="text"
+                                value={profile.skills}
+                            />
+                        </Grid>
+                        <Grid item style={{ margin: "10px" }}>
+                            <label className={classes.userInfoLabel} htmlFor="usermentor">
+                                Mentor
+                            </label>
+                            <TextField
+                                className={classes.textField}
+                                disabled
+                                id="usermentor"
+                                type="text"
+                                value={profile.mentor}
+                            />
+                        </Grid>
                     </Grid>
                 </Grid>
-                <EditProfile        // Note: passing object over maybe cleaner
+                <EditProfile // Note: passing object over maybe cleaner
                     open={open}
                     onOpen={setOpen}
                     name={firstName}
