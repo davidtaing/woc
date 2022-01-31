@@ -6,6 +6,8 @@ const styles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
         marginBottom: "35px",
+        gridGap: "100px",
+        paddingTop: "4em",
     },
     second: {
         backgroundColor: "#efe8eb",
@@ -28,8 +30,8 @@ const styles = makeStyles((theme) => ({
     },
     profilePic: {
         display: "inline - block",
-        width: "180px",
-        height: "180px",
+        width: "320px",
+        height: "320px",
         borderRadius: "5%",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
@@ -48,10 +50,13 @@ const styles = makeStyles((theme) => ({
     userInfoLabel: {
         marginRight: "15px",
         lineHeight: "2.43",
+        float: "left",
+        textAlign: "left",
+        minWidth: "100px",
     },
     textField: {
         fontFamily: `Montserrat, 'sans-serif'`,
-        fontSize: "20px",
+        fontSize: "25px",
     },
 }));
 
