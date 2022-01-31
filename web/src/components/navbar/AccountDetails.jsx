@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth } from "contexts/authContext";
-import {  Button, makeStyles, Dialog } from "@material-ui/core";
+import {  Button, makeStyles, Dialog, Avatar } from "@material-ui/core";
 
 const useStyles = makeStyles ({
     dialog: {
@@ -38,6 +38,19 @@ const useStyles = makeStyles ({
         marginRight: "20px",
         marginLeft: "20px",
         marginBottom: "30px",
+    },
+    dialogAvatarContainer: {
+        textAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        display: 'flex',
+        marginTop: '8px'
+    },
+    avatar: {
+        border: "1px solid black",
+        height:"80px",
+        width: "80px",
+        cursor: "pointer"
     }
 });
 
@@ -65,15 +78,16 @@ const AccountDetails  = (props) => {
               }}
         >
             <div className={classes.container}>
+                <div className={classes.dialogAvatarContainer}>
+                    <Avatar src= "/logo192.png" className={classes.avatar}/>
+                </div>
                 <div className={classes.dialogDetails}>User Name</div>
                 <div className={classes.dialogDetails}>Email</div>
                 <div className={classes.dialogButtonContainer}>
                     <Button className={classes.dialogButton} onClick={signOutHandler} >
                         Sign Out
                     </Button>
-                    <Button className={classes.dialogButton} onClick={onCloseDialog} >
-                        Close
-                    </Button>
+                   
                 </div>
             </div>
         </Dialog>
