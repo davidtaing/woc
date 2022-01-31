@@ -106,7 +106,7 @@ const NavButtons = ({ data }) => {
 
 const NavBar = () => {
     const classes = styles();
-    const loggedIn = useAuth();
+    const { loggedIn } = useAuth();
 
     const btLogIn = { text: "Sign In", path: "/login" };
     //const btLogOut = { text: "Sign out", click: () => logOut() };
