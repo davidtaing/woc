@@ -4,7 +4,6 @@ import { LayoutUserDashboard } from "components/layout/Layout";
 
 import UserProfile from "./userprofile/UserProfile";
 import UserEvents from "./userevents/UserEvents";
-import UserCourses from "./usercourses/UserCourses";
 import MentorsList from "./mentors/MentorsList";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -32,14 +31,13 @@ const UserDash = () => {
 
     return (
         <LayoutUserDashboard>
-            <h1>User DashBoard</h1>
+            <h1>Profile</h1>
             {loading ? (
                 <CircularProgress />
             ) : (
                 <>
                     <UserProfile profile={profile} />
                     <UserEvents />
-                    <UserCourses />
                     <MentorsList />
                 </>
             )}

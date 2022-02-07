@@ -83,7 +83,7 @@ function UserEvents() {
 
     return (
         <>
-            <h2>Events</h2>
+            <h1>Events</h1>
             <Container>
                 <Grid container className="classes.second">
                     <Grid container spacing={4} style={{ paddingTop: "4em" }}>
