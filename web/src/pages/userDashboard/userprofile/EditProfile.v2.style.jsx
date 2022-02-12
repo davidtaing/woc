@@ -4,8 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 const styles = makeStyles((theme) => ({
     root: {
         display: "flex",
+        justifyContent: "center",
         marginBottom: "35px",
-        gridGap: "50px",
+        gridGap: "100px",
         paddingTop: "4em",
     },
     second: {
@@ -45,9 +46,6 @@ const styles = makeStyles((theme) => ({
         fontFamily: `Montserrat, 'sans-serif'`,
         fontSize: "20px",
         color: "grey",
-        textAlign: "start",
-        maxWidth: "100%",
-        flexBasis: "100%",
     },
     userInfoLabel: {
         marginRight: "15px",

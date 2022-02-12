@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-// import EditIcon from "@material-ui/icons/Edit";
 import { Container, Grid } from "@material-ui/core";
 import styles from "./UserProfile.style";
 import picture from "./profilepic.jpg";
-// import UploadPhoto from "./UploadPhoto";
-import EditProfile from "./EditProfile";
 import TextField from "@mui/material/TextField";
 
 const UserProfile = ({ profile }) => {
@@ -49,93 +46,23 @@ const UserProfile = ({ profile }) => {
                     </Grid>
 
                     <Grid item sm={12} md={4} lg={4} className={classes.userInfo}>
-                        {/* <IconButton onClick={openDialog} style={{ marginLeft: "470px" }}>
-                            <EditIcon />
-                        </IconButton> */}
-                        {/* dont really like inline styling */}
                         <Grid item style={{ marginBottom: "10px" }}>
-                            <label className={classes.userInfoLabel} htmlFor="username">
-                                Name
-                            </label>
-                            <TextField
-                                className={classes.textField}
-                                disabled
-                                id="username"
-                                type="text"
-                                value={firstName + " " + lastName}
-                            />
+                            <h1>{firstName + " " + lastName}</h1>
                         </Grid>
 
-                        <Grid item style={{ marginBottom: "10px" }}>
-                            <label className={classes.userInfoLabel} htmlFor="useremail">
-                                Email
-                            </label>
-                            <TextField
-                                className={classes.textField}
-                                disabled
-                                id="useremail"
-                                type="email"
-                                value={profile.email}
-                            />
+                        <Grid item sm={12} md={12} lg={12} style={{ marginBottom: "10px" }}>
+                            <p>
+                                My name is Code Sydney and I am a Junior Web Developer for Oswald Technologies. I am an
+                                accomplished coder and programmer, and I enjoy using my skills to contribute to the
+                                exciting technological advances that happen every day at Oswald Tech. I graduated from
+                                the California Institute of Technology in 2016 with a Bachelor's Degree in Software
+                                Development. While in school, I earned the 2015 Edmund Gains Award for my exemplary
+                                academic performance and leadership skills.
+                            </p>
                         </Grid>
-                        <Grid item style={{ marginBottom: "10px" }}>
-                            <label className={classes.userInfoLabel} htmlFor="userphone">
-                                Phone
-                            </label>
-                            <TextField
-                                className={classes.textField}
-                                disabled
-                                id="phone"
-                                type="text"
-                                value={profile.phone}
-                            />
-                        </Grid>
-                        <Grid item style={{ marginBottom: "10px" }}>
-                            <label className={classes.userInfoLabel} htmlFor="userlinkedinUrl">
-                                Linkedin
-                            </label>
-                            <TextField
-                                className={classes.textField}
-                                disabled
-                                id="userlinkedinUrl"
-                                type="text"
-                                value={profile.linkedinUrl}
-                            />
-                        </Grid>
-                        <Grid item style={{ marginBottom: "10px" }}>
-                            <label className={classes.userInfoLabel} htmlFor="userskills">
-                                Skills
-                            </label>
-                            <TextField
-                                className={classes.textField}
-                                disabled
-                                id="userskills"
-                                type="text"
-                                value={profile.skills}
-                            />
-                        </Grid>
-                        <Grid item style={{ marginBottom: "10px" }}>
-                            <label className={classes.userInfoLabel} htmlFor="usermentor">
-                                Mentor
-                            </label>
-                            <TextField
-                                className={classes.textField}
-                                disabled
-                                id="usermentor"
-                                type="text"
-                                value={profile.mentor}
-                            />
-                        </Grid>
+                        <Grid item style={{ marginBottom: "10px" }}></Grid>
                     </Grid>
                 </Grid>
-                <EditProfile // Note: passing object over maybe cleaner
-                    name={firstName}
-                    onNameChange={setFirstName}
-                    lastName={lastName}
-                    onLastNameChange={setLastName}
-                    skills={skills}
-                    onSkillsChange={setSkills}
-                />
             </Container>
         </>
     );
