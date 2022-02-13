@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Container, Grid } from "@material-ui/core";
 import styles from "./UserProfile.style";
 import picture from "./profilepic.jpg";
-import TextField from "@mui/material/TextField";
 
 const UserProfile = ({ profile }) => {
     const classes = styles();
@@ -34,10 +33,10 @@ const UserProfile = ({ profile }) => {
 
     return (
         <>
-            <Container>
+            <Container maxWidth={false} className="root">
                 {/* main logo and text */}
-                <Grid container className={classes.root} align="center" sm={12}>
-                    <Grid item>
+                <Grid container className={classes.root} align="center">
+                    <Grid item sm={12} md={4} lg={4}>
                         <img src={picture} className={classes.profilePic} alt="Profile" />
                         <div>
                             {/* <UploadPhoto /> */}
@@ -46,11 +45,11 @@ const UserProfile = ({ profile }) => {
                     </Grid>
 
                     <Grid item sm={12} md={4} lg={4} className={classes.userInfo}>
-                        <Grid item style={{ marginBottom: "10px" }}>
+                        <Grid item>
                             <h1>{firstName + " " + lastName}</h1>
                         </Grid>
 
-                        <Grid item sm={12} md={12} lg={12} style={{ marginBottom: "10px" }}>
+                        <Grid item sm={12}>
                             <p>
                                 My name is Code Sydney and I am a Junior Web Developer for Oswald Technologies. I am an
                                 accomplished coder and programmer, and I enjoy using my skills to contribute to the
@@ -60,7 +59,7 @@ const UserProfile = ({ profile }) => {
                                 academic performance and leadership skills.
                             </p>
                         </Grid>
-                        <Grid item style={{ marginBottom: "10px" }}></Grid>
+                        <Grid item></Grid>
                     </Grid>
                 </Grid>
             </Container>

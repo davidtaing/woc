@@ -5,7 +5,7 @@ const styles = makeStyles((theme) => ({
     root: {
         display: "flex",
         marginBottom: "35px",
-        gridGap: "50px",
+        // gridGap: "50px",
         paddingTop: "4em",
     },
     second: {
@@ -19,13 +19,6 @@ const styles = makeStyles((theme) => ({
     },
     modalBox: {
         //  width: "40%",
-    },
-    backgroundStyle: {
-        paddingTop: "26px",
-        border: "2px solid lightgrey",
-        padding: "10px",
-        borderRadius: "25px",
-        backgroundColor: " #f2f2f2",
     },
     profilePic: {
         display: "inline - block",
@@ -46,8 +39,9 @@ const styles = makeStyles((theme) => ({
         fontSize: "20px",
         color: "grey",
         textAlign: "start",
-        maxWidth: "100%",
         flexBasis: "100%",
+        marginBottom: "10px",
+        maxWidth: "60%",
     },
     userInfoLabel: {
         marginRight: "15px",

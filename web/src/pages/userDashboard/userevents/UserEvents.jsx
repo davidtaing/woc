@@ -84,7 +84,7 @@ function UserEvents() {
     return (
         <>
             <h1>Events</h1>
-            <Container>
+            <Container maxWidth={false}>
                 <Grid container className="classes.second">
                     <Grid container spacing={4} style={{ paddingTop: "4em" }}>
                         {loading ? (
