@@ -8,6 +8,7 @@ const { verifyToken: validateToken } = require('../utils/verifyToken');
 
 // /api/user
 
+// router.update('/update', controller.updateUser);
 router.get('/', controller.getUser);
 router.get('/all', controller.getAllUsers);
 

@@ -43,7 +43,7 @@ const responsiveCarousel = {
 function MentorsList() {
     return (
         <>
-            <h2>Mentors</h2>
+            <h1>Mentors</h1>
             <Grid>
                 <Carousel responsive={responsiveCarousel}>
                     {mentor.map((item) => {
