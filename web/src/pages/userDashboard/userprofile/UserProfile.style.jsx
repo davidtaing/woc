@@ -12,10 +12,13 @@ const styles = makeStyles((theme) => ({
         backgroundColor: "#efe8eb",
     },
     paper: {
-        // padding: theme.spacing(1),
-        textAlign: "center",
-
+        elevation: 3,
         color: theme.palette.text.secondary,
+        width: "fit-content",
+        padding: "5px",
+        display: "inline-block",
+        marginRight: "10px",
+        variant: "outlined",
     },
     modalBox: {
         //  width: "40%",

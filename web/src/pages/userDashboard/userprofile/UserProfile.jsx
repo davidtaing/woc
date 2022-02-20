@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Paper } from "@material-ui/core";
 import styles from "./UserProfile.style";
 import picture from "./profilepic.jpg";
 
@@ -9,14 +9,12 @@ const UserProfile = ({ profile }) => {
 
     const [firstName, setFirstName] = useState(profile.firstName || "");
     const [lastName, setLastName] = useState(profile.lastName || "");
-    const [skills, setSkills] = useState(profile.skills);
+    const [skills, setSkills] = useState(profile.skills || "");
 
     //TODO:: get this data from database
     function setFakeProfileData() {
-        profile.skills = "Web";
+        profile.skills = ["Web", "React", "User Experience", "Software Engineering"];
         profile.phone = "04345214562";
-        profile.linkedinUrl = "";
-        profile.mentor = "Roberta Lee";
     }
 
     const longName = firstName.length + lastName.length + 1 < 13;
@@ -38,10 +36,7 @@ const UserProfile = ({ profile }) => {
                 <Grid container className={classes.root} align="center">
                     <Grid item sm={12} md={4} lg={4}>
                         <img src={picture} className={classes.profilePic} alt="Profile" />
-                        <div>
-                            {/* <UploadPhoto /> */}
-                            {displayName()}
-                        </div>
+                        <div>{displayName()}</div>
                     </Grid>
 
                     <Grid item sm={12} md={4} lg={4} className={classes.userInfo}>
@@ -59,7 +54,11 @@ const UserProfile = ({ profile }) => {
                                 academic performance and leadership skills.
                             </p>
                         </Grid>
-                        <Grid item></Grid>
+                        <Grid item>
+                            {skills.map((skill) => (
+                                <Paper className={classes.paper}>{skill}</Paper>
+                            ))}
+                        </Grid>
                     </Grid>
                 </Grid>
             </Container>
