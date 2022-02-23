@@ -51,6 +51,10 @@ module.exports.login = async (req, res) => {
         success: true,
         token: tokenObj.token,
         expiresIn: tokenObj.expiresIn, // just for response
+        id: user._id,
+        firstname: user.firstName,
+        lastname: user.lastName,
+        email: user.email,
     });
 };
 
