@@ -67,7 +67,6 @@ function UserEvents() {
             .get("/api/events")
             .then((res) => {
                 let eventList = JSON.parse(res.data).events;
-                console.log(eventList);
 
                 if (isMounted) {
                     setLoading(false);
@@ -91,7 +90,7 @@ function UserEvents() {
                             <CircularProgress />
                         ) : (
                             response.map(function (item) {
-                                return <Grid item={true}>{<EventCard key={item._id} event={item} />}</Grid>;
+                                return <Grid item={true} key={item._id}>{<EventCard key={item._id} event={item} />}</Grid>;
                             })
                         )}
                     </Grid>

@@ -48,7 +48,7 @@ function MentorsList() {
                 <Carousel responsive={responsiveCarousel}>
                     {mentor.map((item) => {
                         return (
-                            <Grid item={true}>
+                            <Grid item={true} key={item.id}>
                                 <MentorCard key={item.id} mentor={item} />
                             </Grid>
                         );
