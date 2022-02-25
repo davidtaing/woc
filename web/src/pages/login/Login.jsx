@@ -70,7 +70,6 @@ const SignIn = (props) => {
                 // ok set token
                 logIn(res.data.token);
                 setLoading(false);
-                console.log(res.data);
             })
             .catch((e) => {
                 // display bad credentials or unexpected errors

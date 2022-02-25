@@ -64,14 +64,16 @@ const styles = makeStyles((theme) => ({
     },
     navbarDiv: {
         backgroundColor: "#fafafa",
-        margin: "0.5rem 0px",
+        margin: 0,
         borderBottom: "1px solid #F0F0F0",
         minHeight: "77px",
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "space-between",
         padding: 0,
-        position: "relative",
+        position: "fixed",
+        top: 0,
+        width: '100%',
     },
     avatar: {
         border: "1px solid black",
@@ -144,10 +146,10 @@ const NavBar = () => {
                 </Toolbar>
             </AppBar>
             <div className={classes.offset} />
-            <AccountDetails
-                form={form}
-                onOpen={setForm}
-            />
+                <AccountDetails
+                    form={form}
+                    onOpen={setForm}
+                />  
         </>
     );
 };

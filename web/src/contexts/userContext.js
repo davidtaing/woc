@@ -8,22 +8,20 @@ import React, {createContext, useState } from "react";
 export const UserContext = createContext();
 
 export const UserContextProvider = props => { 
-    const [firstname, setFirstName] = useState("Pablo");
-    const [lastname, setLastName] = useState("Gomez");
-    const [email, setEmail] = useState("pablo@sydney.com");
+    const [user, setUser] = useState([{
+        firstname: '',
+        lastname: '',
+        email: '',
+    }]);
 
-    const updateUserData = (fstname, lstname, useremail) => {
-        setFirstName(fstname);
-        setLastName(lstname);
-        setEmail(useremail);
+    const updateUserData = (firstname, lastname, email) => {
+        setUser({firstname,lastname,email});
     };
 
     return (
         <UserContext.Provider
         value={{ 
-            firstname, 
-            lastname,
-            email,
+            user,
             updateUserData}}
         >
             {props.children}

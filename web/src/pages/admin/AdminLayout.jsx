@@ -80,8 +80,8 @@ const NavSidebar = () => {
     ];
     const navContent = (
         <Box style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-            <Box style={{ alignItems: "center", display: "flex", flexDirection: "column", p: 2 }}>
-                <Typography variant="body">UserAvatar</Typography>
+            <Divider />
+            <Box style={{ margin: 10 , alignItems: "center", display: "flex", flexDirection: "column", p: 2 }}>
                 <Typography variant="h5">UserName</Typography>
             </Box>
             <Divider />
@@ -105,8 +105,8 @@ const NavSidebar = () => {
             PaperProps={{
                 style: {
                     width: 256,
-                    top: 64,
-                    height: "calc(100% - 64px)",
+                    top: 80,
+                    height: "calc(100% - 88px)",
                 },
             }}
         >

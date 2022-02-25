@@ -23,6 +23,7 @@ import { getToken, setToken } from "../utils/auth";
 */
 
 import { AuthContext } from "../contexts/authContext";
+import { UserContextProvider } from "contexts/userContext";
 
 const AppWrapper = () => {
     const [loggedIn, setLoggedIn] = useState(getToken() !== null);
@@ -50,7 +51,9 @@ const AppWrapper = () => {
                 logOut,
             }}
         >
-            <App />
+            <UserContextProvider>
+                <App />
+            </UserContextProvider>
         </AuthContext.Provider>
     );
 };

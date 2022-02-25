@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // import EditIcon from "@material-ui/icons/Edit";
 import { Container, Grid } from "@material-ui/core";
 import styles from "./UserProfile.style";
@@ -6,6 +6,7 @@ import picture from "./profilepic.jpg";
 // import UploadPhoto from "./UploadPhoto";
 import EditProfile from "./EditProfile";
 import TextField from "@mui/material/TextField";
+import { UserContext } from "contexts/userContext";
 
 const UserProfile = ({ profile }) => {
     const classes = styles();
@@ -13,7 +14,20 @@ const UserProfile = ({ profile }) => {
 
     const [firstName, setFirstName] = useState(profile.firstName || "");
     const [lastName, setLastName] = useState(profile.lastName || "");
+    const [email] = useState(profile.email || "");
     const [skills, setSkills] = useState(profile.skills);
+    const [dataUpdated, setDataUpdated] = useState(true);
+
+    const {updateUserData} = useContext(UserContext);
+    
+    useEffect(() => {
+        if (dataUpdated){
+            setDataUpdated(!dataUpdated);
+            updateUserData(firstName, lastName, email);
+        }
+    },[dataUpdated]);
+    
+
 
     //TODO:: get this data from database
     function setFakeProfileData() {
