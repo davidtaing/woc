@@ -8,6 +8,7 @@ import mentorImg2 from "res/img/mentor2.jpg";
 import mentorImg3 from "res/img/mentor3.jpg";
 import mentorImg4 from "res/img/mentor4.jpg";
 import mentorImg5 from "res/img/mentor5.jpg";
+import { ClassNames } from "@emotion/react";
 
 const mentor = [
     { id: 1, name: "Alexandra Robinson", photo: mentorImg1 },
@@ -28,11 +29,11 @@ const responsiveCarousel = {
     },
     desktop: {
         breakpoint: { max: 3000, min: 1024 },
-        items: 3,
+        items: 5,
     },
     tablet: {
         breakpoint: { max: 1024, min: 464 },
-        items: 2,
+        items: 3,
     },
     mobile: {
         breakpoint: { max: 464, min: 0 },
@@ -44,7 +45,7 @@ function MentorsList() {
     return (
         <>
             <h1>Mentors</h1>
-            <Grid>
+            <Grid style={{ paddingTop: "4em", paddingBottom: "4em" }}>
                 <Carousel responsive={responsiveCarousel}>
                     {mentor.map((item) => {
                         return (

@@ -13,7 +13,7 @@ const UserProfile = ({ profile }) => {
 
     //TODO:: get this data from database
     function setFakeProfileData() {
-        profile.skills = ["Web", "React", "User Experience", "Software Engineering"];
+        profile.skills = ["Project Management", "Web", "React", "User Experience", "Software Engineering"];
         profile.phone = "04345214562";
     }
 

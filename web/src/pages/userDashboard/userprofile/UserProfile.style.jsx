@@ -5,20 +5,25 @@ const styles = makeStyles((theme) => ({
     root: {
         display: "flex",
         marginBottom: "35px",
-        // gridGap: "50px",
-        paddingTop: "4em",
+        gridGap: "20px",
+        maxWidth: "false",
     },
     second: {
         backgroundColor: "#efe8eb",
     },
     paper: {
-        elevation: 3,
-        color: theme.palette.text.secondary,
+        elevation: 6,
+        color: theme.palette.text.primary,
         width: "fit-content",
+        maxWidth: "17rem",
         padding: "5px",
         display: "inline-block",
         marginRight: "10px",
         variant: "outlined",
+        marginBottom: "12px",
+        backgroundColor: "#fafafa",
+        textOverflow: "ellipsis",
+        overflow: "hidden",
     },
     modalBox: {
         //  width: "40%",
@@ -31,6 +36,7 @@ const styles = makeStyles((theme) => ({
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
         backgroundSize: "cover",
+        maxWidth: "false",
     },
     userName: {
         fontWeight: "bold",
@@ -45,6 +51,12 @@ const styles = makeStyles((theme) => ({
         flexBasis: "100%",
         marginBottom: "10px",
         maxWidth: "60%",
+        [theme.breakpoints.between("xs", "sm")]: {
+            maxWidth: "false",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            maxWidth: "false",
+        },
     },
     userInfoLabel: {
         marginRight: "15px",
