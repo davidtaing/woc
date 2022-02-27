@@ -31,21 +31,21 @@ const UserProfile = ({ profile }) => {
 
     return (
         <>
-            <Container maxWidth={false} className="root">
+            <Container maxWidth={false}>
                 {/* main logo and text */}
-                <Grid container className={classes.root} align="center">
-                    <Grid item sm={12} md={4} lg={4}>
+                <Grid container className={classes.root} align="left">
+                    <Grid item xs={12} sm={12} md={4} lg={3}>
                         <img src={picture} className={classes.profilePic} alt="Profile" />
                         <div>{displayName()}</div>
                     </Grid>
 
-                    <Grid item sm={12} md={4} lg={4} className={classes.userInfo}>
+                    <Grid item xs={12} sm={12} md={8} lg={9} className={classes.userInfo}>
                         <Grid item>
-                            <h1>{firstName + " " + lastName}</h1>
+                            <h1 className={classes.userName2}>{firstName + " " + lastName}</h1>
                         </Grid>
 
-                        <Grid item sm={12}>
-                            <p>
+                        <Grid item xs={12} sm={12}>
+                            <p className={classes.userInfo}>
                                 My name is Code Sydney and I am a Junior Web Developer for Oswald Technologies. I am an
                                 accomplished coder and programmer, and I enjoy using my skills to contribute to the
                                 exciting technological advances that happen every day at Oswald Tech. I graduated from
@@ -56,7 +56,9 @@ const UserProfile = ({ profile }) => {
                         </Grid>
                         <Grid item>
                             {skills.map((skill) => (
-                                <Paper className={classes.paper}>{skill}</Paper>
+                                <Paper className={classes.paper} elevation={3}>
+                                    {skill}
+                                </Paper>
                             ))}
                         </Grid>
                     </Grid>

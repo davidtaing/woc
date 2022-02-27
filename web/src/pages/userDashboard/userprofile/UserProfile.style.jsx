@@ -5,15 +5,13 @@ const styles = makeStyles((theme) => ({
     root: {
         display: "flex",
         marginBottom: "35px",
-        gridGap: "20px",
-        maxWidth: "false",
     },
     second: {
         backgroundColor: "#efe8eb",
     },
     paper: {
-        elevation: 6,
         color: theme.palette.text.primary,
+        textAlign: "center",
         width: "fit-content",
         maxWidth: "17rem",
         padding: "5px",
@@ -24,6 +22,9 @@ const styles = makeStyles((theme) => ({
         backgroundColor: "#fafafa",
         textOverflow: "ellipsis",
         overflow: "hidden",
+        [theme.breakpoints.between("xs", "sm")]: {
+            fontSize: "15px",
+        },
     },
     modalBox: {
         //  width: "40%",
@@ -37,12 +38,26 @@ const styles = makeStyles((theme) => ({
         backgroundPosition: "center center",
         backgroundSize: "cover",
         maxWidth: "false",
+        [theme.breakpoints.between("xs", "sm")]: {
+            width: "180px",
+            height: "180px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            width: "250px",
+            height: "250px",
+        },
     },
     userName: {
         fontWeight: "bold",
         fontSize: "2em",
         fontFamily: `Montserrat, 'sans-serif'`,
     },
+    userName2: {
+        [theme.breakpoints.between("xs", "sm")]: {
+            display: "none",
+        },
+    },
+
     userInfo: {
         fontFamily: `Montserrat, 'sans-serif'`,
         fontSize: "20px",
@@ -50,12 +65,8 @@ const styles = makeStyles((theme) => ({
         textAlign: "start",
         flexBasis: "100%",
         marginBottom: "10px",
-        maxWidth: "60%",
         [theme.breakpoints.between("xs", "sm")]: {
-            maxWidth: "false",
-        },
-        [theme.breakpoints.between("sm", "md")]: {
-            maxWidth: "false",
+            fontSize: "20px",
         },
     },
     userInfoLabel: {

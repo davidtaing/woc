@@ -8,7 +8,7 @@ import mentorImg2 from "res/img/mentor2.jpg";
 import mentorImg3 from "res/img/mentor3.jpg";
 import mentorImg4 from "res/img/mentor4.jpg";
 import mentorImg5 from "res/img/mentor5.jpg";
-import { ClassNames } from "@emotion/react";
+import { Container } from "@material-ui/core";
 
 const mentor = [
     { id: 1, name: "Alexandra Robinson", photo: mentorImg1 },
@@ -45,17 +45,19 @@ function MentorsList() {
     return (
         <>
             <h1>Mentors</h1>
-            <Grid style={{ paddingTop: "4em", paddingBottom: "4em" }}>
-                <Carousel responsive={responsiveCarousel}>
-                    {mentor.map((item) => {
-                        return (
-                            <Grid item={true}>
-                                <MentorCard key={item.id} mentor={item} />
-                            </Grid>
-                        );
-                    })}
-                </Carousel>
-            </Grid>
+            <Container maxWidth={false}>
+                <Grid style={{ paddingTop: "4em", paddingBottom: "4em" }}>
+                    <Carousel responsive={responsiveCarousel}>
+                        {mentor.map((item) => {
+                            return (
+                                <Grid item={true}>
+                                    <MentorCard key={item.id} mentor={item} />
+                                </Grid>
+                            );
+                        })}
+                    </Carousel>
+                </Grid>
+            </Container>
         </>
     );
 }
