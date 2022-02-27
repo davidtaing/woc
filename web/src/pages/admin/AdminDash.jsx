@@ -11,9 +11,6 @@ import {
     TableBody,
     TableCell,
     Typography,
-    Select,
-    MenuItem,
-    FormControl,
 } from "@material-ui/core";
 import axios from "axios";
 import AdminLayout from "./AdminLayout";
