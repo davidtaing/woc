@@ -1,19 +1,20 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const logging = require('./config/logging');
 const config = require('./config/config');
 const serverUtils = require('./utils/server.util');
 
-/**
- * TODO:
- * - set up cors to secure access
- */
+/* 
+    main server entry point and configs
+*/
 
 // server config ------------------------------------------------------------------------------------------
 const NAMESPACE = 'SERVER';
 const app = express();
+app.use(cors());        // TODO: change to whitelisting only
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
