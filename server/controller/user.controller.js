@@ -12,12 +12,11 @@ const getUser = async (req, res) => {
         logging.error(NAMESPACE, `error fetching user userid: ${req.body.id}`)
         return res.status(400).json({ message: 'error fetching user'})
     }
-};
+}
 
 // const updateUser = async(req, res) => {
 //     
 //     // get data to here..
-    
 //     const res = await User.updateOne({ name: req.user.firstName },
 //     { lastName: req.user.lastName});
 
@@ -26,16 +25,21 @@ const getUser = async (req, res) => {
 // }
 
 const getAllUsersRole = async (req, res) => {
-    const users = req.body.role ? await User.find({ role: req.body.role }) : await User.find();
-
+    // TODO: change role to text
+    // these are just bandaid for numbers
+    // not working as expected
     const setRole = (r) => (r === 0 ? 'admin' : r === '1' ? 'mentor' : 'user');
+
+    const users = req.body.role ? await User.find({ role: req.body.role }) : await User.find();
+    console.log(req.body.role)
+
 
     // users.toObject();
     const list = users.map((e) => {
         const u = e.toObject();
         const { skills, events, passwordHash, ...user } = u;
 
-        return { ...user, role: setRole(user.role) };
+        return { ...user, role: setRole(u.role) };
     });
 
     res.status(200).json([...list]);
