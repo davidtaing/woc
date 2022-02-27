@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { AppBar, Toolbar, Button, Box } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/";
+import { makeStyles, Avatar } from "@material-ui/core/";
 import { Link } from "react-router-dom";
 import { useAuth } from "contexts/authContext";
+import AccountDetails from "./AccountDetails";
+
 
 /* 
     Handing main navigation bar for site
@@ -17,7 +19,7 @@ const styles = makeStyles((theme) => ({
     },
     navItem: {
         color: "black",
-        fontSize: "27px",
+        fontSize: "20px",
         fontFamily: `Montserrat, 'sans-serif'`,
         fontWeight: "600",
         border: "1px solid black",
@@ -26,13 +28,13 @@ const styles = makeStyles((theme) => ({
         marginRight: "20px",
         //  textDecoration: 'none'
         [theme.breakpoints.between("xs", "sm")]: {
-            fontSize: "14px",
+            fontSize: "10px",
         },
         [theme.breakpoints.between("sm", "md")]: {
-            fontSize: "20px",
+            fontSize: "12px",
         },
         [theme.breakpoints.between("md", "lg")]: {
-            fontSize: "24px",
+            fontSize: "16px",
         },
         "&:hover": {
             backgroundColor: theme.palette.secondary.main,
@@ -71,6 +73,21 @@ const styles = makeStyles((theme) => ({
         padding: 0,
         position: "relative",
     },
+    avatar: {
+        border: "1px solid black",
+        height:"47px",
+        width: "47px",
+        cursor: "pointer",
+        [theme.breakpoints.between("xs", "sm")]: {
+            fontSize: "10px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            fontSize: "12px",
+        },
+        [theme.breakpoints.between("md", "lg")]: {
+            fontSize: "16px",
+        },
+    },
     offset: theme.mixins.toolbar,
 }));
 
@@ -85,13 +102,20 @@ const NavButtons = ({ data }) => {
     );
 };
 
+
+
 const NavBar = () => {
     const classes = styles();
-    const { loggedIn, logOut } = useAuth();
+    const { loggedIn } = useAuth();
 
     const btLogIn = { text: "Sign In", path: "/login" };
-    const btLogOut = { text: "Sign out", click: () => logOut() };
+    //const btLogOut = { text: "Sign out", click: () => logOut() };
     const btAdmin = { text: "Admin", path: "/admin" };
+
+    const [form, setForm] = useState(false);
+    const showForm = () => {
+        setForm(!form);
+    };
 
     // render buttons
     const NotAuthenticated = () => <NavButtons data={btLogIn} />;
@@ -99,7 +123,7 @@ const NavBar = () => {
     const Authenticated = () => (
         <>
             <NavButtons data={btAdmin} />
-            <NavButtons data={btLogOut} />
+            <Avatar src= "/logo192.png" className={classes.avatar} onClick={showForm} />
         </>
     );
 
@@ -120,6 +144,10 @@ const NavBar = () => {
                 </Toolbar>
             </AppBar>
             <div className={classes.offset} />
+            <AccountDetails
+                form={form}
+                onOpen={setForm}
+            />
         </>
     );
 };

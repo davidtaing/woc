@@ -1,14 +1,28 @@
 const User = require('../models/user.model');
 
 const getUser = async (req, res) => {
-    console.log(req.user);
+     console.log(req.user);
     const data = {
         firstName: req.user.firstName,
         lastName: req.user.lastName,
         email: req.user.email,
+        skills: req.user.skills,
+        
+        //TODO: add phone number, linkedin URL in database
     };
     return res.status(200).json(data);
 };
+
+// const updateUser = async(req, res) => {
+//     
+//     // get data to here..
+    
+//     const res = await User.updateOne({ name: req.user.firstName },
+//     { lastName: req.user.lastName});
+
+//     const user = await User.find();
+
+// }
 
 const getAllUsers = async (req, res) => {
     const users = await User.find();

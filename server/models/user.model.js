@@ -22,6 +22,14 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    phone: {
+        type: String,
+        required: false,
+    },
+    linkedinUrl:{
+        type: String,
+        required: false,
+    },
     role: {
         type: String,
         required: false,
