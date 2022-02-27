@@ -43,7 +43,7 @@ const styles = makeStyles((theme) => ({
     brandName: {
         fontFamily: `Montserrat, 'sans-serif'`,
         fontWeight: "700",
-        fontSize: "60px",
+        fontSize: "40px",
         color: "black",
         margin: "10px 10px",
         [theme.breakpoints.between("xs", "sm")]: {
