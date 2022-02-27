@@ -32,10 +32,12 @@ const UserSchema = new mongoose.Schema({
         required: true,
     },
     gender: { type: String, require: false }, // fix form to require
-    nationality: { type: String, require: false }, // fix form to require
     about: { type: String, require: false },
     skills: { type: Array, require: false },
-    events: { type: Array, require: false },
+    mentor: { type: Object, require: false },
+    mentees: { type: [Object], require: false},
+    job: { type: String, require: false, default: ""},
+    company: { type: String, require: false, default: ""},
     // display image
 });
 
