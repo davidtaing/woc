@@ -10,6 +10,7 @@ const { verifyToken: validateToken } = require('../utils/verifyToken');
 
 // router.update('/update', controller.updateUser);
 router.get('/', controller.getUser);
-router.get('/all', controller.getAllUsers);
+router.get('/all', controller.getAllUsersRole);
+
 
 module.exports = router;
