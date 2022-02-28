@@ -24,8 +24,9 @@ const UserProfile = ({ profile }) => {
         if (dataUpdated){
             setDataUpdated(!dataUpdated);
             updateUserData(firstName, lastName, email);
+            console.log('Is this an error?')
         }
-    },[dataUpdated]);
+    },[dataUpdated, updateUserData, firstName, lastName, email]);
     
 
 
