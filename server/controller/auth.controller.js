@@ -75,6 +75,7 @@ module.exports.signup = async (req, res) => {
     const newUser = new User({
         ...req.body,
         passwordHash: await authUtil.generateHash(req.body.password),
+        user: "user",   // prevent admin from being created
     });
 
     // save
@@ -83,6 +84,7 @@ module.exports.signup = async (req, res) => {
         logging.info(NAMESPACE, 'New User Created');
         return res.status(200).json({
             msg: 'New User Created',
+            user: newUser,
             // saved,
         });
     } catch (err) {
