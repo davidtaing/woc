@@ -7,9 +7,9 @@ const UserProfile = ({ profile }) => {
     const classes = styles();
     setFakeProfileData();
 
-    const [firstName, setFirstName] = useState(profile.firstName || "");
-    const [lastName, setLastName] = useState(profile.lastName || "");
-    const [skills, setSkills] = useState(profile.skills || "");
+    const [firstName] = useState(profile.firstName || "");
+    const [lastName] = useState(profile.lastName || "");
+    const [skills] = useState(profile.skills || "");
 
     //TODO:: get this data from database
     function setFakeProfileData() {
