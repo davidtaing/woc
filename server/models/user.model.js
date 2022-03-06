@@ -37,6 +37,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: false,
         default: "user",
+        enum: ["user", "mentor", "admin"]
     },
     passwordHash: {
         type: String,
