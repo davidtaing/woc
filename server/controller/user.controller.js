@@ -29,21 +29,20 @@ const getAllUsersRole = async (req, res) => {
     // TODO: change role to text
     // these are just bandaid for numbers
     // not working as expected
-    const setRole = (r) => (r === 0 ? 'admin' : r === '1' ? 'mentor' : 'user');
 
     const users = req.body.role ? await User.find({ role: req.body.role }) : await User.find();
-    console.log(req.body.role)
 
-
-    // users.toObject();
+    // remove sensitive data
     const list = users.map((e) => {
         const u = e.toObject();
-        const { skills, events, passwordHash, ...user } = u;
+        // TODO: remove password after cleaning up db - leftovers from old shcema
+        const { skills, events, passwordHash, password, __v, ...user } = u;
 
-        return { ...user, role: setRole(u.role) };
+        return { ...user  };
     });
 
-    res.status(200).json([...list]);
+    res.status(200).json({ count: list.length, role: req.body.role, list});
+    // TODO: no error case for this yet but what are the fail cases
 };
 
 
