@@ -14,9 +14,9 @@ const UserProfile = ({ profile }) => {
     //TODO:: get this data from database
     function setFakeProfileData() {
         profile.skills = ["Project Management", "Web", "React", "User Experience", "Software Engineering"];
-        profile.phone = "04345214562";
+        profile.userSummary =
+            "My name is Code Sydney and I am a Junior Web Developer for Oswald Technologies. I am an accomplished coder and programmer, and I enjoy using my skills to contribute to the exciting technological advances that happen every day at Oswald Tech. I graduated from the California Institute of Technology in 2016 with a Bachelor's Degree in Software Development. While in school, I earned the 2015 Edmund Gains Award for my exemplary academic performance and leadership skills.";
     }
-
     const longName = firstName.length + lastName.length + 1 < 13;
     const displayName = () =>
         longName ? (
@@ -34,25 +34,18 @@ const UserProfile = ({ profile }) => {
             <Container maxWidth={false}>
                 {/* main logo and text */}
                 <Grid container className={classes.root} align="left">
-                    <Grid item xs={12} sm={12} md={4} lg={3}>
+                    <Grid item xs={12} sm={12} md={12} lg={3}>
                         <img src={picture} className={classes.profilePic} alt="Profile" />
                         <div>{displayName()}</div>
                     </Grid>
 
-                    <Grid item xs={12} sm={12} md={8} lg={9} className={classes.userInfo}>
+                    <Grid item xs={12} sm={12} md={12} lg={9} className={classes.userInfo}>
                         <Grid item>
                             <h1 className={classes.userName2}>{firstName + " " + lastName}</h1>
                         </Grid>
 
-                        <Grid item xs={12} sm={12}>
-                            <p className={classes.userInfo}>
-                                My name is Code Sydney and I am a Junior Web Developer for Oswald Technologies. I am an
-                                accomplished coder and programmer, and I enjoy using my skills to contribute to the
-                                exciting technological advances that happen every day at Oswald Tech. I graduated from
-                                the California Institute of Technology in 2016 with a Bachelor's Degree in Software
-                                Development. While in school, I earned the 2015 Edmund Gains Award for my exemplary
-                                academic performance and leadership skills.
-                            </p>
+                        <Grid item xs={12} sm={12} md={10} lg={12}>
+                            <p className={classes.userInfo}>{profile.userSummary}</p>
                         </Grid>
                         <Grid item>
                             {skills.map((skill) => (

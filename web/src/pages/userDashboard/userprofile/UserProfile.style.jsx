@@ -23,7 +23,7 @@ const styles = makeStyles((theme) => ({
         textOverflow: "ellipsis",
         overflow: "hidden",
         [theme.breakpoints.between("xs", "sm")]: {
-            fontSize: "15px",
+            fontSize: "12px",
         },
     },
     modalBox: {
@@ -66,7 +66,14 @@ const styles = makeStyles((theme) => ({
         flexBasis: "100%",
         marginBottom: "10px",
         [theme.breakpoints.between("xs", "sm")]: {
+            fontSize: "15px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
             fontSize: "20px",
+            maxWidth: "90%",
+        },
+        [theme.breakpoints.between("md", "lg")]: {
+            maxWidth: "100%",
         },
     },
     userInfoLabel: {
