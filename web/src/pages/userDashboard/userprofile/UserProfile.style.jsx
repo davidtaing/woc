@@ -25,9 +25,12 @@ const styles = makeStyles((theme) => ({
         [theme.breakpoints.between("xs", "sm")]: {
             fontSize: "12px",
         },
-    },
-    modalBox: {
-        //  width: "40%",
+        [theme.breakpoints.between("sm", "md")]: {
+            fontSize: "15px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            fontSize: "17px",
+        },
     },
     profilePic: {
         display: "inline - block",
@@ -50,7 +53,6 @@ const styles = makeStyles((theme) => ({
     userName: {
         fontWeight: "bold",
         fontSize: "2em",
-        fontFamily: `Montserrat, 'sans-serif'`,
     },
     userName2: {
         [theme.breakpoints.between("xs", "sm")]: {
@@ -59,7 +61,6 @@ const styles = makeStyles((theme) => ({
     },
 
     userInfo: {
-        fontFamily: `Montserrat, 'sans-serif'`,
         fontSize: "20px",
         color: "grey",
         textAlign: "start",
@@ -84,7 +85,6 @@ const styles = makeStyles((theme) => ({
         minWidth: "100px",
     },
     textField: {
-        fontFamily: `Montserrat, 'sans-serif'`,
         fontSize: "25px",
     },
 }));

@@ -26,10 +26,10 @@ const styles = makeStyles((theme) => ({
         marginRight: "20px",
         //  textDecoration: 'none'
         [theme.breakpoints.between("xs", "sm")]: {
-            fontSize: "14px",
+            fontSize: "10px",
         },
         [theme.breakpoints.between("sm", "md")]: {
-            fontSize: "20px",
+            fontSize: "15px",
         },
         [theme.breakpoints.between("md", "lg")]: {
             fontSize: "24px",
