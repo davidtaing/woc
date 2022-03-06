@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, TextField, Dialog, DialogContent, DialogTitle, DialogActions } from "@material-ui/core";
-import styles from "./UserProfile.style";
+import styles from "../userDashboard/userprofile/UserProfile.style";
 import axios from "axios";
 
 const EditProfile = (props) => {

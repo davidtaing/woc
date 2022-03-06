@@ -92,6 +92,7 @@ const NavBar = () => {
     const btLogIn = { text: "Sign In", path: "/login" };
     const btLogOut = { text: "Sign out", click: () => logOut() };
     const btAdmin = { text: "Admin", path: "/admin" };
+    const btEdit = { text: "Edit", path: "/edit" };
 
     // render buttons
     const NotAuthenticated = () => <NavButtons data={btLogIn} />;
@@ -100,6 +101,7 @@ const NavBar = () => {
         <>
             <NavButtons data={btAdmin} />
             <NavButtons data={btLogOut} />
+            <NavButtons data={btEdit} />
         </>
     );
 

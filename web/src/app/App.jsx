@@ -41,6 +41,7 @@ const App = () => {
                 <UserRoute exact path="/user" component={Pages.UserDashBoard} />
                 {/* TODO: change to admin route */}
                 <UserRoute exact path="/admin" component={Pages.Admin} />
+                <UserRoute exact path="/edit" component={Pages.Edit} />
             </Layout>
         </BrowserRouter>
     );
