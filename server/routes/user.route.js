@@ -12,5 +12,8 @@ const { verifyToken: validateToken } = require('../utils/verifyToken');
 router.get('/', controller.getUser);
 router.get('/all', controller.getAllUsersRole);
 
+// update all information
+router.post('/update', controller.update);
+router.post('/update/role', controller.updateRole);
 
 module.exports = router;
