@@ -13,7 +13,7 @@ app.use('/auth', authRoute);
 app.use('/events', eventsRoute);
 
 // user only ============================================================
-app.use(verifyToken);
+// app.use(verifyToken);
 app.use('/user', userRoute);
 
 // admin only ===========================================================
