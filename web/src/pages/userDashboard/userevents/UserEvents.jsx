@@ -83,10 +83,10 @@ function UserEvents() {
 
     return (
         <>
-            <h1>Events</h1>
-            <Container>
-                <Grid container className="classes.second">
-                    <Grid container spacing={4} style={{ paddingTop: "4em" }}>
+            <h1>Upcoming events</h1>
+            <Container maxWidth={false}>
+                <Grid container>
+                    <Grid container style={{ paddingTop: "4em", paddingBottom: "4em" }}>
                         {loading ? (
                             <CircularProgress />
                         ) : (

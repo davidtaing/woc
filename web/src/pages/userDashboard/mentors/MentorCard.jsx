@@ -9,6 +9,16 @@ const useStyles = makeStyles((theme) => ({
     media: {
         height: 175,
     },
+    responsive: {
+        [theme.breakpoints.between("xs", "sm")]: {
+            padding: "4px",
+            fontSize: "15px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            padding: "3px",
+            fontSize: "18px",
+        },
+    },
 }));
 
 export default function MentorCard({ mentor }) {
@@ -19,7 +29,7 @@ export default function MentorCard({ mentor }) {
             <CardActionArea>
                 <CardMedia className={classes.media} image={mentor.photo} name={mentor.name} />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="h5" component="h2" className={classes.responsive}>
                         {mentor.name}
                     </Typography>
                 </CardContent>

@@ -31,7 +31,7 @@ const styles = makeStyles((theme) => ({
             fontSize: "10px",
         },
         [theme.breakpoints.between("sm", "md")]: {
-            fontSize: "12px",
+            fontSize: "15px",
         },
         [theme.breakpoints.between("md", "lg")]: {
             fontSize: "16px",

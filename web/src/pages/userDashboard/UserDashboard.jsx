@@ -31,7 +31,6 @@ const UserDash = () => {
 
     return (
         <LayoutUserDashboard>
-            <h1>Profile</h1>
             {loading ? (
                 <CircularProgress />
             ) : (

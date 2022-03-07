@@ -12,6 +12,7 @@ const Theme = createTheme({
     spacing: 9,
     typography: {
         fontSize: 12,
+        fontFamily: `Montserrat, 'sans-serif'`
     },
 });
 

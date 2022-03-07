@@ -1,28 +1,22 @@
 import React, { useState } from "react";
-// import EditIcon from "@material-ui/icons/Edit";
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Paper } from "@material-ui/core";
 import styles from "./UserProfile.style";
 import picture from "./profilepic.jpg";
-// import UploadPhoto from "./UploadPhoto";
-import EditProfile from "./EditProfile";
-import TextField from "@mui/material/TextField";
 
 const UserProfile = ({ profile }) => {
     const classes = styles();
     setFakeProfileData();
 
-    const [firstName, setFirstName] = useState(profile.firstName || "");
-    const [lastName, setLastName] = useState(profile.lastName || "");
-    const [skills, setSkills] = useState(profile.skills);
+    const [firstName] = useState(profile.firstName || "");
+    const [lastName] = useState(profile.lastName || "");
+    const [skills] = useState(profile.skills || "");
 
     //TODO:: get this data from database
     function setFakeProfileData() {
-        profile.skills = "Web";
-        profile.phone = "04345214562";
-        profile.linkedinUrl = "";
-        profile.mentor = "Roberta Lee";
+        profile.skills = ["Project Management", "Web", "React", "User Experience", "Software Engineering"];
+        profile.userSummary =
+            "My name is Code Sydney and I am a Junior Web Developer for Oswald Technologies. I am an accomplished coder and programmer, and I enjoy using my skills to contribute to the exciting technological advances that happen every day at Oswald Tech. I graduated from the California Institute of Technology in 2016 with a Bachelor's Degree in Software Development. While in school, I earned the 2015 Edmund Gains Award for my exemplary academic performance and leadership skills.";
     }
-
     const longName = firstName.length + lastName.length + 1 < 13;
     const displayName = () =>
         longName ? (
@@ -37,105 +31,31 @@ const UserProfile = ({ profile }) => {
 
     return (
         <>
-            <Container>
+            <Container maxWidth={false}>
                 {/* main logo and text */}
-                <Grid container className={classes.root} align="center" sm={12}>
-                    <Grid item>
+                <Grid container className={classes.root} align="left">
+                    <Grid item xs={12} sm={12} md={12} lg={3}>
                         <img src={picture} className={classes.profilePic} alt="Profile" />
-                        <div>
-                            {/* <UploadPhoto /> */}
-                            {displayName()}
-                        </div>
+                        <div>{displayName()}</div>
                     </Grid>
 
-                    <Grid item sm={12} md={4} lg={4} className={classes.userInfo}>
-                        {/* <IconButton onClick={openDialog} style={{ marginLeft: "470px" }}>
-                            <EditIcon />
-                        </IconButton> */}
-                        {/* dont really like inline styling */}
-                        <Grid item style={{ marginBottom: "10px" }}>
-                            <label className={classes.userInfoLabel} htmlFor="username">
-                                Name
-                            </label>
-                            <TextField
-                                className={classes.textField}
-                                disabled
-                                id="username"
-                                type="text"
-                                value={firstName + " " + lastName}
-                            />
+                    <Grid item xs={12} sm={12} md={12} lg={9} className={classes.userInfo}>
+                        <Grid item>
+                            <h1 className={classes.userName2}>{firstName + " " + lastName}</h1>
                         </Grid>
 
-                        <Grid item style={{ marginBottom: "10px" }}>
-                            <label className={classes.userInfoLabel} htmlFor="useremail">
-                                Email
-                            </label>
-                            <TextField
-                                className={classes.textField}
-                                disabled
-                                id="useremail"
-                                type="email"
-                                value={profile.email}
-                            />
+                        <Grid item xs={12} sm={12} md={10} lg={12}>
+                            <p className={classes.userInfo}>{profile.userSummary}</p>
                         </Grid>
-                        <Grid item style={{ marginBottom: "10px" }}>
-                            <label className={classes.userInfoLabel} htmlFor="userphone">
-                                Phone
-                            </label>
-                            <TextField
-                                className={classes.textField}
-                                disabled
-                                id="phone"
-                                type="text"
-                                value={profile.phone}
-                            />
-                        </Grid>
-                        <Grid item style={{ marginBottom: "10px" }}>
-                            <label className={classes.userInfoLabel} htmlFor="userlinkedinUrl">
-                                Linkedin
-                            </label>
-                            <TextField
-                                className={classes.textField}
-                                disabled
-                                id="userlinkedinUrl"
-                                type="text"
-                                value={profile.linkedinUrl}
-                            />
-                        </Grid>
-                        <Grid item style={{ marginBottom: "10px" }}>
-                            <label className={classes.userInfoLabel} htmlFor="userskills">
-                                Skills
-                            </label>
-                            <TextField
-                                className={classes.textField}
-                                disabled
-                                id="userskills"
-                                type="text"
-                                value={profile.skills}
-                            />
-                        </Grid>
-                        <Grid item style={{ marginBottom: "10px" }}>
-                            <label className={classes.userInfoLabel} htmlFor="usermentor">
-                                Mentor
-                            </label>
-                            <TextField
-                                className={classes.textField}
-                                disabled
-                                id="usermentor"
-                                type="text"
-                                value={profile.mentor}
-                            />
+                        <Grid item>
+                            {skills.map((skill) => (
+                                <Paper className={classes.paper} elevation={3}>
+                                    {skill}
+                                </Paper>
+                            ))}
                         </Grid>
                     </Grid>
                 </Grid>
-                <EditProfile // Note: passing object over maybe cleaner
-                    name={firstName}
-                    onNameChange={setFirstName}
-                    lastName={lastName}
-                    onLastNameChange={setLastName}
-                    skills={skills}
-                    onSkillsChange={setSkills}
-                />
             </Container>
         </>
     );

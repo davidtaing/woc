@@ -22,7 +22,9 @@ export const Layout = ({ status, children }) => {
 export const LayoutUserDashboard = ({ children }) => {
     return (
         <>
-            <Container maxWidth="lg">{children}</Container>
+            <Container style={{ marginRight: "35px", marginLeft: "35px" }} maxWidth={false}>
+                {children}
+            </Container>
         </>
     );
 };
