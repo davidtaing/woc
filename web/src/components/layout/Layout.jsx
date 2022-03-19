@@ -12,7 +12,7 @@ import { Container } from "@material-ui/core";
 export const Layout = ({ status, children }) => {
     return (
         <>
-            <NavBar />
+            <NavBar position='fixed'/>
             <>{children}</>
         </>
     );

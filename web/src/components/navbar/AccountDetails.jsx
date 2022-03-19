@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useAuth } from "contexts/authContext";
 import {  Button, makeStyles, Dialog, Avatar } from "@material-ui/core";
+import { UserContext } from "contexts/userContext";
 
 const useStyles = makeStyles ({
     dialog: {
@@ -67,6 +68,8 @@ const AccountDetails  = (props) => {
         logOut();
     };
 
+    const { user } = useContext(UserContext);
+
     return (
         <Dialog
             
@@ -81,8 +84,8 @@ const AccountDetails  = (props) => {
                 <div className={classes.dialogAvatarContainer}>
                     <Avatar src= "/logo192.png" className={classes.avatar}/>
                 </div>
-                <div className={classes.dialogDetails}>User Name</div>
-                <div className={classes.dialogDetails}>Email</div>
+                <div className={classes.dialogDetails}>{user.firstname} {user.lastname}</div>
+                <div className={classes.dialogDetails}>{user.email}</div>
                 <div className={classes.dialogButtonContainer}>
                     <Button className={classes.dialogButton} onClick={signOutHandler} >
                         Sign Out
