@@ -4,29 +4,33 @@ import { makeStyles } from "@material-ui/core/styles";
 const styles = makeStyles((theme) => ({
     root: {
         display: "flex",
-        justifyContent: "center",
         marginBottom: "35px",
-        gridGap: "100px",
-        paddingTop: "4em",
     },
     second: {
         backgroundColor: "#efe8eb",
     },
     paper: {
-        // padding: theme.spacing(1),
+        color: theme.palette.text.primary,
         textAlign: "center",
-
-        color: theme.palette.text.secondary,
-    },
-    modalBox: {
-        //  width: "40%",
-    },
-    backgroundStyle: {
-        paddingTop: "26px",
-        border: "2px solid lightgrey",
-        padding: "10px",
-        borderRadius: "25px",
-        backgroundColor: " #f2f2f2",
+        width: "fit-content",
+        maxWidth: "17rem",
+        padding: "5px",
+        display: "inline-block",
+        marginRight: "10px",
+        variant: "outlined",
+        marginBottom: "12px",
+        backgroundColor: "#fafafa",
+        textOverflow: "ellipsis",
+        overflow: "hidden",
+        [theme.breakpoints.between("xs", "sm")]: {
+            fontSize: "12px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            fontSize: "15px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            fontSize: "17px",
+        },
     },
     profilePic: {
         display: "inline - block",
@@ -36,16 +40,42 @@ const styles = makeStyles((theme) => ({
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
         backgroundSize: "cover",
+        maxWidth: "false",
+        [theme.breakpoints.between("xs", "sm")]: {
+            width: "180px",
+            height: "180px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            width: "250px",
+            height: "250px",
+        },
     },
     userName: {
         fontWeight: "bold",
         fontSize: "2em",
-        fontFamily: `Montserrat, 'sans-serif'`,
     },
+    userName2: {
+        [theme.breakpoints.between("xs", "sm")]: {
+            display: "none",
+        },
+    },
+
     userInfo: {
-        fontFamily: `Montserrat, 'sans-serif'`,
         fontSize: "20px",
         color: "grey",
+        textAlign: "start",
+        flexBasis: "100%",
+        marginBottom: "10px",
+        [theme.breakpoints.between("xs", "sm")]: {
+            fontSize: "15px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            fontSize: "20px",
+            maxWidth: "90%",
+        },
+        [theme.breakpoints.between("md", "lg")]: {
+            maxWidth: "100%",
+        },
     },
     userInfoLabel: {
         marginRight: "15px",
@@ -55,7 +85,6 @@ const styles = makeStyles((theme) => ({
         minWidth: "100px",
     },
     textField: {
-        fontFamily: `Montserrat, 'sans-serif'`,
         fontSize: "25px",
     },
 }));

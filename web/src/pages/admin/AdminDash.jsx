@@ -22,6 +22,7 @@ import { UserDetails } from "./UserDetails";
     - copy a dashboard template
     - use routing for mores page change thing
     
+    - not used yet for admin
     TODO:
     - for demo have a show all users
     - delete users

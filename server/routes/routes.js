@@ -13,11 +13,11 @@ app.use('/auth', authRoute);
 app.use('/events', eventsRoute);
 
 // user only ============================================================
-app.use(verifyToken);
+// app.use(verifyToken);
 app.use('/user', userRoute);
 
 // admin only ===========================================================
-app.use(verifyAdmin);
+// app.use(verifyAdmin);
 app.get('/admin', (req, res) => {
     return res.status(200).json({ msg: 'ok' });
 });

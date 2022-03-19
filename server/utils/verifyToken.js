@@ -29,7 +29,7 @@ module.exports.verifyToken = async (req, res, next) => {
 // verify admin status
 module.exports.verifyAdmin = (req, res, next) => {
     // is not admin
-    if (req.user.role !== 1)
+    if (req.user.role !== "admin")
         return res.status(401).json(authErrMsg(NAMESPACE, 'not admin'));
     // is admin
     else next();
