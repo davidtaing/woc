@@ -1,11 +1,14 @@
-const User = require('../models/user.model');
+ const User = require('../models/user.model');
 const logging = require('../config/logging');
 
 const NAMESPACE = "CTR_USER"
 
 // TODO: add validation
 const getUser = async (req, res) => {
-    const user = await User.findById(req.body.id);
+    const token = req.get("Authorization").split(" ")[1];
+    const userID = require("jsonwebtoken").decode(token).id;
+    const user = await User.findById(userID);
+
     if(user) {
         return res.status(200).json(user);
     } else {
