@@ -21,6 +21,7 @@ import AdminLayout from "./AdminLayout";
     - copy a dashboard template
     - use routing for mores page change thing
     
+    - not used yet for admin
     TODO:
     - for demo have a show all users
     - delete users
