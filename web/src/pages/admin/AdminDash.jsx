@@ -32,9 +32,13 @@ const AdminDash = () => {
     const [users, SetUsers] = useState([]);
 
     useEffect(() => {
-        axios.get("/api/user/all").then((res) => {
-            SetUsers(res.data);
-        });
+        axios
+            .get("/api/user/all")
+            .then((res) => {
+            console.log(res.data.list);
+            SetUsers(res.data.list);
+            })
+            .catch((e) => console.log(e.message));
     }, []);
 
     const ShowList = () => {
@@ -46,6 +50,7 @@ const AdminDash = () => {
         }
     };
 
+    
 
     return (
         <AdminLayout>
