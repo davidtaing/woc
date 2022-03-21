@@ -7,12 +7,13 @@ import {
     MenuItem,
     FormControl,
 } from "@material-ui/core";
+//import axios from "axios";
 
 
 export const UserDetails = (user) => {
     
-    const [mentor, setMentor] = useState('');
-    const [rol, setRol] = useState('');
+    const [mentor, setMentor] = useState(user.value.mentor);
+    const [rol, setRol] = useState(user.value.role);
 
     const mentors = [
         { id: 0, name:""},
@@ -32,27 +33,40 @@ export const UserDetails = (user) => {
         'Admin',
         'Mentee',
         'Mentor',
-        'Staff'
+        'Staff',
+        'user',
+        'admin',
+        'mentor'
     ];
 
-    const handleMentorChange = (event) => {
-        setMentor(event.target.value);
+    const handleMentorChange = (userId) => ( event ) => {
+        let value = event.target.value;
+        setMentor(value);
+        /* Update information into DB
+            axios
+                .post("/api/user/update", {_id:{userId}, mentor: {value}})
+                .then((res) => {
+                    console.log('All good')
+                })
+                .catch((e) => console.log(e.message));
+        */
     };
 
-    const handleRolChange = (event) => {
-        setRol(event.target.value);
+    const handleRolChange = (userId) => ( event ) => {
+        let value = event.target.value;
+        setRol(value);
     };
     
     return ( 
-        <TableRow hover key={user.value.id}>
+        <TableRow hover key={user.value._id}>
             <TableCell>{`${user.value.firstName} ${user.value.lastName}`}</TableCell>
             <TableCell>{user.value.email}</TableCell>
             <TableCell>
                 <FormControl  style={{ m: 1, minWidth: 150 }}>
                     <Select
-                    id={user.value.id}
+                    id={user.value._id}
                     value={mentor}
-                    onChange={handleMentorChange}>
+                    onChange={handleMentorChange(user.value._id)}>
                         {mentors.map((mentor) => (
                             <MenuItem
                             key={mentor.id}
@@ -67,9 +81,9 @@ export const UserDetails = (user) => {
             <TableCell>
             <FormControl  style={{ m: 1, minWidth: 70 }}>
                     <Select
-                    id={user.value.id}
+                    id={user.value._id}
                     value={rol}
-                    onChange={handleRolChange}>
+                    onChange={handleRolChange(user.value._id)}>
                         {roles.map((rol) => (
                             <MenuItem
                             key={rol}

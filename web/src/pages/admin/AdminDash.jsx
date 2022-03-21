@@ -11,6 +11,7 @@ import {
     TableBody,
     TableCell,
     Typography,
+    TextField,
 } from "@material-ui/core";
 import axios from "axios";
 import AdminLayout from "./AdminLayout";
@@ -32,9 +33,13 @@ const AdminDash = () => {
     const [users, SetUsers] = useState([]);
 
     useEffect(() => {
-        axios.get("/api/user/all").then((res) => {
-            SetUsers(res.data);
-        });
+        axios
+            .get("/api/user/all")
+            .then((res) => {
+            console.log(res.data.list);
+            SetUsers(res.data.list);
+            })
+            .catch((e) => console.log(e.message));
     }, []);
 
     const ShowList = () => {
@@ -46,6 +51,7 @@ const AdminDash = () => {
         }
     };
 
+    
 
     return (
         <AdminLayout>
@@ -70,10 +76,19 @@ const UserToolbar = ({ total }) => {
     return (
         <Card>
             <CardContent style={{ display: "flex", maxWidth: "100%" }}>
-                <Typography style={{ paddingTop: "5px" }}>Total: {total ? total : 0} user(s)</Typography>
+                <Box style={{ display: "flex", justifyContent: "right" }}>
+                <TextField id="outlined-basic" label="Search field" variant="outlined" />
+                    <Button variant="contained">
+                        Search
+                    </Button>
+                </Box>
+               
                 <Box style={{ flexGrow: 1, display: "flex", justifyContent: "right" }}>
                     <Button variant="contained">Send Email</Button>
                 </Box>
+            </CardContent>
+            <CardContent style={{ display: "flex", maxWidth: "100%" }}>
+                <Typography style={{ paddingTop: "5px" }}>Total: {total ? total : 0} user(s)</Typography>
             </CardContent>
         </Card>
     );
