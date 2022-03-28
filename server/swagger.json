@@ -1,0 +1,58 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "WOC API in development documentation",
+        "description": "API description in Markdown.",
+        "version": "1.0.0"
+    },
+    "host": "woc-au.herokuapp.com",
+    "basePath": "/api",
+    "schemes": ["https"],
+    "paths": {
+        "/users": {
+            "get": {
+                "summary": "return list of users",
+                "description": "optional",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": { "description" : "OK" }
+                }
+            }
+        }
+    },
+    "definitions": {
+        
+        "User": {
+            "description": "Base user object model",
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "format": "MongoDB ObjectID"
+                },
+                "firstName": { "type": "string" },
+                "lastName": { "type": "string" },
+                "middleName": { "type": "string" },
+                "email": { "type": "string" },
+                "phone": { "type": "string" },
+                "linkedinUrl": { "type": "string", "format": "url" },
+                "role": { 
+                    "type": "string",
+                    "enum": [ "admin", "mentor", "mentee"]
+                },
+                "passwordHash": { "type": "string" },
+                "gender": { "type": "string" },
+                "about": { "type": "string" },
+                "skills": { "type": "array", "items": { "type":"string"} },
+                "mentor": { "type": "string", "format": "User ObjectID" },
+                "mentee": { "type": "string" },
+                "mentees": { "type": "array", "items": { "type": "string", "format": "User ObjectID"} },
+                "job": { "type": "string" },
+                "company": { "type": "string" }
+            },
+            "required": [
+                "firstName", "lastName", "email", "role", "passwordHash"
+            ]
+        }
+    }
+
+}
