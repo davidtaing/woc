@@ -17,25 +17,39 @@ const UserSchema = new mongoose.Schema({
     middleName: {
         type: String,
         required: false,
+        default: "",
     },
     email: {
         type: String,
         required: true,
     },
+    phone: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    linkedinUrl:{
+        type: String,
+        required: false,
+        default: "",
+    },
     role: {
         type: String,
         required: false,
-        default: 2, // default user unless set
+        default: "user",
+        enum: ["user", "mentor", "admin"]
     },
     passwordHash: {
         type: String,
         required: true,
     },
-    gender: { type: String, require: false }, // fix form to require
-    nationality: { type: String, require: false }, // fix form to require
-    about: { type: String, require: false },
-    skills: { type: Array, require: false },
-    events: { type: Array, require: false },
+    gender: { type: String, require: false, default: "" }, // fix form to require
+    about: { type: String, require: false, default: ""},
+    skills: { type: Array, require: false, default: [] },
+    mentor: { type: Object, require: false, default: ""},
+    mentees: { type: [Object], require: false, default: [] },
+    job: { type: String, require: false, default: ""},
+    company: { type: String, require: false, default: ""},
     // display image
 });
 

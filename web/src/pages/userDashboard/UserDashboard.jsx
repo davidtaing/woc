@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { LayoutUserDashboard } from "../../components/layout/Layout";
+import { LayoutUserDashboard } from "components/layout/Layout";
 
 import UserProfile from "./userprofile/UserProfile";
 import UserEvents from "./userevents/UserEvents";
-import UserCourses from "./usercourses/UserCourses";
+import MentorsList from "./mentors/MentorsList";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -17,6 +17,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const UserDash = () => {
     const [profile, setProfile] = useState({});
     const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
         setLoading(true);
@@ -31,14 +32,13 @@ const UserDash = () => {
 
     return (
         <LayoutUserDashboard>
-            <h1>User DashBoard</h1>
             {loading ? (
                 <CircularProgress />
             ) : (
                 <>
                     <UserProfile profile={profile} />
                     <UserEvents />
-                    <UserCourses />
+                    <MentorsList />
                 </>
             )}
         </LayoutUserDashboard>

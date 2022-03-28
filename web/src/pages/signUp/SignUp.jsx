@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import { checkIsFormValid, validateInput } from "../../utils/formUtils";
 import { Link as RouterLink, useHistory } from "react-router-dom";
+import axios from "axios";
+
+import { checkIsFormValid, validateInput } from "utils/formUtils";
+import Copyright from "components/copyright/Copyright";
+
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -10,12 +14,10 @@ import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Copyright from "../../components/copyright/Copyright";
-import { FormHelperText } from "@material-ui/core";
-import { Typography } from "@material-ui/core";
-import axios from "axios";
+import { Typography, FormHelperText } from "@material-ui/core";
+
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -34,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(2, 0, 2),
+        backgroundColor: theme.palette.secondary.main,
     },
 }));
 

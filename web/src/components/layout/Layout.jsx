@@ -1,6 +1,5 @@
 import React from "react";
-import NavBar from "../navbar/NavBar";
-
+import NavBar from "components/navbar/NavBar";
 import { Container } from "@material-ui/core";
 /* 
     Layout component handling common layout for all pages
@@ -13,7 +12,7 @@ import { Container } from "@material-ui/core";
 export const Layout = ({ status, children }) => {
     return (
         <>
-            <NavBar />
+            <NavBar position='fixed'/>
             <>{children}</>
         </>
     );
@@ -23,7 +22,9 @@ export const Layout = ({ status, children }) => {
 export const LayoutUserDashboard = ({ children }) => {
     return (
         <>
-            <Container maxWidth="md">{children}</Container>
+            <Container style={{ marginRight: "35px", marginLeft: "35px" }} maxWidth={false}>
+                {children}
+            </Container>
         </>
     );
 };

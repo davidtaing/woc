@@ -4,61 +4,88 @@ import { makeStyles } from "@material-ui/core/styles";
 const styles = makeStyles((theme) => ({
     root: {
         display: "flex",
-        justifyContent: "left",
         marginBottom: "35px",
     },
     second: {
         backgroundColor: "#efe8eb",
     },
     paper: {
-        // padding: theme.spacing(1),
+        color: theme.palette.text.primary,
         textAlign: "center",
-
-        color: theme.palette.text.secondary,
-    },
-    modalBox: {
-        //  width: "40%",
-    },
-    backgroundStyle: {
-        paddingTop: "26px",
-        marginRight: "16px",
-        border: "2px solid lightgrey",
-        padding: "10px",
-        borderRadius: "25px",
-        backgroundColor: " #f2f2f2",
+        width: "fit-content",
+        maxWidth: "17rem",
+        padding: "5px",
+        display: "inline-block",
+        marginRight: "10px",
+        variant: "outlined",
+        marginBottom: "12px",
+        backgroundColor: "#fafafa",
+        textOverflow: "ellipsis",
+        overflow: "hidden",
+        [theme.breakpoints.between("xs", "sm")]: {
+            fontSize: "12px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            fontSize: "15px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            fontSize: "17px",
+        },
     },
     profilePic: {
         display: "inline - block",
-        width: "180px",
-        height: "180px",
-        borderRadius: "50%",
+        width: "320px",
+        height: "320px",
+        borderRadius: "5%",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
         backgroundSize: "cover",
+        maxWidth: "false",
+        [theme.breakpoints.between("xs", "sm")]: {
+            width: "180px",
+            height: "180px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            width: "250px",
+            height: "250px",
+        },
     },
     userName: {
         fontWeight: "bold",
         fontSize: "2em",
-        fontFamily: `'Roboto Slab', serif`,
     },
-    userOccupation: {
-        fontSize: "16px",
-        fontFamily: `'Roboto Slab', serif`,
-        marginBottom: "0px",
-        color: "grey",
+    userName2: {
+        [theme.breakpoints.between("xs", "sm")]: {
+            display: "none",
+        },
     },
+
     userInfo: {
-        textAlign: "left",
-        fontFamily: `'Roboto Slab', serif`,
-        fontSize: "9px",
-        //paddingTop: "40px !important",
-        marginRight: "16px",
-        border: "2px solid lightgrey",
-        padding: "10px",
-        borderRadius: "25px",
-        backgroundColor: "#f2f2f2",
-        paddingLeft: "37px",
+        fontSize: "20px",
         color: "grey",
+        textAlign: "start",
+        flexBasis: "100%",
+        marginBottom: "10px",
+        [theme.breakpoints.between("xs", "sm")]: {
+            fontSize: "15px",
+        },
+        [theme.breakpoints.between("sm", "md")]: {
+            fontSize: "20px",
+            maxWidth: "90%",
+        },
+        [theme.breakpoints.between("md", "lg")]: {
+            maxWidth: "100%",
+        },
+    },
+    userInfoLabel: {
+        marginRight: "15px",
+        lineHeight: "2.43",
+        float: "left",
+        textAlign: "left",
+        minWidth: "100px",
+    },
+    textField: {
+        fontSize: "25px",
     },
 }));
 

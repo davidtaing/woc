@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link as RouterLink, Redirect } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../../contexts/authContext";
+import { useAuth } from "contexts/authContext";
 
 import {
     Avatar,

@@ -11,7 +11,7 @@ module.exports.verifyToken = async (req, res, next) => {
     // token validation
     const auth = req.header('Authorization');
     const token = auth.split(' ')[1];
-
+    
     try {
         const payload = await jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findOne({ _id: payload.id });
@@ -29,7 +29,7 @@ module.exports.verifyToken = async (req, res, next) => {
 // verify admin status
 module.exports.verifyAdmin = (req, res, next) => {
     // is not admin
-    if (req.user.role !== 1)
+    if (req.user.role !== "admin")
         return res.status(401).json(authErrMsg(NAMESPACE, 'not admin'));
     // is admin
     else next();
