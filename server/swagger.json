@@ -5,10 +5,48 @@
         "description": "API description in Markdown.",
         "version": "1.0.0"
     },
-    "host": "woc-au.herokuapp.com",
+    "host": "localhost:8080",
     "basePath": "/api",
     "schemes": ["https"],
+    "tags": [
+        { "name": "auth",
+        "description": "auth endpoints"}
+    ],
     "paths": {
+        "/auth/checkmail": { 
+            "post": {
+                "summary": "check if email is used",
+                "tags": ["auth"],
+                "parameters": [{ 
+                    "in": "body", 
+                    "name": "body",
+                    "description": "email to check for availability",
+                    "required": true,
+                    "schema": { "$ref": "#components/RequestBody/CheckEmail"}
+                }],
+                "responses": { 
+                    "200": {
+                        "NOTE": "move schema to components",
+                        "description": "success",
+                        "schema": { "$ref": "#components/ResponseBody/CheckEmail" }
+                    }
+                }
+            }
+        },
+        "/auth/login": { "get": { "tags": ["auth"]} },
+        "/auth/signup": { "get": { "tags": ["auth"]} },
+
+        "/events": { "get": { "tags": ["events"]} },
+
+        "/user": { "get": { "tags": ["user"]} },
+        "/user/all": { "get": { "tags": ["user"]} },
+        "/user/update": { "get": { "tags": ["user"]} },
+        "/user/update/role": { "get": { "tags": ["user"]} },
+
+        "/admin": { "get": {
+            "summary": "place holder admin only endpoint",
+            "description": "place holder admin only endpoint"
+        } },
         "/users": {
             "get": {
                 "summary": "return list of users",
@@ -52,6 +90,25 @@
             "required": [
                 "firstName", "lastName", "email", "role", "passwordHash"
             ]
+        }
+    },
+    "components": {
+        "RequestBody": {
+            "CheckEmail": {
+                "type": "object",
+                "properties": {
+                    "email": { "type": "string", "example": "woc@email.com"}
+                }
+            }
+        }, 
+        "ResponseBody": {
+            "CheckEmail": {
+                "type": "object",
+                "properties": {
+                    "exist": { "type": "boolean" },
+                    "msg": { "type": "string" }
+                }
+            }
         }
     }
 
