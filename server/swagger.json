@@ -9,11 +9,12 @@
     "basePath": "/api",
     "schemes": ["https"],
     "tags": [
-        { "name": "auth",
-        "description": "auth endpoints"}
+        { "name": "auth", "description": "auth endpoints"},
+        { "name": "user", "description": "auth endpoints"},
+        { "name": "events", "description": "auth endpoints"}
     ],
     "paths": {
-        "/auth/checkmail": { 
+        "/auth/checkemail": { 
             "post": {
                 "summary": "check if email is used",
                 "tags": ["auth"],
@@ -22,19 +23,75 @@
                     "name": "body",
                     "description": "email to check for availability",
                     "required": true,
-                    "schema": { "$ref": "#components/RequestBody/CheckEmail"}
+                    "schema": {  
+                        "type": "object",
+                        "properties": {
+                            "email": { "type": "string", "example": "woc@email.com"}
+                        }
+                    }
                 }],
                 "responses": { 
                     "200": {
                         "NOTE": "move schema to components",
                         "description": "success",
-                        "schema": { "$ref": "#components/ResponseBody/CheckEmail" }
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "exist": { "type": "boolean" },
+                                "msg": { "type": "string", "example": "Email already"}
+                            }
+                        }
                     }
                 }
             }
         },
-        "/auth/login": { "get": { "tags": ["auth"]} },
-        "/auth/signup": { "get": { "tags": ["auth"]} },
+        "/auth/login": { 
+            "post": { 
+                "summary": "path to login, return jwt if correct",
+                "tags": ["auth"],
+                    "parameters": [{ 
+                    "in": "body", "name": "body",
+                    "description": "account username & password",
+                    "required": true,
+                    "schema": {  
+                        "type": "object",
+                        "properties": {
+                            "email": { "type": "string", "example": "woc@email.com"},
+                            "password": { "type": "string"}
+                        }
+                    }
+                }],
+                "responses": { 
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": { "type": "boolean", "example": true },
+                                "token": { "type": "string", "format": "jwt", "example": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" },
+                                "expiresIn": { "type": "string", "example": "1d" }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": { "type": "boolean", "example": false }, 
+                                "msg": { "type": "boolean", "example": "Account does not exist or Invalid password" } 
+                            }
+                        }
+                    } 
+                }
+            }
+        },
+        "/auth/signup": {
+            "post": {
+                "summary": "path to create new account",
+                "tags": ["auth"]
+            }
+        },
 
         "/events": { "get": { "tags": ["events"]} },
 
@@ -91,25 +148,5 @@
                 "firstName", "lastName", "email", "role", "passwordHash"
             ]
         }
-    },
-    "components": {
-        "RequestBody": {
-            "CheckEmail": {
-                "type": "object",
-                "properties": {
-                    "email": { "type": "string", "example": "woc@email.com"}
-                }
-            }
-        }, 
-        "ResponseBody": {
-            "CheckEmail": {
-                "type": "object",
-                "properties": {
-                    "exist": { "type": "boolean" },
-                    "msg": { "type": "string" }
-                }
-            }
-        }
     }
-
 }
