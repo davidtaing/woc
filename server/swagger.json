@@ -49,7 +49,7 @@
             "post": { 
                 "summary": "path to login, return jwt if correct",
                 "tags": ["auth"],
-                    "parameters": [{ 
+                "parameters": [{ 
                     "in": "body", "name": "body",
                     "description": "account username & password",
                     "required": true,
@@ -89,34 +89,77 @@
         "/auth/signup": {
             "post": {
                 "summary": "path to create new account",
-                "tags": ["auth"]
+                "tags": ["auth"],
+                "parameters": [{
+                    "in": "body", "name": "body",
+                    "description": "required account data",
+                    "required": true,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "email": { "type": "string", "example": "woc@email.com" },
+                            "password": { "type": "string", "example": "12345" },
+                            "firstName": { "type": "string", "example": "Jim" },
+                            "lastName": { "type": "string", "example": "Bob" }
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": { "type": "boolean", "example": true },
+                                "msg": { "type": "string", "example": "New User Created" }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Signup Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": { "type": "boolean", "example": false }, 
+                                "msg": { "type": "boolean", "example": "Signup error. Please try again or contact support" } 
+                            }
+                        }
+                    } 
+                }
             }
         },
 
-        "/events": { "get": { "tags": ["events"]} },
+        "/events": { 
+            "get": { 
+                "summary": "get list of events from humanitix",
+                "description": "One two",
+                "tags": ["events"],
+                "responses": {
+                    "200": {
+                        "description": "Success, need to get this",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "msg": { "type": "string", "example": "here we go again" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
 
         "/user": { "get": { "tags": ["user"]} },
         "/user/all": { "get": { "tags": ["user"]} },
-        "/user/update": { "get": { "tags": ["user"]} },
-        "/user/update/role": { "get": { "tags": ["user"]} },
+        "/user/update": { "post": { "tags": ["user"]} },
+        "/user/update/role": { "post": { "tags": ["user"]} },
 
         "/admin": { "get": {
             "summary": "place holder admin only endpoint",
             "description": "place holder admin only endpoint"
-        } },
-        "/users": {
-            "get": {
-                "summary": "return list of users",
-                "description": "optional",
-                "produces": ["application/json"],
-                "responses": {
-                    "200": { "description" : "OK" }
-                }
             }
         }
     },
     "definitions": {
-        
         "User": {
             "description": "Base user object model",
             "properties": {

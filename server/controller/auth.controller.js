@@ -11,8 +11,8 @@ const logging = require('../config/logging');
  * - SignUp
  *
  * TODO:
- * - SignUp:
  * - changePassword
+ * - maybe using flags to trigger what msg to use is cleaner?? (minor optimization)
  */
 const NAMESPACE = 'AuthController';
 
@@ -70,7 +70,7 @@ module.exports.signup = async (req, res) => {
     // already done in checkEmail but leaving this here for safety
     const exist = await User.findOne({ email: req.body.email });
     if (exist) {
-        return res.status(200).json({ msg: 'Email already exist' });
+        return res.status(200).json({ success: false, msg: 'Email already exist' });
     }
 
     // new user object
@@ -85,6 +85,7 @@ module.exports.signup = async (req, res) => {
         const saved = await newUser.save();
         logging.info(NAMESPACE, 'New User Created');
         return res.status(200).json({
+            success: true,
             msg: 'New User Created'
             // user: newUser,
             // saved,
@@ -93,7 +94,7 @@ module.exports.signup = async (req, res) => {
         logging.error(NAMESPACE, `Signup ${err.message}`, err);
         return res
             .status(400)
-            .json({ msg: 'Signup error. Please try again or contact support' });
+            .json({ success: false, msg: 'Signup error. Please try again or contact support' });
     }
 };
 
