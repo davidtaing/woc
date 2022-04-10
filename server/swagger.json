@@ -32,7 +32,7 @@
                 }],
                 "responses": { 
                     "200": {
-                        "NOTE": "move schema to components",
+                        "TODo": "move schema to components",
                         "description": "success",
                         "schema": {
                             "type": "object",
@@ -148,10 +148,122 @@
             }
         },
 
-        "/user": { "get": { "tags": ["user"]} },
-        "/user/all": { "get": { "tags": ["user"]} },
-        "/user/update": { "post": { "tags": ["user"]} },
-        "/user/update/role": { "post": { "tags": ["user"]} },
+        "/user": {
+            "get": { 
+                "summary": "get user information by userID",
+                "description": "get user information via auth token, hence this is only usable if the user is logged in, TODO this docs later",
+                "tags": ["user"]}},
+        "/user/all": {
+            "get": {
+                "summary": "get list of user (can be based on roles)",
+                "description": "get list of users, return full list if no roles are provided or is invalid",
+                "tags": ["user"],
+                "parameters": [{
+                    "in": "body", "name": "body",
+                    "description": "user's role",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "role": { "type": "string", "example": "admin" }
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "list of users matching provided role",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "count": { "type": "number", "example": 1 },
+                                "role": { "type": "string", "example": "admin" },
+                                "list": { "type": "array", "items": { "type": "object", "$ref": "#/definitions/User" } }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/update": {
+            "post": { 
+                "description": "update a user's role",
+                "summary": "update a user to a specified role",
+                "tags": ["user"],
+                "parameters": [{
+                    "in": "body", "required": true,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "id": { "type":"string", "format": "mongoID" },
+                            "user": {
+                                "type": "object",
+                                "properties": {
+                                    "firstName": { "type": "string" },
+                                    "lastName": { "type": "string" },
+                                    "middleName": { "type": "string" },
+                                    "email": { "type": "string" },
+                                    "phone": { "type": "string" },
+                                    "linkedinURL": { "type": "string" },
+                                    "gender": { "type": "string" },
+                                    "about": { "type": "string" },
+                                    "skills": { "type": "array", "items": { "type": "string" }},
+                                    "job": { "type": "string" },
+                                    "company": { "type": "string" }
+                                }
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "update success",
+                        "schema": {
+                            "type": "object",
+                            "properties": { "msg": { "type": "string", "example": "user update completed" }}
+                        }
+                    },
+                    "400": {
+                        "description": "update fail",
+                        "schema": {
+                            "type": "object",
+                            "properties": { "msg": { "type": "string", "example": "error updating details" }}
+                        }
+                    }
+                }
+            }
+        },
+        "/user/update/role": { 
+            "post": { 
+                "description": "update user information",
+                "summary": "update a user to a specified role",
+                "tags": ["user"],
+                "parameters": [{
+                    "in": "body", "required": true,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "id": { "type": "string", "format": "mongoObject" },
+                            "role": { "type": "string", "format": ""}
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "role update success",
+                        "schema": {
+                            "type": "object",
+                            "properties": { "msg": { "type": "string", "example": "role user update completed" }}
+                        }
+                    },
+                    "400": {
+                        "description": "update fail",
+                        "schema": {
+                            "type": "object",
+                            "properties": { "msg": { "type": "string", "example": "error updating role" }}
+                        }
+                    }
+                }
+            }
+        },
 
         "/admin": { "get": {
             "summary": "place holder admin only endpoint",
