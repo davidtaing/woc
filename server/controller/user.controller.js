@@ -44,7 +44,7 @@ const getAllUsersRole = async (req, res) => {
         return { ...user  };
     });
 
-    res.status(200).json({ count: list.length, role: req.body.role, list});
+    res.status(200).json({ count: list.length, role: req.body.role || "all", list});
     // TODO: no error case for this yet but what are the fail cases
 };
 

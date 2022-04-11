@@ -1,0 +1,307 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "WOC API in development documentation",
+        "description": "API description in Markdown.",
+        "version": "1.0.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api",
+    "schemes": ["https"],
+    "tags": [
+        { "name": "auth", "description": "auth endpoints"},
+        { "name": "user", "description": "auth endpoints"},
+        { "name": "events", "description": "auth endpoints"}
+    ],
+    "paths": {
+        "/auth/checkemail": { 
+            "post": {
+                "summary": "check if email is used",
+                "tags": ["auth"],
+                "parameters": [{ 
+                    "in": "body", 
+                    "name": "body",
+                    "description": "email to check for availability",
+                    "required": true,
+                    "schema": {  
+                        "type": "object",
+                        "properties": {
+                            "email": { "type": "string", "example": "woc@email.com"}
+                        }
+                    }
+                }],
+                "responses": { 
+                    "200": {
+                        "TODo": "move schema to components",
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "exist": { "type": "boolean" },
+                                "msg": { "type": "string", "example": "Email already"}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": { 
+            "post": { 
+                "summary": "path to login, return jwt if correct",
+                "tags": ["auth"],
+                "parameters": [{ 
+                    "in": "body", "name": "body",
+                    "description": "account username & password",
+                    "required": true,
+                    "schema": {  
+                        "type": "object",
+                        "properties": {
+                            "email": { "type": "string", "example": "woc@email.com"},
+                            "password": { "type": "string"}
+                        }
+                    }
+                }],
+                "responses": { 
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": { "type": "boolean", "example": true },
+                                "token": { "type": "string", "format": "jwt", "example": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" },
+                                "expiresIn": { "type": "string", "example": "1d" }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": { "type": "boolean", "example": false }, 
+                                "msg": { "type": "boolean", "example": "Account does not exist or Invalid password" } 
+                            }
+                        }
+                    } 
+                }
+            }
+        },
+        "/auth/signup": {
+            "post": {
+                "summary": "path to create new account",
+                "tags": ["auth"],
+                "parameters": [{
+                    "in": "body", "name": "body",
+                    "description": "required account data",
+                    "required": true,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "email": { "type": "string", "example": "woc@email.com" },
+                            "password": { "type": "string", "example": "12345" },
+                            "firstName": { "type": "string", "example": "Jim" },
+                            "lastName": { "type": "string", "example": "Bob" }
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": { "type": "boolean", "example": true },
+                                "msg": { "type": "string", "example": "New User Created" }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Signup Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": { "type": "boolean", "example": false }, 
+                                "msg": { "type": "boolean", "example": "Signup error. Please try again or contact support" } 
+                            }
+                        }
+                    } 
+                }
+            }
+        },
+
+        "/events": { 
+            "get": { 
+                "summary": "get list of events from humanitix",
+                "description": "One two",
+                "tags": ["events"],
+                "responses": {
+                    "200": {
+                        "description": "Success, need to get this",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "msg": { "type": "string", "example": "here we go again" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/user": {
+            "get": { 
+                "summary": "get user information by userID",
+                "description": "get user information via auth token, hence this is only usable if the user is logged in, TODO this docs later",
+                "tags": ["user"]}},
+        "/user/all": {
+            "get": {
+                "summary": "get list of user (can be based on roles)",
+                "description": "get list of users, return full list if no roles are provided or is invalid",
+                "tags": ["user"],
+                "parameters": [{
+                    "in": "body", "name": "body",
+                    "description": "user's role",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "role": { "type": "string", "example": "admin" }
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "list of users matching provided role",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "count": { "type": "number", "example": 1 },
+                                "role": { "type": "string", "example": "admin" },
+                                "list": { "type": "array", "items": { "type": "object", "$ref": "#/definitions/User" } }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/update": {
+            "post": { 
+                "description": "update a user's role",
+                "summary": "update a user to a specified role",
+                "tags": ["user"],
+                "parameters": [{
+                    "in": "body", "required": true,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "id": { "type":"string", "format": "mongoID" },
+                            "user": {
+                                "type": "object",
+                                "properties": {
+                                    "firstName": { "type": "string" },
+                                    "lastName": { "type": "string" },
+                                    "middleName": { "type": "string" },
+                                    "email": { "type": "string" },
+                                    "phone": { "type": "string" },
+                                    "linkedinURL": { "type": "string" },
+                                    "gender": { "type": "string" },
+                                    "about": { "type": "string" },
+                                    "skills": { "type": "array", "items": { "type": "string" }},
+                                    "job": { "type": "string" },
+                                    "company": { "type": "string" }
+                                }
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "update success",
+                        "schema": {
+                            "type": "object",
+                            "properties": { "msg": { "type": "string", "example": "user update completed" }}
+                        }
+                    },
+                    "400": {
+                        "description": "update fail",
+                        "schema": {
+                            "type": "object",
+                            "properties": { "msg": { "type": "string", "example": "error updating details" }}
+                        }
+                    }
+                }
+            }
+        },
+        "/user/update/role": { 
+            "post": { 
+                "description": "update user information",
+                "summary": "update a user to a specified role",
+                "tags": ["user"],
+                "parameters": [{
+                    "in": "body", "required": true,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "id": { "type": "string", "format": "mongoObject" },
+                            "role": { "type": "string", "format": ""}
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "role update success",
+                        "schema": {
+                            "type": "object",
+                            "properties": { "msg": { "type": "string", "example": "role user update completed" }}
+                        }
+                    },
+                    "400": {
+                        "description": "update fail",
+                        "schema": {
+                            "type": "object",
+                            "properties": { "msg": { "type": "string", "example": "error updating role" }}
+                        }
+                    }
+                }
+            }
+        },
+
+        "/admin": { "get": {
+            "summary": "place holder admin only endpoint",
+            "description": "place holder admin only endpoint"
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "description": "Base user object model",
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "format": "MongoDB ObjectID"
+                },
+                "firstName": { "type": "string" },
+                "lastName": { "type": "string" },
+                "middleName": { "type": "string" },
+                "email": { "type": "string" },
+                "phone": { "type": "string" },
+                "linkedinUrl": { "type": "string", "format": "url" },
+                "role": { 
+                    "type": "string",
+                    "enum": [ "admin", "mentor", "mentee"]
+                },
+                "passwordHash": { "type": "string" },
+                "gender": { "type": "string" },
+                "about": { "type": "string" },
+                "skills": { "type": "array", "items": { "type":"string"} },
+                "mentor": { "type": "string", "format": "User ObjectID" },
+                "mentee": { "type": "string" },
+                "mentees": { "type": "array", "items": { "type": "string", "format": "User ObjectID"} },
+                "job": { "type": "string" },
+                "company": { "type": "string" }
+            },
+            "required": [
+                "firstName", "lastName", "email", "role", "passwordHash"
+            ]
+        }
+    }
+}

@@ -11,8 +11,8 @@ const logging = require('../config/logging');
  * - SignUp
  *
  * TODO:
- * - SignUp:
  * - changePassword
+ * - maybe using flags to trigger what msg to use is cleaner?? (minor optimization)
  */
 const NAMESPACE = 'AuthController';
 
@@ -27,13 +27,15 @@ module.exports.user = (req, res) => {
 };
 
 module.exports.login = async (req, res) => {
+    const errMsg = 'Account does not exist or Invalid password';
     // check matching account
     const user = await User.findOne({ email: req.body.email });
     if (!user)
         return res
             .status(401)
-            .json({ success: false, msg: 'Account does not exist' });
+            .json({ success: false, msg: errMsg });
 
+    console.log("account ok");
     // check matching password
     const checkPassword = await authUtil.checkHash(
         req.body.password,
@@ -42,7 +44,7 @@ module.exports.login = async (req, res) => {
     if (!checkPassword)
         return res
             .status(401)
-            .json({ success: false, msg: 'Invalid password' });
+            .json({ success: false, msg: errMsg });
 
     // successful
     const tokenObj = await authUtil.signToken({ id: user._id });
@@ -68,7 +70,7 @@ module.exports.signup = async (req, res) => {
     // already done in checkEmail but leaving this here for safety
     const exist = await User.findOne({ email: req.body.email });
     if (exist) {
-        return res.status(200).json({ msg: 'Email already exist' });
+        return res.status(200).json({ success: false, msg: 'Email already exist' });
     }
 
     // new user object
@@ -83,15 +85,16 @@ module.exports.signup = async (req, res) => {
         const saved = await newUser.save();
         logging.info(NAMESPACE, 'New User Created');
         return res.status(200).json({
-            msg: 'New User Created',
-            user: newUser,
+            success: true,
+            msg: 'New User Created'
+            // user: newUser,
             // saved,
         });
     } catch (err) {
         logging.error(NAMESPACE, `Signup ${err.message}`, err);
         return res
             .status(400)
-            .json({ msg: 'Signup error. Please try again or contact support' });
+            .json({ success: false, msg: 'Signup error. Please try again or contact support' });
     }
 };
 

@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const swagger = require('swagger-ui-express')
 
 const logging = require('./config/logging');
 const config = require('./config/config');
@@ -32,6 +33,13 @@ app.use(express.static(path.resolve(__dirname, '../web', 'build')));
 
 // api routing -----------------------------------------------------------------------------------------------
 app.use('/api', require('./routes/routes'));
+
+const swaggerOp = {
+  swaggerOptions: {
+    validatorUrl: null
+  }
+}
+app.use('/api/docs', swagger.serve, swagger.setup(require('./swagger.json'), swaggerOp));
 
 // error handling --------------------------------------------------------------------------------------------
 app.use(serverUtils.errHandling);
