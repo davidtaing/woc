@@ -1,4 +1,4 @@
-if (process.env.NODE_ENV === 'dev') require('dotenv').config(); //.env file in main folder
+if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === undefined) require('dotenv').config(); //.env file in main folder
 
 // NOTE: feels bad? react having access to .env
 
