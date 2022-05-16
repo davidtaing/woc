@@ -1,4 +1,4 @@
-import React, {createContext, useState } from "react";
+import React, { createContext, useState } from "react";
 
 /* 
     handle authentication status
@@ -7,24 +7,25 @@ import React, {createContext, useState } from "react";
 // create context object
 export const UserContext = createContext();
 
-export const UserContextProvider = props => { 
-    const [user, setUser] = useState([{
-        firstname: '',
-        lastname: '',
-        email: '',
-    }]);
+export const UserContextProvider = ({ children }) => {
+    const [user, setUser] = useState({
+        firstname: "",
+        lastname: "",
+        email: "",
+    });
 
     const updateUserData = (firstname, lastname, email) => {
-        setUser({firstname,lastname,email});
+        setUser({ firstname, lastname, email });
     };
 
     return (
         <UserContext.Provider
-        value={{ 
-            user,
-            updateUserData}}
+            value={{
+                user,
+                updateUserData,
+            }}
         >
-            {props.children}
+            {children}
         </UserContext.Provider>
     );
 };

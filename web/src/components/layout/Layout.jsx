@@ -12,8 +12,8 @@ import { Container } from "@material-ui/core";
 export const Layout = ({ status, children }) => {
     return (
         <>
-            <NavBar position='fixed'/>
-            <>{children}</>
+            <NavBar position="fixed" />
+            {children}
         </>
     );
 };
@@ -21,10 +21,8 @@ export const Layout = ({ status, children }) => {
 // layout for user dashboard
 export const LayoutUserDashboard = ({ children }) => {
     return (
-        <>
-            <Container style={{ marginRight: "35px", marginLeft: "35px" }} maxWidth={false}>
-                {children}
-            </Container>
-        </>
+        <Container style={{ marginRight: "35px", marginLeft: "35px" }} maxWidth={false}>
+            {children}
+        </Container>
     );
 };
