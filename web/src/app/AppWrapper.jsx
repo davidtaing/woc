@@ -1,8 +1,4 @@
-import React, { useState } from "react";
 import App from "./App";
-import axios from "axios";
-
-import { getToken, setToken } from "../utils/auth";
 
 /* 
     Top level component
@@ -22,39 +18,16 @@ import { getToken, setToken } from "../utils/auth";
 
 */
 
-import { AuthContext } from "../contexts/authContext";
+import { AuthContextProvider } from "../contexts/authContext";
 import { UserContextProvider } from "contexts/userContext";
 
 const AppWrapper = () => {
-    const [loggedIn, setLoggedIn] = useState(getToken() !== null);
-    // const [isAdmin, setIsAdmin] = useState(false);
-
-    const logIn = (tk) => {
-        setToken(tk);
-        setLoggedIn(getToken());
-    };
-    const logOut = () => {
-        setToken(null);
-        setLoggedIn(false);
-    };
-
-    // check local storage and set auth
-    // set default header key for api calls
-    if (getToken()) axios.defaults.headers["Authorization"] = `Bearer ${getToken()}`;
-
     return (
-        <AuthContext.Provider
-            // fix what is passed in here
-            value={{
-                loggedIn,
-                logIn,
-                logOut,
-            }}
-        >
+        <AuthContextProvider>
             <UserContextProvider>
                 <App />
             </UserContextProvider>
-        </AuthContext.Provider>
+        </AuthContextProvider>
     );
 };
 

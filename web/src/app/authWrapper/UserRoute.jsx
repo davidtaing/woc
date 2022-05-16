@@ -12,7 +12,7 @@ import axios from "axios";
 // TODO: remove token check here
 // TODO: global axios handler for bad token
 const UserRoute = ({ component: Component, ...rest }) => {
-    const { loggedIn, logOut } = useAuth();
+    const { loggedIn, logout } = useAuth();
     // call server to check token
     if (loggedIn) {
         axios
@@ -22,7 +22,7 @@ const UserRoute = ({ component: Component, ...rest }) => {
             })
             .catch((e) => {
                 // bad token => clear token and logout
-                if (e.response.status === 401) logOut();
+                if (e.response.status === 401) logout();
             });
     }
 
