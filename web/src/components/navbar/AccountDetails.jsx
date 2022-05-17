@@ -62,10 +62,10 @@ const AccountDetails  = (props) => {
         props.onOpen(false);
     };
     
-    const { logOut } = useAuth();
+    const { logout } = useAuth();
     const signOutHandler =  () => {
         props.onOpen(false);
-        logOut();
+        logout();
     };
 
     const { user } = useContext(UserContext);

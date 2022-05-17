@@ -5,7 +5,7 @@ import { useAuth } from "../contexts/authContext";
 import "./App.css";
 import UserRoute from "./authWrapper/UserRoute";
 import { Layout } from "components/layout/Layout";
-import * as Pages from "pages/Pages";
+import * as Pages from "pages";
 
 /* 
     TODO: 
